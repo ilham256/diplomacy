@@ -14,13 +14,13 @@
 
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Nama CPL</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data->nama ?>" name="nama_cpl">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data->nama ?>" name="nama_cpl" maxlength="50" minlength="2" required>
 			                  </div>
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Deskripsi</label>
 			                    
-			                    <textarea class="form-control" rows="3" id="text" name="deskripsi"><?= $data->deskripsi ?></textarea>
+			                    <textarea class="form-control" rows="3" id="text" name="deskripsi" maxlength="100" minlength="2" required><?= $data->deskripsi ?></textarea>
 			                  </div>
 			                  <input type="hidden" name="id" value="<?= $data->id_cpl_langsung ?>" >
 			                  <br>

@@ -13,7 +13,7 @@
 	                <div class="card-body">
 	                  <div class="form-group">
 	                    <label for="exampleInputEmail1">Kode Mata Kuliah (K2020) </label>
-	                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Kode Mata Kuliah . . ." name="kode_mata_kuliah">
+	                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Kode Mata Kuliah . . ." name="kode_mata_kuliah"  maxlength="50" minlength="2" required >
 	                  </div>
 	                  <br>
 	                  <div class="form-group">
@@ -28,16 +28,16 @@
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Nama Mata Kuliah</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Mata Kuliah" name="nama_mata_kuliah">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Mata Kuliah" name="nama_mata_kuliah"  maxlength="50" minlength="2" required >
 			                  </div>
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">SKS</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Jumlah SKS" name="sks">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Jumlah SKS" name="sks"  maxlength="50" minlength="2" required >
 			                  </div>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Dosen</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Dosen" name="dosen">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Dosen" name="dosen"  maxlength="50" minlength="2" required >
 			                  </div>
 			                  <br>
 			                  <div class="form-group">

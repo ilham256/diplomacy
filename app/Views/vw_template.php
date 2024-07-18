@@ -87,312 +87,316 @@
 </head>
 
 <body>
-	
+
+<aside class="main-sidebar sidebar-light-primary elevation-4">
 <div class="main-menu">
 	<header class="header">
 		<a href="<?php echo site_url() ?>" class="logo"><img src="<?php echo base_url() ?>images/Logo_web.png" width="170" /></a>
 		<button type="button" class="button-close fa fa-times js__menu_close"></button>
 	</header>
 	<!-- /.header -->
-	<div class="content">
-		<div class="navigation">
-			<h5 class="title">Admin</h5>
+	<div class="sidebar">
+		<!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-1 mb-1 d-flex">
+        <div class="info">
+          <a href="<?= base_url('akun') ?>" class="d-block"><h5 class="title">Admin</h5></a>
+        </div>
+      </div>
 			<!-- /.title -->
 
-			<nav class="mt-2">
-				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-				<!-- Add icons to the links using the .nav-icon class
-					with font-awesome or any other icon font library -->
-				<li class="nav-item has-treeview">
-					<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-dashboard"></i> &ensp;
-						Dashboard
-						<i class="right menu-arrow fa fa-angle-left"></i>
-					</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="<?= base_url('infumum') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Informasi Umum</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('kinumum') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Kinerja CPL</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('kincpmk') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Kinerja CPMK</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('kincpl') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Status Pencapaian CPL</p>
-							</a>
-						</li>
-					</ul>
-				</li>
+			<!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item <?php if (in_array($breadcrumbs, ['infumum', 'kinumum', 'kincpmk', 'kincpl'])) {echo "menu-open";}?>">
+            <a href="#" class="nav-link <?php if (in_array($breadcrumbs, ['infumum', 'kinumum', 'kincpmk', 'kincpl'])) {echo "active";}?>">
+              <i class="nav-icon menu-icon ti-dashboard"></i>
+              <p>
+                Dashboard
+                <i class="right menu-arrow fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('infumum') ?>" class="nav-link <?php if ($breadcrumbs == 'infumum') {echo "active";}?>">
+                  <i class="far ti-arrow-circle-right nav-icon"></i>
+                  <p>Informasi Umum</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('kinumum') ?>" class="nav-link <?php if ($breadcrumbs == 'kinumum') {echo "active";}?>">
+                  <i class="far ti-arrow-circle-right nav-icon"></i>
+                  <p>Kinerja CPL</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('kincpmk') ?>" class="nav-link <?php if ($breadcrumbs == 'kincpmk') {echo "active";}?>">
+                  <i class="far ti-arrow-circle-right nav-icon"></i>
+                  <p>Kinerja CPMK</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('kincpl') ?>" class="nav-link <?php if ($breadcrumbs == 'kincpl') {echo "active";}?>">
+                  <i class="far ti-arrow-circle-right nav-icon"></i>
+                  <p>Status Pencapaian CPL</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
-				<li class="nav-item has-treeview">
-					<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-layers-alt"></i> &ensp;
-						Input Asesmen
-						<i class="right menu-arrow fa fa-angle-left"></i>
-					</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="<?= base_url('kurikulum') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Kurikulum</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('cpmkcpl') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>CPL dan Deskriptor</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('matakuliah') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>MK menurut Semester</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('profilmatakuliah') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Profil MK & CPMK</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('formula') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Formula CPL</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('katkin') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Kategori Kinerja</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('Cpmklang') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Nilai CPMK Langsung</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('cpmktlang') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Nilai CPMK Tak Langsung</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('cpltlang') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Nilai CPL Tak Langsung</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('efektivitascpl') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Evaluasi Efektivitas CPL</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('relevansippm') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Evaluasi Relevansi PPM</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('epbm') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Rekap EPBM</p>
-							</a>
-						</li>
-					</ul>
-				</li>				
-
-				<li class="nav-item has-treeview">
-					<a href="<?= base_url('dosen') ?>" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-user"></i> &ensp;
-						Dosen
-					</p>
+          <li class="nav-item <?php if (in_array($breadcrumbs, ['kurikulum','cpmk_cpl','matakuliah','profil_matakuliah','formula','katkin','cpmklang','cpmktlang','cpltlang','efektivitas_cpl','relevansi_ppm','epbm' ])) {echo "menu-open";}?>">
+            <a href="#" class="nav-link <?php if (in_array($breadcrumbs, ['kurikulum','cpmk_cpl','matakuliah','profil_matakuliah','formula','katkin','cpmklang','cpmktlang','cpltlang','efektivitas_cpl','relevansi_ppm','epbm' ])) {echo "active";}?>">
+              <i class="nav-icon menu-icon ti-layers-alt"></i>
+              <p>
+                Input Asesmen
+                <i class="right menu-arrow fa fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('kurikulum') ?>" class="nav-link <?php if ($breadcrumbs == 'kurikulum') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Kurikulum</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('cpmkcpl') ?>" class="nav-link <?php if ($breadcrumbs == 'cpmk_cpl') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>CPL dan Deskriptor</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('matakuliah') ?>" class="nav-link <?php if ($breadcrumbs == 'matakuliah') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>MK menurut Semester</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('profilmatakuliah') ?>" class="nav-link <?php if ($breadcrumbs == 'profil_matakuliah') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Profil MK & CPMK</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('formula') ?>" class="nav-link <?php if ($breadcrumbs == 'formula') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Formula CPL</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('katkin') ?>" class="nav-link <?php if ($breadcrumbs == 'katkin') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Kategori Kinerja</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('cpmklang') ?>" class="nav-link <?php if ($breadcrumbs == 'cpmklang') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Nilai CPMK Langsung</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('cpmktlang') ?>" class="nav-link <?php if ($breadcrumbs == 'cpmktlang') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Nilai CPMK Tak Langsung</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('cpltlang') ?>" class="nav-link <?php if ($breadcrumbs == 'cpltlang') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Nilai CPL Tak Langsung</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('efektivitascpl') ?>" class="nav-link <?php if ($breadcrumbs == 'efektivitas_cpl') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Evaluasi Efektivitas CPL</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('relevansippm') ?>" class="nav-link <?php if ($breadcrumbs == 'relevansi_ppm') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Evaluasi Relevansi PPM</p>
+                </a>
+              </li>
+              <li class="nav-item">
+					<a href="<?= base_url('epbm') ?>" class="nav-link <?php if ($breadcrumbs == 'epbm') {echo "active";}?>">
+					<i class="far ti-arrow-circle-right nav-icon"></i>
+					<p>Rekap EPBM</p>
 					</a>
 				</li>
+            </ul>
+          </li>
 
-				<li class="nav-item has-treeview">
-					<a href="<?= base_url('mahasiswa') ?>" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-user"></i> &ensp;
-						Mahasiswa
-					</p>
-					</a>
-				</li>
+          <li class="nav-item <?php if (in_array($breadcrumbs, ['dosen'])) {echo "active";}?>">
+            <a href="<?= base_url('dosen') ?>" class="nav-link <?php if (in_array($breadcrumbs, ['dosen'])) {echo "active";}?>">
+            <i class="nav-icon menu-icon ti-user"></i>
+            <p>  
+              Dosen
+            </p>
+            </a>
+          </li>
 
-				<li class="nav-item has-treeview">
-					<a href="<?= base_url('cpltersimpan') ?>" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-files"></i> &ensp;
-						Hasil Pengukuran
-					</p>
-					</a>
-				</li>
+          <li class="nav-item has-treeview">
+            <a href="<?= base_url('mahasiswa') ?>" class="nav-link <?php if (in_array($breadcrumbs, ['mahasiswa'])) {echo "active";}?>">
+            <i class="nav-icon menu-icon ti-user"></i>
+            <p>
+              Mahasiswa
+            </p>
+            </a>
+          </li>
 
-				<li class="nav-item has-treeview">
-					<a href="#" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-dashboard"></i> &ensp;
-						Analisis & Evaluasi
-						<i class="right menu-arrow fa fa-angle-left"></i>
-					</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="<?= base_url('evaluasil') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>P Langsung</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('evaluasitl') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>P Tak Langsung</p>
-							</a>
-						</li>
-					</ul>
-				</li>
+          <li class="nav-item has-treeview">
+				<a href="<?= base_url('cpltersimpan') ?>" class="nav-link <?php if (in_array($breadcrumbs, ['cpl_tersimpan'])) {echo "active";}?>">
+				<p> <i class="nav-icon menu-icon ti-files"></i>
+					Hasil Pengukuran
+				</p>
+				</a>
+			</li>
 
-				<li class="nav-item has-treeview">
-					<a href="report" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-layers"></i> &ensp;
-						Laporan
-						<i class="right menu-arrow fa fa-angle-left"></i>
-					</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="<?= base_url('report') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Kinerja CPL Mahasiswa</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('report/kinerja_cpmk_mahasiswa') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Kinerja CPMK Mahasiswa</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('report/mahasiswa') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Report Mahasiswa</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('report/mata_kuliah') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Report Matakuliah</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('report/relevansi_ppm') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Relevansi PPM</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('report/efektivitas_cpl') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Efektifitas CPL</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('report/report_epbm') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Report EPBM</p>
-							</a>
-						</li>
-					</ul>
-				</li>
+          <li class="nav-item <?php if (in_array($breadcrumbs, ['evaluasi_l', 'evaluasi_tl'])) {echo "menu-open";}?>">
+            <a href="#" class="nav-link <?php if (in_array($breadcrumbs, ['evaluasi_l', 'evaluasi_tl'])) {echo "active";}?>">
+            <i class="nav-icon menu-icon ti-dashboard"></i>
+            <p>
+              Analisis & Evaluasi
+              <i class="right menu-arrow fa fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('evaluasil') ?>" class="nav-link <?php if ($breadcrumbs == 'evaluasi_l') {echo "active";}?>">
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>P Langsung</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('evaluasitl') ?>" class="nav-link <?php if ($breadcrumbs == 'evaluasi_tl') {echo "active";}?>">
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>P Tak Langsung</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
-				<li class="nav-item has-treeview">
-					<a href="<?= base_url('cpltersimpan') ?>" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-files"></i> &ensp;
-						Asesmen dan Tindak
-					</p><br>
-					&ensp;&ensp;&ensp;&ensp;
-					<p>Lanjut Perbaikan</p><br>
-					&ensp;&ensp;&ensp;&ensp;
-					<p>Matakuliah</p>
-					</a>
-				</li>
+          <li class="nav-item <?php if (in_array($breadcrumbs, ['report', 'report_epbm','report_kinerja_cpmk_mahasiswa','report_mahasiswa','report_mata_kuliah','report_relevansi_ppm','report_efektivitas_cpl'])) {echo "menu-open";}?>">
+            <a href="report" class="nav-link <?php if (in_array($breadcrumbs, ['report', 'report_epbm','report_kinerja_cpmk_mahasiswa','report_mahasiswa','report_mata_kuliah','report_relevansi_ppm','report_efektivitas_cpl'])) {echo "active";}?>">
+            <i class="nav-icon menu-icon ti-layers"></i>
+            <p>
+              Laporan
+              <i class="right menu-arrow fa fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('report') ?>" class="nav-link <?php if ($breadcrumbs == 'report') {echo "active";}?>">
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Kinerja CPL Mahasiswa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('report/kinerja_cpmk_mahasiswa') ?>" class="nav-link <?php if ($breadcrumbs == 'report_kinerja_cpmk_mahasiswa') {echo "active";}?>">
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Kinerja CPMK Mahasiswa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('report/mahasiswa') ?>" class="nav-link <?php if ($breadcrumbs == 'report_mahasiswa') {echo "active";}?>">
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Report Mahasiswa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('report/mata_kuliah') ?>" class="nav-link <?php if ($breadcrumbs == 'report_mata_kuliah') {echo "active";}?>">
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Report Matakuliah</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('report/relevansi_ppm') ?>" class="nav-link <?php if ($breadcrumbs == 'report_relevansi_ppm') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Relevansi PPM</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('report/efektivitas_cpl') ?>" class="nav-link <?php if ($breadcrumbs == 'report_efektivitas_cpl') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Efektifitas CPL</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('report/report_epbm') ?>" class="nav-link <?php if ($breadcrumbs == 'report_epbm') {echo "active";}?>">
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Report EPBM</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
-				<li class="nav-item has-treeview">
-					<a href="report" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-layers"></i> &ensp;
-						Data
-						<i class="right menu-arrow fa fa-angle-left"></i>
-					</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="<?= base_url('data') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Data CPL</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?= base_url('data/data_cpmk') ?>" class="nav-link"> &ensp;
-							<i class="far ti-arrow-circle-right"></i> &ensp;
-							<p>Data CPMK Mahasiswa</p>
-							</a>
-						</li>
-					</ul>
-				</li>
+          <li class="nav-item has-treeview">
+            <a href="<?= base_url('perbaikanmatakuliah') ?>" class="nav-link <?php if (in_array($breadcrumbs, ['perbaikan'])) {echo "active";}?>">
+            <i class="nav-icon menu-icon ti-files"></i>
+            <p>
+              Asesmen dan Tindak
+            </p><br>
+            &ensp;&ensp;&ensp;
+            <p>Lanjut Perbaikan</p><br>
+            &ensp;&ensp;&ensp;
+            <p>Matakuliah</p>
+            </a>
+          </li>
 
-				<li class="nav-item has-treeview">
-					<a href="<?= base_url('akun') ?>" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-user"></i> &ensp;
-						Akun
-					</p>
-					</a>
-				</li>
+          <li class="nav-item <?php if (in_array($breadcrumbs, ['data', 'data_cpmk'])) {echo "menu-open";}?>">
+            <a href="#" class="nav-link <?php if (in_array($breadcrumbs, ['data', 'data_cpmk'])) {echo "active";}?>">
+            <i class="nav-icon menu-icon ti-layers"></i>
+            <p>
+              Data
+              <i class="right menu-arrow fa fa-angle-left"></i>
+            </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('data') ?>" class="nav-link <?php if ($breadcrumbs == 'data') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Data CPL</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('data/data_cpmk') ?>" class="nav-link <?php if ($breadcrumbs == 'data_cpmk') {echo "active";}?>"> 
+                <i class="far ti-arrow-circle-right nav-icon"></i> 
+                <p>Data CPMK Mahasiswa</p>
+                </a>
+              </li>
+            </ul>
+          </li>
 
-				<li class="nav-item has-treeview">
-					<a href="<?= base_url('Auth/logout') ?>" class="nav-link" onclick="return confirm('apakah anda ingin Keluar ?')">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-close"></i> &ensp;
-						Logout
-					</p>
-					</a>
-				</li>
+          <li class="nav-item has-treeview">
+            <a href="<?= base_url('akun') ?>" class="nav-link <?php if (in_array($breadcrumbs, ['akun'])) {echo "active";}?>">
+            <i class="nav-icon menu-icon ti-user"></i>
+            <p>
+              Akun Setting
+            </p>
+            </a>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="<?= base_url('Auth/logout') ?>" class="nav-link" onclick="return confirm('apakah anda ingin Keluar ?')">
+            <i class="nav-icon menu-icon ti-shift-left"></i>
+            <p>
+              Logout
+            </p>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
 
 
-				</ul>
-			</nav>
-
-
-		</div>
 		<!-- /.navigation -->
 	</div>
 	<!-- /.content -->
 </div>
+</aside>
 
 
 <!-- /.main-menu -->

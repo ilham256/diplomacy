@@ -238,7 +238,7 @@
 						<label class="control-label col-sm-3">Kode</label>
 
 						<div class="controls col-sm-9">
-							<input type="text" name="kode" class="form-control" placeholder="Kode CPMK" required>
+							<input type="text" name="kode" class="form-control" placeholder="Kode CPMK"  maxlength="50" minlength="2" required >
 						</div>
 					</div>
 					<div class="form-group">
@@ -272,21 +272,21 @@
 						<label class="control-label col-sm-3">Kode</label>
 
 						<div class="controls col-sm-9">
-							<input type="text" name="kode" class="form-control" placeholder="Kode CPL" required>
+							<input type="text" name="kode" class="form-control" placeholder="Kode CPL"  maxlength="50" minlength="2" required >
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-3">Nama Mata Kuliah</label>
 
 						<div class="controls col-sm-9">
-							<input type="text" name="nama_mk" class="form-control" placeholder="Nama Mata Kuliah" required>
+							<input type="text" name="nama_mk" class="form-control" placeholder="Nama Mata Kuliah"  maxlength="50" minlength="2" required >
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-3">SKS</label>
 
 						<div class="controls col-sm-9">
-							<input type="text" name="sks" class="form-control" placeholder="Jumlah SKS" required>
+							<input type="text" name="sks" class="form-control" placeholder="Jumlah SKS"  maxlength="50" minlength="2" required >
 						</div>
 					</div>
 				</form>

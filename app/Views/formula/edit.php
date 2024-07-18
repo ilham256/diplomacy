@@ -14,7 +14,7 @@
 
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Nama CPL</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama ?>" name="nama_cpl">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama ?>" name="nama_cpl" maxlength="50" minlength="2" required>
 			                  </div>
 			                  <br>
 			                  <div class="form-group">

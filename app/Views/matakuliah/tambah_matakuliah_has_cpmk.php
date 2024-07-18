@@ -14,7 +14,7 @@
 
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Kode Mata Kuliah</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Nama Deskriptor" name="mk" value="<?= $data[0]->kode_mk ?>" >
+			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Nama Deskriptor" name="mk" value="<?= $data[0]->kode_mk ?>"  maxlength="50" minlength="2" required >
 			                  </div>
 			                  <br>
 			                  <div class="form-group">
@@ -31,7 +31,7 @@
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Deskripsi</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Deskripsi" name="deskripsi"  >
+			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Deskripsi" name="deskripsi"  maxlength="50" minlength="2" required  >
 			                  </div>
 			                  <br> 
 

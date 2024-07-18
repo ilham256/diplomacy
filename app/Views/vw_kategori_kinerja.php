@@ -12,36 +12,36 @@
 									<label for="angkatan" class="col-sm-6 col-form-label">Batas Bawah Kategori Cukup</label>
 									<label for="angkatan" class="col-sm-6 col-form-label">Target Persentase Mahasiswa</label>
 									<div class="col-sm-12 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_cukup_cpl ?>" name="batas_bawah_kategori_cukup_cpl">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_cukup_cpl ?>" name="batas_bawah_kategori_cukup_cpl" maxlength="50" minlength="2" required >
 									</div>
 									<div class="col-sm-12 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->target_jumlah_mahasiswa_cukup_cpl ?>" name="target_jumlah_mahasiswa_cukup_cpl">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->target_jumlah_mahasiswa_cukup_cpl ?>" name="target_jumlah_mahasiswa_cukup_cpl" maxlength="50" minlength="2" required >
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="angkatan" class="col-sm-6 col-form-label">Batas Bawah Kategori Baik</label>
 									<label for="angkatan" class="col-sm-6 col-form-label">Target Persentase Mahasiswa</label>
 									<div class="col-sm-12 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_baik_cpl ?>" name="batas_bawah_kategori_baik_cpl">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_baik_cpl ?>" name="batas_bawah_kategori_baik_cpl" maxlength="50" minlength="2" required >
 									</div>
 									<div class="col-sm-12 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->target_jumlah_mahasiswa_baik_cpl ?>" name="target_jumlah_mahasiswa_baik_cpl">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->target_jumlah_mahasiswa_baik_cpl ?>" name="target_jumlah_mahasiswa_baik_cpl" maxlength="50" minlength="2" required >
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="angkatan" class="col-sm-6 col-form-label">Batas Bawah Kategori Sgt Baik</label>
 									<label for="angkatan" class="col-sm-6 col-form-label">Target Persentase Mahasiswa</label>
 									<div class="col-sm-12 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_sangat_baik_cpl ?>" name="batas_bawah_kategori_sangat_baik_cpl">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_sangat_baik_cpl ?>" name="batas_bawah_kategori_sangat_baik_cpl" maxlength="50" minlength="2" required >
 									</div>
 									<div class="col-sm-12 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->target_jumlah_mahasiswa_sangat_baik_cpl ?>" name="target_jumlah_mahasiswa_sangat_baik_cpl">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->target_jumlah_mahasiswa_sangat_baik_cpl ?>" name="target_jumlah_mahasiswa_sangat_baik_cpl" maxlength="50" minlength="2" required >
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="angkatan" class="col-sm-6 col-form-label">Nilai Target Pencapaian CPL</label>
 									<div class="col-sm-12 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->nilai_target_pencapaian_cpl ?>" name="nilai_target_pencapaian_cpl">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->nilai_target_pencapaian_cpl ?>" name="nilai_target_pencapaian_cpl" maxlength="50" minlength="2" required >
 									</div>
 								</div>
 							</div>
@@ -57,25 +57,25 @@
 								<div class="row mb-3">
 									<label for="angkatan" class="col-sm-6 col-form-label">Batas Bawah Kategori Cukup</label>
 									<div class="col-sm-6 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_cukup_cpmk ?>" name="batas_bawah_kategori_cukup_cpmk">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_cukup_cpmk ?>" name="batas_bawah_kategori_cukup_cpmk" maxlength="50" minlength="2" required >
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="angkatan" class="col-sm-6 col-form-label">Batas Bawah Kategori Baik</label>
 									<div class="col-sm-6 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_baik_cpmk ?>" name="batas_bawah_kategori_baik_cpmk">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_baik_cpmk ?>" name="batas_bawah_kategori_baik_cpmk" maxlength="50" minlength="2" required >
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="angkatan" class="col-sm-6 col-form-label">Batas Bawah Kategori Sangat Baik</label>
 									<div class="col-sm-6 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_sangat_baik_cpmk ?>" name="batas_bawah_kategori_sangat_baik_cpmk">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->batas_bawah_kategori_sangat_baik_cpmk ?>" name="batas_bawah_kategori_sangat_baik_cpmk" maxlength="50" minlength="2" required >
 									</div>
 								</div>
 								<div class="row mb-3">
 									<label for="angkatan" class="col-sm-6 col-form-label">Nilai Target Pencapaian CPMK</label>
 									<div class="col-sm-6 col-md-6">
-										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->nilai_target_pencapaian_cpmk ?>" name="nilai_target_pencapaian_cpmk">
+										<input type="text" class="form-control" id="inp-type-1" value="<?= $data->nilai_target_pencapaian_cpmk ?>" name="nilai_target_pencapaian_cpmk" maxlength="50" minlength="2" required >
 									</div>
 								</div>
 								<input type="hidden" name="id"value="<?= $data->id ?>">

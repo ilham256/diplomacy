@@ -13,13 +13,13 @@
 	                <div class="card-body">
 	                  <div class="form-group">
 	                    <label for="exampleInputEmail1">Nama CPL</label>
-	                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Nama CPL" name="nama_cpl">
+	                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Nama CPL" name="nama_cpl" maxlength="50" minlength="2" required>
 	                  </div>
 	                  <br> 
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Deskripsi</label>
 			                    
-			                    <textarea class="form-control" rows="3" id="text" placeholder="Enter ..." name="deskripsi"></textarea>
+			                    <textarea class="form-control" rows="3" id="text" placeholder="Enter ..." name="deskripsi" maxlength="100" minlength="2" required></textarea>
 			                  </div>
 			                  <br>
 

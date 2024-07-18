@@ -6,7 +6,7 @@
 				<div class="row mb-3">
 					<label for="angkatan" class="col-sm-3 col-form-label">Masukkan Tahun Angkatan</label>
 					<div class="col-sm-3"> 
-						<input type="text" name="tahun" class="form-control" placeholder="- Tahun Angkatan -" required>
+						<input type="number" name="tahun" class="form-control" placeholder="- Tahun Angkatan -" required>
 					</div>
 				</div>				
 				<div class="row mb-3"> 

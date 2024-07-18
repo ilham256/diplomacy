@@ -20,17 +20,17 @@
                         <br>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Kode Mata Kuliah TM-2018</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama_kode ?>" name="kode_mata_kuliah">
+                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama_kode ?>" name="kode_mata_kuliah" maxlength="50" minlength="2" required >
                         </div>
                         <br> 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Kode Mata Kuliah TM-2019</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama_kode_3 ?>" name="kode_mata_kuliah_3">
+                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama_kode_3 ?>" name="kode_mata_kuliah_3" maxlength="50" minlength="2" required >
                         </div>
                         <br> 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Kode Mata Kuliah K-2020</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama_kode_2 ?>" name="kode_mata_kuliah_2">
+                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama_kode_2 ?>" name="kode_mata_kuliah_2" maxlength="50" minlength="2" required >
                         </div>
                         <br> 
                         <div class="form-group">
@@ -45,17 +45,17 @@
                         <br>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama Mata Kuliah</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama_mata_kuliah ?>" name="nama_mata_kuliah">
+                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->nama_mata_kuliah ?>" name="nama_mata_kuliah" maxlength="50" minlength="2" required >
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="exampleInputEmail1">SKS</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->sks ?>" name="sks">
+                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->sks ?>" name="sks" maxlength="50" minlength="2" required >
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Dosen</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->dosen ?>" name="dosen">
+                            <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data[0]->dosen ?>" name="dosen" maxlength="50" minlength="2" required >
                         </div>
                         <br>
                         <div class="form-group">

@@ -91,7 +91,7 @@
 					<div class="mb-3">
 						<input type="hidden" id="deskriptor_id" name="deskriptor_id" />
 						<label for="nama" class="form-label">Nama Deskriptor</label>
-						<input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Deskriptor" required>
+						<input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Deskriptor"  maxlength="50" minlength="2" required >
 					</div>
 					<div class="mb-3">
 						<label for="keterangan" class="form-label">Keterangan</label>

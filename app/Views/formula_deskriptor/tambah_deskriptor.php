@@ -25,7 +25,7 @@
 			                  <br>
 			                <div class="form-group">
 			                    <label for="exampleInputEmail1">Nama Deskriptor</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Deskriptor" name="nama">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukkan Nama Deskriptor" name="nama" maxlength="50" minlength="2" required>
 			                </div>
 			                  <br>
 			                <div class="form-group"> 

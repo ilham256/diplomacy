@@ -3,8 +3,8 @@
 		<div class="box-content" style="text-align: justify; font-size: 20px;">
 			<h4 class="box-title" style="text-align: justify; font-size: 35px;">Sistem Perbaikan Mutu Pendidikan Berkelanjutan PS TIN</h4>
 
-			<a href="<?php echo base_url('assets/images/infumum.png')?>" class="lightview" data-lightview-group="group">
-					<img src="<?php echo base_url('assets/images/infumum.png')?>" alt="">
+			<a href="<?php echo base_url('images/infumum.png')?>" class="lightview" data-lightview-group="group">
+					<img src="<?php echo base_url() ?>images/infumum.png" alt="">
 			</a>
 			<p>
 			<b>DIPLOMACY (Direct and Indirect Program Learning Outcome Measurement Annual Cycle) </b> adalah sistem penunjang program perbaikan mutu pendidikan berkelanjutan PS TIN. Sistem ini mencakup desain asesmen capaian pembelajaran, pengumpulan data dan analisis hasil pengukuran, evaluasi dan tindak lanjut, serta monitoring efektivitas perbaikan yang dilaksanakan, baik pada level mata kuliah (CPMK), program studi (CPL), maupun profesional (PPM).  

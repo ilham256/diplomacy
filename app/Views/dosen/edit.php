@@ -19,27 +19,27 @@
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Nama Mahasiswa</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" name="nama" value="<?= $data->nama; ?>">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" name="nama" value="<?= $data->nama; ?>" maxlength="50" minlength="2" required>
 			                  </div>
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Asal SMA</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" name="asal_sma" value="<?= $data->asal_sma; ?>">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" name="asal_sma" value="<?= $data->asal_sma; ?>" maxlength="50" minlength="2" required>
 			                  </div>
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Jalur Masus</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" name="jalur_masuk" value="<?= $data->jalur_masuk; ?>">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" name="jalur_masuk" value="<?= $data->jalur_masuk; ?>" maxlength="50" minlength="2" required>
 			                  </div>
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Tahun Masuk</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" name="tahun_masuk" value="<?= $data->tahun_masuk; ?>">
+			                    <input type="number" class="form-control" id="exampleInputEmail1" name="tahun_masuk" value="<?= $data->tahun_masuk; ?>">
 			                  </div>
 			                  <br>
 			                  <div class="form-group">
 			                    <label for="exampleInputEmail1">Tempat Lahir</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" name="tempat_lahir" value="<?= $data->tempat_lahir; ?>">
+			                    <input type="text" class="form-control" id="exampleInputEmail1" name="tempat_lahir" value="<?= $data->tempat_lahir; ?>" maxlength="50" minlength="2" required>
 			                  </div>
 			                  <br>
 

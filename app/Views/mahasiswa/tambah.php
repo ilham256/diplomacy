@@ -13,7 +13,7 @@
 	                <div class="card-body">
 	                  <div class="form-group">
 	                    <label for="exampleInputEmail1">Tahun Angkatan</label>
-	                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Tahun angkatan yang ingin di update" name="tahun">
+	                    <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Masukan Tahun angkatan yang ingin di update" name="tahun">
 	                  </div>
 
                 </div>

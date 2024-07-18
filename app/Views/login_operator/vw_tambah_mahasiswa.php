@@ -6,17 +6,17 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Username</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Username" name="username">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Username" name="username" maxlength="50" minlength="2" required >
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Email" name="email">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Email" name="email" maxlength="50" minlength="2" required >
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Password</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Password" name="password">
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Masukan Password" name="password" maxlength="50" minlength="2" required >
                   </div>
                   <br>
 

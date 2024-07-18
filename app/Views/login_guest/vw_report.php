@@ -32,7 +32,7 @@
 							<div class="row mb-3">
 								<label for="mata_kuliah" class="col-sm-3 col-form-label">Silahkan Masukkan NIM</label>
 								<div class="col-sm-3">
-									<input type="text" name="nim_3" class="form-control" placeholder="NIM" required>					
+									<input type="text" name="nim_3" class="form-control" placeholder="NIM" maxlength="50" minlength="2" required>					
 								</div>
 							</div>
 							<div class="row mb-3">

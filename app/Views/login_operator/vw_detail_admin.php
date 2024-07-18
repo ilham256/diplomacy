@@ -7,17 +7,17 @@
                   <input type="hidden" name="id" value="<?= $data->id ?>">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Username</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data->username ?>" name="username">
+                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data->username ?>" name="username" maxlength="50" minlength="2" required>
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data->username ?>" name="email">
+                    <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $data->username ?>" name="email" maxlength="50" minlength="2" required>
                   </div>
                   <br>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Password</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="password" placeholder="Masukan Password">
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="password" placeholder="Masukan Password" maxlength="50" minlength="2" required>
                   </div>
                   <br>
 

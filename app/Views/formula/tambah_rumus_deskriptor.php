@@ -13,7 +13,7 @@
 	                <div class="card-body">
 	                  <div class="form-group">
 	                    <label for="exampleInputEmail1">Kode CPL</label>
-	                    <input type="text" class="form-control" id="exampleInputEmail1"  name="id_cpl" value="<?= $data[0]->id_cpl_langsung ?>" >
+	                    <input type="text" class="form-control" id="exampleInputEmail1"  name="id_cpl" value="<?= $data[0]->id_cpl_langsung ?>" maxlength="50" minlength="2" required>
 	                  </div>
 	                  <br>
 

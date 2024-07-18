@@ -23,9 +23,9 @@
 			<!-- /.title -->
 			<div class="frm-title">Login</div>
 			<!-- /.frm-title -->
-			<div class="frm-input"><input type="text" placeholder="Username" class="frm-inp"><i class="fa fa-user frm-ico"></i></div>
+			<div class="frm-input"><input type="text" placeholder="Username" class="frm-inp"><i class="fa fa-user frm-ico" maxlength="50" minlength="2" required ></i></div>
 			<!-- /.frm-input -->
-			<div class="frm-input"><input type="text" placeholder="Password" class="frm-inp"><i class="fa fa-lock frm-ico"></i></div>
+			<div class="frm-input"><input type="text" placeholder="Password" class="frm-inp"><i class="fa fa-lock frm-ico" maxlength="50" minlength="2" required ></i></div>
 			<!-- /.frm-input -->
 			<button type="submit" class="frm-submit">Login<i class="fa fa-arrow-circle-right"></i></button>
 		</div>
