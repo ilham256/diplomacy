@@ -31,10 +31,10 @@ CI_ENVIRONMENT = production
 #--------------------------------------------------------------------
 
 # APP
-
+ 
 #--------------------------------------------------------------------
 
-# app.baseURL = ''
+app.baseURL = 'http://localhost:8080'
 
 # If you have trouble with `.`, you could also use `_`.
 
@@ -50,15 +50,15 @@ CI_ENVIRONMENT = production
 
 #--------------------------------------------------------------------
 
-# database.default.hostname = localhost
+database.default.hostname = localhost
 
-# database.default.database = ci4
+database.default.database = spk
 
-# database.default.username = root
+database.default.username = root
 
-# database.default.password = root
+database.default.password = 
 
-# database.default.DBDriver = MySQLi
+database.default.DBDriver = MySQLi
 
 # database.default.DBPrefix =
 
