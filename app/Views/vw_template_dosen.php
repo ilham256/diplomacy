@@ -154,13 +154,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= base_url('report') ?>" class="nav-link"> &ensp;
+							<a href="<?= base_url('reportdosen') ?>" class="nav-link"> &ensp;
 							<i class="far ti-arrow-circle-right"></i> &ensp;
 							<p>Kinerja CPL Mahasiswa</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= base_url('report/kinerja_cpmk_mahasiswa') ?>" class="nav-link"> &ensp;
+							<a href="<?= base_url('reportdosen/kinerja_cpmk_mahasiswa') ?>" class="nav-link"> &ensp;
 							<i class="far ti-arrow-circle-right"></i> &ensp;
 							<p>Kinerja CPMK Mahasiswa</p>
 							</a>
@@ -172,25 +172,25 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= base_url('reportdosen/matakuliah') ?>" class="nav-link"> &ensp;
+							<a href="<?= base_url('reportdosen/mata_kuliah') ?>" class="nav-link"> &ensp;
 							<i class="far ti-arrow-circle-right"></i> &ensp;
 							<p>Report Matakuliah</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= base_url('reportdosen/relevansippm') ?>" class="nav-link"> &ensp;
+							<a href="<?= base_url('reportdosen/relevansi_ppm') ?>" class="nav-link"> &ensp;
 							<i class="far ti-arrow-circle-right"></i> &ensp;
 							<p>Relevansi PPM</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= base_url('reportdosen/efektivitascpl') ?>" class="nav-link"> &ensp;
+							<a href="<?= base_url('reportdosen/efektivitas_cpl') ?>" class="nav-link"> &ensp;
 							<i class="far ti-arrow-circle-right"></i> &ensp;
 							<p>Efektifitas CPL</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= base_url('reportdosen/reportepbm') ?>" class="nav-link"> &ensp;
+							<a href="<?= base_url('reportdosen/report_epbm') ?>" class="nav-link"> &ensp;
 							<i class="far ti-arrow-circle-right"></i> &ensp;
 							<p>Report EPBM</p>
 							</a>

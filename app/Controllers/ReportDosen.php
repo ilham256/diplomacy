@@ -37,7 +37,7 @@ class ReportDosen extends BaseController
             header('Location: ' . base_url('Auth/login'));
             exit(); 
         }
-
+ 
     }
 
     public function index()

@@ -296,7 +296,7 @@ $routes->group('reportdosen', ['namespace' => 'App\Controllers'], function($rout
     $routes->get('report_epbm_copy', 'ReportDosen::report_epbm_copy');
     $routes->get('report_epbm', 'ReportDosen::report_epbm');
 });
-
+ 
 $routes->group('reportguest', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('/', 'ReportDosen::index');
     $routes->get('mahasiswa', 'ReportDosen::mahasiswa');
