@@ -24,7 +24,8 @@ class EvaluasiLDosen extends BaseController {
 
         $session = session();
         if ($session->get('loggedin') !== true || $session->get('level') != 1) {
-            return redirect()->to('auth/login');
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
      

@@ -27,9 +27,7 @@ class ReportMahasiswa extends BaseController
     {
         $this->session = session();
         
-        if (!$this->session->get('loggedin') || $this->session->get('level') != 2) {
-            return redirect()->to('auth/login');
-        }
+        
 
         $this->matakuliahModel = new MatakuliahModel();
         $this->mahasiswaModel = new MahasiswaModel();
@@ -39,6 +37,11 @@ class ReportMahasiswa extends BaseController
         $this->kinumumModel = new KinumumModel();
         $this->kincplModel = new KincplModel();
         $this->epbmModel = new EpbmModel();
+
+        if (!$this->session->get('loggedin') || $this->session->get('level') != 2) {
+            header('Location: ' . base_url('Auth/login'));
+            exit();
+        }
     }
  
 	public function index()
@@ -186,7 +189,7 @@ class ReportMahasiswa extends BaseController
 
     $data['nim'] = session()->get('nama_user');
     $tgl = date('Y');
-    $th = 2017;
+    $th = 2016;
     $tahun_report = [];
 
     for ($i = $th; $i < $tgl; $i++) {
@@ -225,8 +228,8 @@ class ReportMahasiswa extends BaseController
             $n_m = $mhs;
         }
     }
-
-    $data['nama'] = ($n_m["Nama"]);
+    //dd($data['nim'],$dt_mahasiswa,$n_m);
+    $data['nama'] = ($n_m['Nama']); 
     $data['ns'] = 'Nilai CPMK ' . $data['nama'] . ' (' . $data['nim'] . ')';
 
 	//mendefinisikan matakuliah dan nilai cpmk
@@ -278,6 +281,7 @@ class ReportMahasiswa extends BaseController
 			}
 		}
 
+        //dd($nim_2,$dt_mahasiswa,$n_m);
 		$data['nama_rapor_mahasiswa'] = $n_m["Nama"];
 		$data['nim_rapor_mahasiswa'] = $n_m["Nim"];
 

@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
@@ -45,9 +45,9 @@ class DashboardMahasiswa extends BaseController
         $data['keterangan'] = null;
 
         if ($this->request->getPost('simpan')) {
-            $passwordLama = $this->request->getPost('password_lama', true);
-            $passwordBaru = $this->request->getPost('password_baru', true);
-            $passwordBaruVerifikasi = $this->request->getPost('password_baru_verifikasi', true);
+            $passwordLama = $this->request->getPost('password_lama');
+            $passwordBaru = $this->request->getPost('password_baru');
+            $passwordBaruVerifikasi = $this->request->getPost('password_baru_verifikasi');
             
             if (password_verify($passwordLama, $data['data'][0]->password)) {
                 if ($passwordBaru == $passwordBaruVerifikasi) {

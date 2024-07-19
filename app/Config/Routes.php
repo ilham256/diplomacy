@@ -12,6 +12,8 @@ $routes->get('/coba/(:any)/(:num)', 'Coba::Index/$1/$2');
 $routes->get('Auth', 'Auth::index');
 $routes->get('Auth/login', 'Auth::login');
 $routes->post('Auth/login', 'Auth::login'); // Jika menggunakan metode POST untuk login
+$routes->get('auth/login', 'Auth::login');
+$routes->post('auth/login', 'Auth::login');
 $routes->get('Auth/logout', 'Auth::logout');
 
 // Routes untuk Dashboard controller
@@ -28,7 +30,8 @@ $routes->get('DashboardGuest/kincpl', 'DashboardGuest::kincpl');
 
 $routes->get('DashboardMahasiswa', 'DashboardMahasiswa::index');
 $routes->get('DashboardMahasiswa/akun', 'DashboardMahasiswa::akun');
-$routes->get('DashboardMahasiswa/edit_password', 'DashboardMahasiswa::edit_password');
+$routes->get('dashboard_mahasiswa/edit_password', 'DashboardMahasiswa::edit_password');
+$routes->post('dashboard_mahasiswa/edit_password', 'DashboardMahasiswa::edit_password');
 
 $routes->get('DashboardOperator', 'Dashboard::index');
 
@@ -127,7 +130,7 @@ $routes->group('evaluasil', ['namespace' => 'App\Controllers'], function ($route
     $routes->post('evaluasikinerjacpl', 'EvaluasiL::evaluasikinerjacpl');
 });
 
-$routes->group('evaluasildosen', function ($routes) {
+$routes->group('evaluasiLDosen', function ($routes) {
     $routes->get('/', 'EvaluasiLDosen::index');
     $routes->post('/', 'EvaluasiLDosen::index');
     $routes->get('evaluasi_kinerja_cpl', 'EvaluasiLDosen::evaluasiKinerjaCpl');
@@ -141,7 +144,7 @@ $routes->group('evaluasitl', function ($routes) {
     $routes->post('/', 'EvaluasiTl::index');
 });
 
-$routes->group('evaluasitldosen', function ($routes) {
+$routes->group('evaluasiTlDosen', function ($routes) {
     $routes->get('/', 'EvaluasiTlDosen::index');
     $routes->post('/', 'EvaluasiTlDosen::index');
 });
@@ -307,7 +310,7 @@ $routes->group('reportguest', ['namespace' => 'App\Controllers'], function($rout
     $routes->get('report_epbm', 'ReportDosen::report_epbm');
 });
 
-$routes->group('reportmahasiswa', ['namespace' => 'App\Controllers'], function($routes) {
+$routes->group('reportmahasiswa', ['namespace' => 'App\Controllers'], function($routes) { 
     // Route untuk method index
     $routes->get('/', 'ReportMahasiswa::index');
 

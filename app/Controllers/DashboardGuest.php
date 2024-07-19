@@ -28,7 +28,8 @@ class DashboardGuest extends BaseController
         $this->kincplModel = new KincplModel();
 
         if (session()->get('loggedin') != true || session()->get('level') != 4) {
-            return redirect()->to('auth/login');
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
 

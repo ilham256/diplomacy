@@ -12,7 +12,8 @@ class DashboardOperator extends BaseController
         $this->session = \Config\Services::session();
 
         if (!$this->session->get('loggedin') || $this->session->get('level') != 3) {
-            return redirect()->to('auth/login');
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
 

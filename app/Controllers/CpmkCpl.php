@@ -15,7 +15,8 @@ class CpmkCpl extends BaseController
         $this->formulaModel = new FormulaModel();
         $session = session();
         if (!$session->get('loggedin') || $session->get('level') != 0) {
-            return redirect()->to('auth/login');
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
 

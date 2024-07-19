@@ -34,7 +34,8 @@ class AnalisisEvaluasiGuest extends BaseController
         $this->evaluasiTlModel = new EvaluasiTlModel();
 
         if (!session()->get('loggedin') || session()->get('level') != 4) {
-            return redirect()->to('auth/login');
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
 

@@ -25,7 +25,8 @@ class Kincpl extends Controller
         $this->session = session();
 
         if (!$this->session->get('loggedin') || $this->session->get('level') != 0) {
-            return redirect()->to('auth/login');
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
 

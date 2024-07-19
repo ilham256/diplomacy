@@ -20,7 +20,8 @@ class Data extends BaseController
 
         // Assuming you have a session library loaded in BaseController
         if (!session()->get('loggedin') || session()->get('level') != 0) {
-            return redirect()->to('/auth/login');
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
 

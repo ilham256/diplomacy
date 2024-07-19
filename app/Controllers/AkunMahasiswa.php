@@ -18,8 +18,9 @@ class AkunMahasiswa extends BaseController
         $this->userModel = new UserModel();
         $this->session = \Config\Services::session();
         
-        if (!$this->session->get('loggedin')) {
-            return redirect()->to('/auth/login');
+        if (!$this->session->get('loggedin') || $this->session->get('level') != 2) {
+            header('Location: ' . base_url('Auth/login'));
+            exit();
         }
     }
 

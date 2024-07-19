@@ -31,7 +31,8 @@ class Epbm extends CI_Controller {
         $this->load->model('mahasiswa_model');
          
         if ($this->session->userdata('loggedin') != true || $_SESSION['level'] != 0) {
-      redirect('auth/login');}
+      header('Location: ' . base_url('Auth/login'));
+            exit(); 
       
     }
 

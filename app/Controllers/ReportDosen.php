@@ -32,14 +32,17 @@ class ReportDosen extends BaseController
         $this->kinumumModel = new KinumumModel();
         $this->kincplModel = new KincplModel();
         $this->epbmModel = new EpbmModel();
+
+        if (!session()->get('loggedin') || session()->get('level') != 1) {
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
+        }
+
     }
 
     public function index()
     {
-        if (!session()->get('loggedin') || session()->get('level') != 1) {
-            return redirect()->to('/auth/login');
-        }
-
+        
         $arr['breadcrumbs'] = 'report';
         $arr['content'] = 'vw_report';
 

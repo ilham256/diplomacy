@@ -24,7 +24,8 @@ class RelevansiPpm extends BaseController
         $this->mahasiswaModel = new MahasiswaModel();
 
         if (!session()->get('loggedin') || session()->get('level') != 0) {
-            return redirect()->to('auth/login');
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
 

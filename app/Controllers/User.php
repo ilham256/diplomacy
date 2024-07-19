@@ -14,7 +14,8 @@ class User extends BaseController
 		$this->userModel = new UserModel();
 
 		if (!session()->get('loggedin') || session()->get('level') != 3) {
-			return redirect()->to('/auth/login');
+			header('Location: ' . base_url('Auth/login'));
+            exit(); 
 		}
 	}
 

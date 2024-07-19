@@ -25,8 +25,8 @@ class Cpmktlang extends BaseController {
         
         $session = \Config\Services::session();
         if (!$session->get('loggedin') || $session->get('level') != 0) {
-            return redirect()->to('auth/login');
-        }
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
     }
 
     public function index() {

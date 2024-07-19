@@ -90,7 +90,7 @@
 	
 <div class="main-menu">
 	<header class="header">
-		<a href="<?php echo site_url('dashboard_mahasiswa') ?>" class="logo"><img src="<?php echo base_url() ?>assets/images/Logo_web.png" width="170" /></a>
+		<a href="<?php echo site_url('dashboard_mahasiswa') ?>" class="logo"><img src="<?php echo base_url() ?>images/Logo_web.png" width="170" /></a>
 		<button type="button" class="button-close fa fa-times js__menu_close"></button>
 	</header>
 	<!-- /.header -->
@@ -108,10 +108,10 @@
 						Dashboard
 					</p>
 					</a>
-				</li>
+				</li> 
 				
 				<li class="nav-item has-treeview">
-					<a href="<?= base_url('DashboardMahasiswa/Akun') ?>" class="nav-link">
+					<a href="<?= base_url('DashboardMahasiswa/akun') ?>" class="nav-link">
 					<i class="nav-icon fas fa-tachometer-alt"></i>
 					<p> <i class="nav-icon menu-icon ti-user"></i> &ensp;
 						Akun
@@ -120,7 +120,7 @@
 				</li>
 
 				<li class="nav-item has-treeview">
-					<a href="<?= base_url('ReportMahasiswa') ?>" class="nav-link">
+					<a href="<?= base_url('reportmahasiswa') ?>" class="nav-link">
 					<i class="nav-icon fas fa-tachometer-alt"></i>
 					<p> <i class="nav-icon menu-icon ti-layers"></i> &ensp;
 						Report Mahasiswa
@@ -129,7 +129,7 @@
 				</li>
 
 				<li class="nav-item has-treeview">
-					<a href="<?= base_url('AkunMahasiswa') ?>" class="nav-link">
+					<a href="<?= base_url('akunmahasiswa') ?>" class="nav-link">
 					<i class="nav-icon fas fa-tachometer-alt"></i>
 					<p> <i class="nav-icon menu-icon ti-user"></i> &ensp;
 						Akun

@@ -22,7 +22,8 @@ class CplTersimpan extends BaseController
         $this->kinumumModel = new \App\Models\KinumumModel();
 
         if (session()->get('loggedin') != true || session()->get('level') != 0) {
-            return redirect()->to('auth/login');
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
 

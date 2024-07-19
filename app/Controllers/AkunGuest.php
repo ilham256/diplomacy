@@ -17,9 +17,11 @@ class AkunGuest extends BaseController
 
         helper('session');
 
-        if (!session()->get('loggedin')) {
-            return redirect()->to('auth/login');
+        if (!session()->get('loggedin') || session()->get('level') != 4) {
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
+
     }
 
     public function index()

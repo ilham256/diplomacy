@@ -18,7 +18,8 @@ class AkunMahasiswa extends BaseController
         helper('session');
 
         if (!session()->get('loggedin')) {
-            return redirect()->to('auth/login');
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
 

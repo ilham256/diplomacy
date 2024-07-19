@@ -54,6 +54,11 @@ class InputAsesmenGuest extends Controller
         $this->mahasiswaModel = new MahasiswaModel();
 
         helper(['form', 'url']);
+
+        if (!session()->get('loggedin') || session()->get('level') != 4) {
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
+        }
     }
 
     public function kurikulum()

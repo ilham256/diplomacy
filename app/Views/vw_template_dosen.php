@@ -90,7 +90,7 @@
 	
 <div class="main-menu">
 	<header class="header">
-		<a href="<?php echo site_url('dashboard_dosen') ?>" class="logo"><img src="<?php echo base_url() ?>assets/images/Logo_web.png" width="170" /></a>
+		<a href="<?php echo site_url('DashboardDosen') ?>" class="logo"><img src="<?php echo base_url() ?>images/Logo_web.png" width="170" /></a>
 		<button type="button" class="button-close fa fa-times js__menu_close"></button>
 	</header>
 	<!-- /.header -->
@@ -112,22 +112,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= base_url('dashboarddosen/infumum') ?>" class="nav-link"> &ensp;
+							<a href="<?= base_url('DashboardDosen/infumum') ?>" class="nav-link"> &ensp;
 							<i class="far ti-arrow-circle-right"></i> &ensp;
 							<p>Informasi Umum</p>
 							</a>
 						</li>
 					</ul>
 				</li>		
-
-				<li class="nav-item has-treeview">
-					<a href="<?= base_url('cpltersimpan') ?>" class="nav-link">
-					<i class="nav-icon fas fa-tachometer-alt"></i>
-					<p> <i class="nav-icon menu-icon ti-files"></i> &ensp;
-						Hasil Pengukuran
-					</p>
-					</a>
-				</li>
 
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
