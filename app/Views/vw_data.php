@@ -7,7 +7,7 @@
 							<div class="input-group">
 								<label for="mata_kuliah" class="col-sm-3 col-form-label">Silahkan Masukkan Tahun Angkatan</label>
 								<div class="col-sm-3">
-									<input type="number" name="tahun" class="form-control" placeholder="- Tahun Angkatan -" required>					
+									<input type="number" name="tahun" class="form-control" placeholder="- Tahun Angkatan -" min="2010" max="2100" required>					
 								</div>
 								<button type="submit" class="btn btn-primary" name="pilih" value="pilih">Pilih</button>
 							</div> 

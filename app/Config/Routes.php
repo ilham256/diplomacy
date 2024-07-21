@@ -166,7 +166,7 @@ $routes->group('formula', function ($routes) {
     $routes->get('hapus_cpl/(:segment)', 'Formula::hapus_cpl/$1');
 });
 
-$routes->group('formula_deskriptor', function ($routes) {
+$routes->group('formuladeskriptor', function ($routes) {
     $routes->get('/', 'FormulaDeskriptor::index');
     $routes->get('tambah_formula_deskriptor/(:segment)', 'FormulaDeskriptor::tambah_formula_deskriptor/$1');
     $routes->post('submit_tambah_deskriptor', 'FormulaDeskriptor::submit_tambah_deskriptor');
