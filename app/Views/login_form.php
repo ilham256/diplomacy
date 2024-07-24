@@ -92,8 +92,10 @@
     <footer class="footer">
       <div class="row">
         <div class="col-lg-5 mb-3">
+          <br>
+          <br>
           <ul class="list-unstyled">
-            <li class="mb-2">v.1.1</li>
+            <li class="mb-2">v.1.2</li>
           </ul>
         </div>
       </div>

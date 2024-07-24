@@ -69,6 +69,7 @@ $routes->post('cpltersimpan/simpan', 'CplTersimpan::simpan');
 $routes->post('cpltersimpan/import', 'CplTersimpan::import');
 
 $routes->get('cpltlang', 'Cpltlang::index');
+$routes->post('cpltlang', 'Cpltlang::index');
 $routes->post('cpltlang/import', 'Cpltlang::import');
 
 $routes->get('cpmkcpl', 'CpmkCpl::index');
@@ -88,10 +89,12 @@ $routes->get('cpmkcpl/tambahdeskriptor/(:num)', 'CpmkCpl::tambahDeskriptor/$1');
 
 // Custom routes for Cpmklang controller
 $routes->get('/cpmklang', 'Cpmklang::index');
+$routes->post('/Cpmklang', 'Cpmklang::index');
 $routes->post('/cpmklang/import', 'Cpmklang::import');
 $routes->get('/cpmklang/data_tersimpan', 'Cpmklang::data_tersimpan');
 
 $routes->get('cpmktlang', 'Cpmktlang::index');
+$routes->post('Cpmktlang', 'Cpmktlang::index');
 $routes->post('cpmktlang', 'Cpmktlang::index');
 $routes->post('cpmktlang/import', 'Cpmktlang::import');
 
@@ -110,9 +113,11 @@ $routes->get('dosen/export_excel', 'Dosen::export_excel');
 $routes->get('dosen/suksesSimpan', 'Dosen::suksesSimpan');
 
 $routes->get('efektivitascpl', 'EfektivitasCpl::index');
+$routes->post('efektivitascpl', 'EfektivitasCpl::index');
 $routes->post('efektivitascpl/import', 'EfektivitasCpl::import');
 
 $routes->get('epbm', 'Epbm::index');
+$routes->post('epbm', 'Epbm::index');
 $routes->post('epbm/upload', 'Epbm::upload');
 $routes->post('epbm/import', 'Epbm::import');
 
@@ -203,8 +208,8 @@ $routes->group('inputasesmenguest', function($routes) {
 
 $routes->group('katkin', function($routes) {
     $routes->get('/', 'Katkin::index');
-    $routes->get('edit', 'Katkin::editKatkin');
-    $routes->post('simpan', 'Katkin::simpanData');
+    $routes->get('editkatkin', 'Katkin::editKatkin');
+    $routes->post('simpandata', 'Katkin::simpanData');
     $routes->get('suksessimpan', 'Katkin::suksesSimpan');
 });
 
@@ -269,6 +274,7 @@ $routes->group('profilmatakuliah', ['namespace' => 'App\Controllers'], function(
 
 $routes->group('relevansippm', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('/', 'RelevansiPpm::index');
+    $routes->post('/', 'RelevansiPpm::index');
     $routes->post('import', 'RelevansiPpm::import');
 });
 
@@ -278,7 +284,8 @@ $routes->get('/report/kinerja_cpmk_mahasiswa', 'Report::kinerja_cpmk_mahasiswa')
 $routes->post('/report/mahasiswa', 'Report::mahasiswa');
 $routes->post('/report/kinerja_cpmk_mahasiswa', 'Report::kinerja_cpmk_mahasiswa');
 $routes->post('/report/download_report_mahasiswa', 'Report::download_report_mahasiswa');
-
+$routes->get('/report/mata_kuliah', 'Report::mata_kuliah');
+$routes->post('/report/mata_kuliah', 'Report::mata_kuliah');
 $routes->post('/report/download_report_mata_kuliah', 'Report::download_report_mata_kuliah');
 $routes->get('/report/relevansi_ppm', 'Report::relevansi_ppm');
 $routes->get('/report/efektivitas_cpl', 'Report::efektivitas_cpl');
