@@ -130,18 +130,18 @@ class Cpmktlang extends BaseController {
                 $kode_mk_2 = str_replace(" ", "", $kode_mk_1 );
                 $kode_mk = str_replace(":", "", $kode_mk_2 );
 
-                $cek_kode_mk = $this->cpmktlang_model->cekmatakuliahkode2($kode_mk);
+                $cek_kode_mk = $this->cpmktlangModel->cekmatakuliahkode2($kode_mk);
 
                 if (!empty($cek_kode_mk)) {
                     $kode_mk = $cek_kode_mk["0"]->kode_mk;
                 }else {
-                    $cek_kode_mk = $this->cpmktlang_model->cekmatakuliahkode3($kode_mk);
+                    $cek_kode_mk = $this->cpmktlangModel->cekmatakuliahkode3($kode_mk);
                 } 
 
                 if (!empty($cek_kode_mk)) {
                     $kode_mk = $cek_kode_mk["0"]->kode_mk;
                 }else {
-                    $cek_kode_mk = $this->cpmktlang_model->cekmatakuliahkode1($kode_mk);
+                    $cek_kode_mk = $this->cpmktlangModel->cekmatakuliahkode1($kode_mk);
                 }
 
                 if (!empty($cek_kode_mk)) {
@@ -174,7 +174,7 @@ class Cpmktlang extends BaseController {
                                                         FALSE);
                         //Sesuaikan sama nama kolom tabel di database 
 
-                        $data_cek =  $this->cpmktlang_model->cekmatakuliahhascpmk($kode_mk.'_'.$key);
+                        $data_cek =  $this->cpmktlangModel->cekmatakuliahhascpmk($kode_mk.'_'.$key);
 
                         if (empty($data_cek)) {
                             $save_data = array(
@@ -214,7 +214,7 @@ class Cpmktlang extends BaseController {
                         //sesuaikan nama dengan nama tabel
                          
                         array_push($arr['datas'],$masukan);
-                        $insert = $this->cpmktlang_model->updateexcel($save_data);
+                        $insert = $this->cpmktlangModel->updateexcel($save_data);
                         //delete_files($media['file_path']);                   
                         }
                         $i++;
@@ -229,7 +229,7 @@ class Cpmktlang extends BaseController {
         //echo '<pre>';  var_dump($arr['datas']); echo '</pre>';
         $arr['breadcrumbs'] = 'cpmklang';
         $arr['content'] = 'vw_data_nilai_berhasil_disimpan2'; 
-        $this->load->view('vw_template', $arr);
+        return view('vw_template', $arr);
 
 
     }

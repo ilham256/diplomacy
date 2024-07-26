@@ -13,7 +13,7 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" role="tabpanel" id="cpl" aria-labelledby="cpl-tab">
-					<form role="form" id="contactform" action="<?php echo site_url('evaluasi_l')?>" method="post">
+					<form role="form" id="contactform" action="<?php echo site_url('evaluasil')?>" method="post">
 						<div class="row mb-3">
 							<label for="angkatan" class="col-sm-3 col-form-label">Silahkan pilih Tahun Akademik</label>
 							<div class="col-sm-3"> 
@@ -73,7 +73,7 @@
 						//$data_tahun = array_map('intval', explode(',', str_replace(array('[', ']'),'', $tahun)));
 						//echo '<pre>';  var_dump($tahun_masuk_select); echo '</pre>'; ?>
 
-					<form role="form" id="contactform" action="<?php echo site_url('evaluasi_l/evaluasi_ketercapaian')?>" method="post">
+					<form role="form" id="contactform" action="<?php echo site_url('evaluasil/evaluasi_ketercapaian')?>" method="post">
 						<?php foreach($tahun_masuk_select as $key2) { ?>
 						<input type="hidden" name="tahun[]" value="<?php echo json_encode($key2); ?>">
 						<?php }; ?>
@@ -88,7 +88,7 @@
 
 					</form>
 					<br>
-					<form role="form" id="contactform" action="<?php echo site_url('evaluasi_l/evaluasi_trend')?>" method="post">
+					<form role="form" id="contactform" action="<?php echo site_url('evaluasil/evaluasi_trend')?>" method="post">
 						<?php foreach($tahun_masuk_select as $key2) { ?>
 						<input type="hidden" name="tahun[]" value="<?php echo json_encode($key2); ?>">
 						<?php }; ?>

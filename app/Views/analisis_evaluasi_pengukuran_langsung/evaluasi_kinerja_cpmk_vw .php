@@ -16,7 +16,7 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade" role="tabpanel" id="cpmk" aria-labelledby="cpmk-tab">
-					<form role="form" id="contactform" action="<?php echo site_url('evaluasi_l/evaluasi_kinerja_cpmk')?>" method="post">
+					<form role="form" id="contactform" action="<?php echo site_url('evaluasil/evaluasi_kinerja_cpmk')?>" method="post">
 						<div class="row mb-3">
 							<label for="angkatan" class="col-sm-3 col-form-label">Silahkan pilih Tahun Akademik</label>
 							<div class="col-sm-3">

@@ -95,7 +95,7 @@
           <br>
           <br>
           <ul class="list-unstyled">
-            <li class="mb-2">v.1.2</li>
+            <li class="mb-2">v.1.3</li>
           </ul>
         </div>
       </div>

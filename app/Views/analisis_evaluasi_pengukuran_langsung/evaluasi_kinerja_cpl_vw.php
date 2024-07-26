@@ -14,7 +14,7 @@
 			</ul>
 			<div class="tab-content" id="myTabContent"> 
 				<div class="tab-pane fade show active" role="tabpanel" id="cpl" aria-labelledby="cpl-tab">
-					<form role="form" id="contactform" action="<?php echo site_url('evaluasi_l/evaluasi_kinerja_cpl')?>" method="post">
+					<form role="form" id="contactform" action="<?php echo site_url('evaluasil/evaluasi_kinerja_cpl')?>" method="post">
 						<div class="row mb-3">
 							<label for="angkatan" class="col-sm-3 col-form-label">Masukkan Tahun Angkatan</label>
 							<div class="col-sm-3"> 

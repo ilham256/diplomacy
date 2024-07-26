@@ -90,7 +90,7 @@ $routes->get('cpmkcpl/tambahdeskriptor/(:num)', 'CpmkCpl::tambahDeskriptor/$1');
 // Custom routes for Cpmklang controller
 $routes->get('/cpmklang', 'Cpmklang::index');
 $routes->post('/Cpmklang', 'Cpmklang::index');
-$routes->post('/cpmklang/import', 'Cpmklang::import');
+$routes->post('/Cpmklang/import', 'Cpmklang::import');
 $routes->get('/cpmklang/data_tersimpan', 'Cpmklang::data_tersimpan');
 
 $routes->get('cpmktlang', 'Cpmktlang::index');
@@ -114,7 +114,7 @@ $routes->get('dosen/suksesSimpan', 'Dosen::suksesSimpan');
 
 $routes->get('efektivitascpl', 'EfektivitasCpl::index');
 $routes->post('efektivitascpl', 'EfektivitasCpl::index');
-$routes->post('efektivitascpl/import', 'EfektivitasCpl::import');
+$routes->post('efektivitas_cpl/import', 'EfektivitasCpl::import');
 
 $routes->get('epbm', 'Epbm::index');
 $routes->post('epbm', 'Epbm::index');

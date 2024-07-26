@@ -65,9 +65,9 @@ class EfektivitasCpl extends Controller {
             //echo '<pre>';  var_dump($highestSheet); echo '</pre>';
 
             //konfersi dari funsion uploads
-                $arr['datas'] = [];
+            $arr['datas'] = [];
             $arr['datas_relevansi_ppm'] = [];
-            $arr['datas_cpl'] = $this->efektivitas_cpl_model->getcpl();;
+            $arr['datas_cpl'] = $this->efektivitasCplModel->getcpl();;
 
             //Menyimpan Data Persheet
             for ($p=0; $p < $highestSheet; $p++) { 
@@ -103,7 +103,7 @@ class EfektivitasCpl extends Controller {
                                                         FALSE);
                         //Sesuaikan sama nama kolom tabel di database 
 
-                        $data_cek =  $this->efektivitas_cpl_model->cekcpl($key);
+                        $data_cek =  $this->efektivitasCplModel->cekcpl($key);
 
                         if (empty($data_cek)) {
                             $save_data = array(
@@ -137,7 +137,7 @@ class EfektivitasCpl extends Controller {
                          
                         array_push($arr['datas'],$masukan);
 
-                        $insert = $this->efektivitas_cpl_model->updateexcelnilaiefektivitascpl($save_data);
+                        $insert = $this->efektivitasCplModel->updateexcelnilaiefektivitascpl($save_data);
                         //delete_files($media['file_path']);
                              
                         }
@@ -156,7 +156,7 @@ class EfektivitasCpl extends Controller {
         //echo '<pre>';  var_dump($arr['datas']); echo '</pre>';
         $arr['breadcrumbs'] = 'relevansi_ppm';
         $arr['content'] = 'vw_data_nilai_berhasil_disimpan4';
-        $this->load->view('vw_template', $arr);
+        return view('vw_template', $arr);
 
 
     }

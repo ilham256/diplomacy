@@ -65,7 +65,7 @@ class RelevansiPpm extends BaseController
                 //konfersi dari funsion uploads
                 $arr['datas'] = [];
                 $arr['datas_relevansi_ppm'] = [];
-                $arr['datas_cpl'] = $this->relevansi_ppm_model->getcpl();;
+                $arr['datas_cpl'] = $this->relevansiPpmModel->getcpl();;
 
                 //Menyimpan Data Persheet
                 for ($p=0; $p < $highestSheet; $p++) { 
@@ -95,7 +95,7 @@ class RelevansiPpm extends BaseController
                                         "email"=> $row_relevansi_ppm[0][8]);
 
                         array_push($arr['datas_relevansi_ppm'],$save_data_ppm);
-                        $insert = $this->relevansi_ppm_model->updateexcelrelevansippm($save_data_ppm);
+                        $insert = $this->relevansiPpmModel->updateexcelrelevansippm($save_data_ppm);
 
                         }
                     }
@@ -123,7 +123,7 @@ class RelevansiPpm extends BaseController
                                                             FALSE);
                             //Sesuaikan sama nama kolom tabel di database 
 
-                            $data_cek =  $this->relevansi_ppm_model->cekcpl($key);
+                            $data_cek =  $this->relevansiPpmModel->cekcpl($key);
 
                             if (empty($data_cek)) {
                                 $save_data = array(
@@ -156,7 +156,7 @@ class RelevansiPpm extends BaseController
                             //sesuaikan nama dengan nama tabel
                              
                             array_push($arr['datas'],$masukan);
-                            $insert = $this->relevansi_ppm_model->updateexcelnilairelevansippmcpl($save_data);
+                            $insert = $this->relevansiPpmModel->updateexcelnilairelevansippmcpl($save_data);
                             //delete_files($media['file_path']);
                                  
                             }
@@ -189,7 +189,7 @@ class RelevansiPpm extends BaseController
                                                                 FALSE);
                                 //Sesuaikan sama nama kolom tabel di database 
 
-                                $data_cek =  $this->relevansi_ppm_model->cekppm($key);
+                                $data_cek =  $this->relevansiPpmModel->cekppm($key);
 
                                 if (empty($data_cek)) {
                                     $save_data = array(
@@ -222,7 +222,7 @@ class RelevansiPpm extends BaseController
                                 //sesuaikan nama dengan nama tabel
                                  
                                 array_push($arr['datas'],$masukan);
-                                $insert = $this->relevansi_ppm_model->updateexcelnilairelevansippm($save_data);
+                                $insert = $this->relevansiPpmModel->updateexcelnilairelevansippm($save_data);
                                 //delete_files($media['file_path']);
                                      
                                 }
@@ -240,7 +240,7 @@ class RelevansiPpm extends BaseController
             //echo '<pre>';  var_dump($arr['datas']); echo '</pre>';
             $arr['breadcrumbs'] = 'relevansi_ppm';
             $arr['content'] = 'vw_data_nilai_berhasil_disimpan3';
-            $this->load->view('vw_template', $arr);
+            return view('vw_template', $arr);
 
 
     }

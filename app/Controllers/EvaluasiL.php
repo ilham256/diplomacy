@@ -339,7 +339,7 @@ class EvaluasiL extends BaseController
         //echo '<pre>';  var_dump($tahun_min); echo '</pre>';
        // echo '<pre>';  var_dump($tahun_max); echo '</pre>';
        // echo '<pre>';  var_dump($arr['tahun_masuk_select']); echo '</pre>';
-        $this->load->view('vw_template', $arr);
+        return view('vw_template', $arr);
     }
 
     public function evaluasi_ketercapaian(){
@@ -369,7 +369,7 @@ class EvaluasiL extends BaseController
            $arr['target_cpl'] = $this->katkin_model->getkatkin();
         }
 
-        $this->load->view('vw_template', $arr);
+        return view('vw_template', $arr);
     }
 
     public function evaluasi_trend(){
@@ -399,7 +399,7 @@ class EvaluasiL extends BaseController
            $arr['target_cpl'] = $this->katkin_model->getkatkin();
         }
 
-        $this->load->view('vw_template', $arr);
+        return view('vw_template', $arr);
     }
      public function identifikasi($tahun){
         $arr['breadcrumbs'] = 'evaluasi_l';
@@ -459,7 +459,7 @@ class EvaluasiL extends BaseController
         }
 
         //echo '<pre>';  var_dump($arr['nilai']); echo '</pre>'; 
-       $this->load->view('vw_template', $arr);
+       return view('vw_template', $arr);
         
     }
 
