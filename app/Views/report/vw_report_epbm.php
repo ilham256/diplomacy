@@ -41,7 +41,7 @@
 							<div class="input-group">
 								<label for="mata_kuliah" class="col-sm-3 col-form-label">Semester</label>
 								<div class="col-sm-9">
-									<select id="cpl" class="form-select" name="semester">
+									<select id="cpl" class="form-control select2" name="semester">
 										<option value="Ganjil">Ganjil</option>
 										<option value="Genap">Genap</option>
 									</select>					
@@ -52,7 +52,7 @@
 							<div class="input-group">
 								<label for="mata_kuliah" class="col-sm-3 col-form-label">Dosen</label>
 								<div class="col-sm-9">
-									<select id="cpl" class="form-select" name="dosen">
+									<select id="cpl" class="form-control select2" name="dosen">
 									<option value="<?php echo $dosen; ?>" style="background: lightblue;"><?php echo $dosen; ?></option>
 									<?php $i = 1; foreach($data_dosen as $d) { ?>
 									<option value="<?php echo $d->NIP; ?>"><?php echo $d->NIP.' ('.$d->nama_dosen.')' ; ?></option>
@@ -64,7 +64,7 @@
 							<div class="input-group">
 								<label for="mata_kuliah" class="col-sm-3 col-form-label">Mata Kuliah</label>
 								<div class="col-sm-9">
-									<select id="cpl" class="form-select" name="mk">
+									<select id="cpl" class="form-control select2" name="mk">
 									<option value="<?php echo $mk; ?>" style="background: lightblue;"><?php echo $mk; ?></option>
 									<?php $i = 1; foreach($data_epbm_mk as $d) { ?>
 									<option value="<?php echo $d->kode_epbm_mk; ?>"><?php echo $d->kode_epbm_mk.' ('.$d->nama_mata_kuliah.')' ; ?></option>

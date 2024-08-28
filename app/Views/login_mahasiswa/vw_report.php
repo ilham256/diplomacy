@@ -21,8 +21,8 @@
 							<div class="row mb-3">
 								<label for="cpl" class="col-sm-3 control-label">Silahkan Pilih CPL</label>
 								<div class="col-sm-3">
-									<div class="input-group">
-									<select id="cpl" class="form-select" name="cpl">
+									<div>
+									<select id="cpl" class="form-control" name="cpl">
 										<option value="<?php echo $simpanan_cpl; ?>" style="background: lightblue;"><?php echo $simpanan_cpl; ?></option>
 										<?php $i = 1; foreach($cpl as $d) { ?>
 										<option value="<?php echo $d->id_cpl_langsung; ?>"><?php echo $d->nama; ?></option>
@@ -31,7 +31,7 @@
 									<button type="submit" class="btn btn-primary" name="pilih_3" value="pilih_3">Pilih</button> 
 									</div>
 								</div>
-							</div> 
+							</div>
 							</form>					
 
 						<div class="row">

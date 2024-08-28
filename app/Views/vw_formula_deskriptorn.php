@@ -53,7 +53,7 @@
 						<input type="hidden" id="desk_cpmk_id" name="desk_cpmk_id" />
 						<label for="mata_kuliah" class="form-label">Pilih Mata Kuliah</label>
 
-						<select id="mata_kuliah" class="form-select">
+						<select id="mata_kuliah" class="form-control select2">
 							<option value="2020">TIN 311 Penelitian Operasi</option>
 							<option value="2019">TIN 310 Tata Letak dan Penanganan Bahan</option>
 							<option value="2018">TIN 326 Peralatan Industri</option>
@@ -62,7 +62,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="cpmk" class="form-label">Pilih Kode</label>
-						<select id="cpmk" class="form-select">
+						<select id="cpmk" class="form-control select2">
 							<option value="2020">CPMK A</option>
 							<option value="2019">CPMK B</option>
 							<option value="2018">CPMK C</option>

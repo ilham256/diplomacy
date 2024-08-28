@@ -13,7 +13,7 @@
 	                <div class="card-body"> 
 	                  <div class="form-group">
 	                    <label for="exampleInputEmail1">Mata Kuliah</label>
-	                    <select id="mata_kuliah" class="form-select" name="mata_kuliah">
+	                    <select id="mata_kuliah" class="form-control select2" name="mata_kuliah">
                         <?php $i = 1; foreach($mata_kuliah as $d) { ?>
                         <option value="<?php echo $d->kode_mk; ?>"><?php echo $d->nama_kode.' ('.$d->nama_mata_kuliah.')'; ?></option>
                         <?php $i++; } ?>
@@ -22,7 +22,7 @@
                     <br>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama Dosen</label>
-                      <select id="mata_kuliah" class="form-select" name="dosen">
+                      <select id="mata_kuliah" class="form-control select2" name="dosen">
                         <?php $i = 1; foreach($dosen as $d) { ?>
                         <option value="<?php echo $d->NIP; ?>"><?php echo $d->NIP.' ('.$d->nama_dosen.')'; ?></option>
                         <?php $i++; } ?>

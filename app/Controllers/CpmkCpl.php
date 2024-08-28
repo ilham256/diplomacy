@@ -56,6 +56,12 @@ class CpmkCpl extends BaseController
     }
 
     public function editCpl($id) {
+
+        // Validasi bahwa $id adalah string yang diharapkan
+        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $id)) {
+            return redirect()->to('/error');
+        }
+
         $edit = $this->cpmkCplModel->editCpl($id);
         $data['data'] = $edit;
         $data['breadcrumbs'] = 'cpmk_cpl';
@@ -79,6 +85,12 @@ class CpmkCpl extends BaseController
     }
 
     public function hapusCpl($id) {
+
+        // Validasi bahwa $id adalah string yang diharapkan
+        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $id)) {
+            return redirect()->to('/error');
+        }
+
         if ($this->cpmkCplModel->hapusCpl($id)) {
             return redirect()->to('cpmkcpl');
         }
@@ -106,6 +118,12 @@ class CpmkCpl extends BaseController
     }
 
     public function editCpmk($id) {
+
+        // Validasi bahwa $id adalah string yang diharapkan
+        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $id)) {
+            return redirect()->to('/error');
+        }
+
         $edit = $this->cpmkCplModel->editCpmk($id);
         $data['data'] = $edit;
         $data['breadcrumbs'] = 'cpmk_cpl';
@@ -129,6 +147,12 @@ class CpmkCpl extends BaseController
     }
 
     public function hapusCpmk($id) {
+
+        // Validasi bahwa $id adalah string yang diharapkan
+        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $id)) {
+            return redirect()->to('/error');
+        }
+
         if ($this->cpmkCplModel->hapusCpmk($id)) {
             return redirect()->to('cpmkcpl');
         }
@@ -136,6 +160,12 @@ class CpmkCpl extends BaseController
 
     // Deskriptor
     public function tambahDeskriptor($id) {
+
+        // Validasi bahwa $id adalah string yang diharapkan
+        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $id)) {
+            return redirect()->to('/error');
+        }
+        
         $edit = $this->formulaModel->getDataCpl($id);
         $data['data'] = $edit;
         $data['breadcrumbs'] = 'formula_deskriptor';

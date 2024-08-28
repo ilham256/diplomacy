@@ -8,7 +8,7 @@
 					<label for="mata_kuliah" class="col-sm-3 col-form-label">Silahkan pilih Tahun Angkatan</label>
 					<div class="col-sm-3 ">
 						<div class="input-group">
-						<select id="angkatan" class="form-select" name="tahun_masuk">
+						<select id="angkatan" class="form-control select2" name="tahun_masuk">
 							<option value="<?php echo $simpanan_tahun	; ?>" style="background: lightblue;"><?php echo $simpanan_tahun."/".$t_simpanan_tahun; ?></option>
 							<?php $i = 1; foreach($tahun_masuk as $d) { ?>
 							<option value="<?php echo $d->tahun_masuk; ?>"><?php echo $d->tahun_masuk.'/'.($d->tahun_masuk+1); ?></option>

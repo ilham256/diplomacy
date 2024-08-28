@@ -6,19 +6,19 @@
 				<div class="row mb-3">
 					<label for="angkatan" class="col-sm-3 col-form-label">Silahkan pilih Mata Kuliah</label>
 					<div class="col-sm-6">
-						<select id="mata_kuliah" class="form-select" name="mata_kuliah">
+						<select id="mata_kuliah" class="form-control select2" name="mata_kuliah">
 							<option value="<?php echo $simpanan_mk	; ?>" style="background: lightblue;"><?php echo $simpanan_nama_mk; ?></option>
 							<?php $i = 1; foreach($mata_kuliah as $d) { ?>
 							<option value="<?php echo $d->kode_mk; ?>"><?php echo $d->nama_kode.' ('.$d->nama_mata_kuliah.')'; ?></option>
 							<?php $i++; } ?>
 						</select>
-					</div>  
+					</div> 
 				</div>  
 				<div class="row mb-3">
 					<label for="mata_kuliah" class="col-sm-3 col-form-label">Silahkan pilih Tahun Akademik</label>
 					<div class="col-sm-3 ">
 						<div class="input-group">
-						<select id="angkatan" class="form-select" name="tahun_masuk">
+						<select id="angkatan" class="form-control select2" name="tahun_masuk">
 							<option value="<?php echo $simpanan_tahun	; ?>" style="background: lightblue;"><?php echo $simpanan_tahun.$t_simpanan_tahun; ?></option>
 							<?php $i = 1; foreach($tahun_masuk as $d) { ?>
 							<option value="<?php echo $d->tahun_masuk; ?>"><?php echo $d->tahun_masuk.'/'.($d->tahun_masuk+1); ?></option>

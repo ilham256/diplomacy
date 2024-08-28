@@ -38,7 +38,7 @@
 							<label for="angkatan" class="col-sm-3 col-form-label">Silahkan Pilih Mata Kuliah</label>
 							<div class="col-sm-6">
 								<div class="input-group">
-								<select id="cpl" class="form-select" name="mk">
+								<select id="cpl" class="form-control select2" name="mk">
 									<option value="<?php echo $simpanan_mk; ?>" style="background: lightblue;"><?php echo $simpanan_mk; ?></option>
 									<?php $i = 1; foreach($mata_kuliah as $d) { ?>
 									<option value="<?php echo $d->kode_mk; ?>"><?php echo $d->nama_kode_2." (".$d->nama_mata_kuliah.")"; ?></option>

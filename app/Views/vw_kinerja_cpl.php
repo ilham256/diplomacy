@@ -2,7 +2,7 @@
 	<div class="col-lg-12 col-xs-12">
 		<div class="box-content">
 			<h4 class="box-title">Progress Capaian Pembelajaran Lulusan (CPL) - Tahun <?php echo $tahun; ?></h4>
-			<form role="form" id="contactform" action="<?php echo site_url('Kincpl')?>" method="post">
+			<form role="form" id="contactform" action="<?php echo site_url('kincpl')?>" method="post">
 				<div class="row mb-3">
 					<label for="angkatan" class="col-sm-3 col-form-label">Masukkan Tahun Angkatan</label>
 					<div class="col-sm-3"> 
@@ -13,7 +13,7 @@
 					<label for="cpl" class="col-sm-3 control-label">Silahkan Pilih CPL</label>
 					<div class="col-sm-3">
 						<div class="input-group">
-						<select id="cpl" class="form-select" name="cpl">
+						<select id="cpl" class="form-control select2" name="cpl">
 							<option value="<?php echo $simpanan_cpl; ?>" style="background: lightblue;"><?php echo $simpanan_cpl; ?></option>
 							<?php $i = 1; foreach($cpl as $d) { ?>
 							<option value="<?php echo $d->id_cpl_langsung; ?>"><?php echo $d->nama; ?></option>

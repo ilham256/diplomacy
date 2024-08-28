@@ -74,18 +74,18 @@ $routes->post('cpltlang/import', 'Cpltlang::import');
 
 $routes->get('cpmkcpl', 'CpmkCpl::index');
 $routes->get('cpmkcpl/tambahcpl', 'CpmkCpl::tambahCpl');
-$routes->post('cpmkcpl/tambahcpl', 'CpmkCpl::submitTambahCpl');
-$routes->get('cpmkcpl/editcpl/(:num)', 'CpmkCpl::editCpl/$1');
-$routes->post('cpmkcpl/editcpl', 'CpmkCpl::submitEditCpl');
-$routes->get('cpmkcpl/hapuscpl/(:num)', 'CpmkCpl::hapusCpl/$1');
+$routes->post('cpmkcpl/submittambahcpl', 'CpmkCpl::submitTambahCpl');
+$routes->get('cpmkcpl/editcpl/(:any)', 'CpmkCpl::editCpl/$1');
+$routes->post('cpmkcpl/submiteditcpl', 'CpmkCpl::submitEditCpl');
+$routes->get('cpmkcpl/hapuscpl/(:any)', 'CpmkCpl::hapusCpl/$1');
 
 $routes->get('cpmkcpl/tambahcpmk', 'CpmkCpl::tambahCpmk');
 $routes->post('cpmkcpl/tambahcpmk', 'CpmkCpl::submitTambahCpmk');
-$routes->get('cpmkcpl/editcpmk/(:num)', 'CpmkCpl::editCpmk/$1');
+$routes->get('cpmkcpl/editcpmk/(:any)', 'CpmkCpl::editCpmk/$1');
 $routes->post('cpmkcpl/editcpmk', 'CpmkCpl::submitEditCpmk');
-$routes->get('cpmkcpl/hapuscpmk/(:num)', 'CpmkCpl::hapusCpmk/$1');
+$routes->get('cpmkcpl/hapuscpmk/(:any)', 'CpmkCpl::hapusCpmk/$1');
 
-$routes->get('cpmkcpl/tambahdeskriptor/(:num)', 'CpmkCpl::tambahDeskriptor/$1');
+$routes->get('cpmkcpl/tambahdeskriptor/(:any)', 'CpmkCpl::tambahDeskriptor/$1');
 
 // Custom routes for Cpmklang controller
 $routes->get('/cpmklang', 'Cpmklang::index');
@@ -215,14 +215,22 @@ $routes->group('katkin', function($routes) {
 
 $routes->group('kincpl', function($routes) {
     $routes->get('/', 'Kincpl::index');
+    $routes->post('/', 'Kincpl::index');
+});
+
+$routes->group('Kincpl', function($routes) {
+    $routes->get('/', 'Kincpl::index');
+    $routes->post('/', 'Kincpl::index');
 });
 
 $routes->group('kincpmk', function($routes) {
     $routes->get('/', 'Kincpmk::index');
+    $routes->post('/', 'Kincpmk::index');
 });
 
 $routes->group('kinumum', function($routes) {
     $routes->get('/', 'Kinumum::index');
+    $routes->post('/', 'Kinumum::index');
 });
 
 $routes->group('kurikulum', function($routes) {
@@ -242,6 +250,7 @@ $routes->group('mahasiswa', function($routes) {
 
 $routes->group('matakuliah', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('/', 'Matakuliah::index');
+    $routes->post('/', 'Matakuliah::index');
     $routes->get('tambah', 'Matakuliah::tambah');
     $routes->post('submit_tambah', 'Matakuliah::submit_tambah');
     $routes->post('submit_edit', 'Matakuliah::submit_edit');
@@ -270,6 +279,7 @@ $routes->group('perbaikanmatakuliah', ['namespace' => 'App\Controllers'], functi
 
 $routes->group('profilmatakuliah', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('/', 'ProfilMatakuliah::index');
+    $routes->post('/', 'ProfilMatakuliah::index');
 });
 
 $routes->group('relevansippm', ['namespace' => 'App\Controllers'], function($routes) {
@@ -279,6 +289,7 @@ $routes->group('relevansippm', ['namespace' => 'App\Controllers'], function($rou
 });
 
 $routes->get('/report', 'Report::index');
+$routes->post('/report', 'Report::index');
 $routes->get('/report/mahasiswa', 'Report::mahasiswa');
 $routes->get('/report/kinerja_cpmk_mahasiswa', 'Report::kinerja_cpmk_mahasiswa');
 $routes->post('/report/mahasiswa', 'Report::mahasiswa');
@@ -320,6 +331,7 @@ $routes->group('reportguest', ['namespace' => 'App\Controllers'], function($rout
 $routes->group('reportmahasiswa', ['namespace' => 'App\Controllers'], function($routes) { 
     // Route untuk method index
     $routes->get('/', 'ReportMahasiswa::index');
+    $routes->post('/', 'ReportMahasiswa::index');
 
     // Route untuk method download_report_mahasiswa
     $routes->get('download', 'ReportMahasiswa::download_report_mahasiswa');

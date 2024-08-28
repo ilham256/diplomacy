@@ -39,7 +39,7 @@
 								<label for="cpl" class="col-sm-3 control-label">Silahkan Pilih CPL</label>
 								<div class="col-sm-3">
 									<div class="input-group">
-									<select id="cpl" class="form-select" name="cpl">
+									<select id="cpl" class="form-control select2" name="cpl">
 										<option value="<?php echo $simpanan_cpl; ?>" style="background: lightblue;"><?php echo $simpanan_cpl; ?></option>
 										<?php $i = 1; foreach($cpl as $d) { ?>
 										<option value="<?php echo $d->id_cpl_langsung; ?>"><?php echo $d->nama; ?></option>
@@ -81,9 +81,8 @@
 </div>
 
 <!-- chart.js Chart -->
-<script src="<?php echo base_url() ?>assets/plugin/chart/node_modules/chartjs-plugin-error-bars/node_modules/chart.js/dist/Chart.bundle.min.js"></script>
-<script src="<?php echo base_url() ?>assets/plugin/chart/node_modules/chartjs-plugin-error-bars/build/Plugin.Errorbars.js"></script>
-
+<script src="<?php echo base_url() ?>plugin/chart/node_modules/chartjs-plugin-error-bars/node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+<script src="<?php echo base_url() ?>plugin/chart/node_modules/chartjs-plugin-error-bars/build/Plugin.Errorbars.js"></script>
 
 <script>
 		var e = {},
@@ -176,7 +175,7 @@
 				},
 				intersect : false,
 				mode:'index'
-			}
+			} 
 		};
 
 		var sms = <?php echo json_encode($nama_semester); ?>;

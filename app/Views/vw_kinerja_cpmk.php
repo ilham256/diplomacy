@@ -2,11 +2,11 @@
     <div class="col-lg-12 col-xs-12">
         <div class="box-content">
             <h4 class="box-title">Kinerja Capaian Pembelajaran Mata Kuliah (CPMK)</h4>
-            <form role="form" id="contactform" action="<?= site_url('Kincpl') ?>" method="post">
+            <form role="form" id="contactform" action="<?= site_url('kincpmk') ?>" method="post">
                 <div class="row mb-3">
                     <label for="mata_kuliah" class="col-sm-3 col-form-label">Silahkan pilih Tahun Angkatan</label>
                     <div class="col-sm-3 ">
-                        <select id="angkatan" class="form-select" name="tahun_masuk">
+                        <select id="angkatan" class="form-control select2" name="tahun_masuk">
                             <option value="<?= $simpanan_tahun ?>" style="background: lightblue;"><?= $simpanan_tahun . '/' . $t_simpanan_tahun; ?></option>
                             <?php foreach ($tahun_masuk as $d) { ?>
                             <option value="<?= $d->tahun_masuk ?>"><?= $d->tahun_masuk . '/' . ($d->tahun_masuk + 1); ?></option>
@@ -18,7 +18,7 @@
                     <label for="angkatan" class="col-sm-3 col-form-label">Silahkan pilih Semester</label>
                     <div class="col-sm-3">
                         <div class="input-group">
-                            <select id="semester" class="form-select" name="semester">
+                            <select id="semester" class="form-control select2" name="semester">
                                 <option value="<?= $simpanan_semester ?>" style="background: lightblue;"><?= $simpanan_semester; ?></option>
                                 <?php foreach ($data_semester as $d) { ?>
                                 <option value="<?= $d->id_semester ?>"><?= $d->id_semester; ?></option>

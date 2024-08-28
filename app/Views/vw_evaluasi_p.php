@@ -16,7 +16,7 @@
 						<div class="row mb-3">
 							<label for="angkatan" class="col-sm-3 col-form-label">Silahkan pilih Tahun Akademik</label>
 							<div class="col-sm-3">
-								<select id="angkatan" class="form-select">
+								<select id="angkatan" class="form-control select2">
 									<option value="2020">2020/2021</option>
 									<option value="2019">2019/2020</option>
 									<option value="2018">2018/2019</option>
@@ -27,7 +27,7 @@
 							</div>
 							<label class="col-sm-1 col-form-label">s/d</label>
 							<div class="col-sm-3">
-								<select id="angkatan" class="form-select">
+								<select id="angkatan" class="form-control select2">
 									<option value="2020" selected>2020/2021</option>
 									<option value="2019">2019/2020</option>
 									<option value="2018">2018/2019</option>
@@ -40,7 +40,7 @@
 						<div class="row mb-3">
 							<label for="angkatan" class="col-sm-3 col-form-label">Silahkan Pilih Mata Kuliah</label>
 							<div class="col-sm-3">
-								<select id="mk" class="form-select">
+								<select id="mk" class="form-control select2">
 									<option value="2020">TIN 101</option>
 									<option value="2019">TIN 202</option>
 									<option value="2018">TIN 230</option>

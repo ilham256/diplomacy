@@ -16,7 +16,7 @@ class Kurikulum extends BaseController
         $session = session();
         if (!$session->get('loggedin') || $session->get('level') != 0) {
             header('Location: ' . base_url('Auth/login'));
-            exit(); 
+            exit(); }
     }
 
     public function index() {

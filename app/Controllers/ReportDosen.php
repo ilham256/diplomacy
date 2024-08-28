@@ -209,14 +209,14 @@ class ReportDosen extends BaseController
             return $response->getBody();
         }
 
-        $dt_mahasiswa_2 = [];
+        $data['dt_mahasiswa_2'] = [];
         foreach ($tahun_report as $year) {
             $response = curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=$year");
             $dt_mahasisw = json_decode($response, true);
-            $dt_mahasiswa_2 = array_merge($dt_mahasiswa_2, $dt_mahasisw);
+            $data['dt_mahasiswa_2'] = array_merge($data['dt_mahasiswa_2'], $dt_mahasisw);
         }
 
-        $dt_mahasiswa = $dt_mahasiswa_2;
+        $dt_mahasiswa = $data['dt_mahasiswa_2'];
 
         // Sub Menu Rapor Mahasiswa
         $rumus_cpl = $this->kinumumModel->getCplRumusDeskriptor();

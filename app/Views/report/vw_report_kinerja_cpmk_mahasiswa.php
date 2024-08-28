@@ -142,7 +142,6 @@
 	var arr_nilai = <?php echo json_encode($nilai_cpmk); ?>;
 
 	var ab = arr.length
-	console.log(arr);
 
 	var datai = [];
 

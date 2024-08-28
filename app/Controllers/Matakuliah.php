@@ -84,7 +84,7 @@ class Matakuliah extends BaseController
 
             if ($query) {
                 $this->uploadRps($name_image);
-                return redirect()->to('/Matakuliah');
+                return redirect()->to('/matakuliah');
             }
         }
     }
@@ -113,7 +113,7 @@ class Matakuliah extends BaseController
 
             $query = $this->matakuliahModel->submitEdit($save_data, $id_edit);
             if ($query) {
-                return redirect()->to('/Matakuliah');
+                return redirect()->to('/matakuliah');
             }
         }
     }
@@ -164,7 +164,7 @@ class Matakuliah extends BaseController
     {
         $delete = $this->matakuliahModel->hapus($id);
         if ($delete) {
-            return redirect()->to('/Matakuliah');
+            return redirect()->to('/matakuliah');
         }
     }
 

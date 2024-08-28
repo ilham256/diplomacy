@@ -20,7 +20,7 @@
 						<div class="row mb-3">
 							<label for="angkatan" class="col-sm-3 col-form-label">Silahkan pilih Tahun Akademik</label>
 							<div class="col-sm-3">
-								<select id="angkatan" class="form-select" name="tahun_masuk_min">
+								<select id="angkatan" class="form-control select2" name="tahun_masuk_min">
 									<option value="<?php echo $simpanan_tahun_min	; ?>" style="background: lightblue;"><?php echo $simpanan_tahun_min.'/'.$t_simpanan_tahun_min; ?></option>
 									<?php $i = 1; foreach($tahun_masuk as $d) { ?>
 									<option value="<?php echo $d->tahun_masuk; ?>"><?php echo $d->tahun_masuk.'/'.($d->tahun_masuk+1); ?></option>
@@ -30,7 +30,7 @@
 							<label class="col-sm-1 col-form-label">s/d</label> 
 							<div class="col-sm-3">
 								<div class="input-group">
-								<select id="angkatan" class="form-select" name="tahun_masuk_max">
+								<select id="angkatan" class="form-control select2" name="tahun_masuk_max">
 									<option value="<?php echo $simpanan_tahun_max	; ?>" style="background: lightblue;"><?php echo $simpanan_tahun_max.'/'.$t_simpanan_tahun_max; ?></option>
 									<?php $i = 1; foreach($tahun_masuk as $d) { ?>
 									<option value="<?php echo $d->tahun_masuk; ?>"><?php echo $d->tahun_masuk.'/'.($d->tahun_masuk+1); ?></option>
@@ -69,7 +69,7 @@
 						<div class="row mb-3">
 							<label for="angkatan" class="col-sm-3 col-form-label">Silahkan pilih Tahun Akademik</label>
 							<div class="col-sm-3">
-								<select id="angkatan" class="form-select">
+								<select id="angkatan" class="form-control select2">
 									<option value="2020">2020/2021</option>
 									<option value="2019">2019/2020</option>
 									<option value="2018">2018/2019</option>
@@ -82,7 +82,7 @@
 						<div class="row mb-3">
 							<label for="angkatan" class="col-sm-3 col-form-label">Silahkan Pilih CPL</label>
 							<div class="col-sm-3">
-								<select id="cpl" class="form-select">
+								<select id="cpl" class="form-control select2">
 									<option value="2020">1</option>
 									<option value="2019">2</option>
 									<option value="2018">3</option>
@@ -105,7 +105,7 @@
 						<div class="row mb-3">
 							<label for="angkatan" class="col-sm-3 col-form-label">Silahkan pilih Tahun Akademik</label>
 							<div class="col-sm-3">
-								<select id="angkatan" class="form-select">
+								<select id="angkatan" class="form-control select2">
 									<option value="2020">2020/2021</option>
 									<option value="2019">2019/2020</option>
 									<option value="2018">2018/2019</option>
@@ -116,7 +116,7 @@
 							</div>
 							<label class="col-sm-1 col-form-label">s/d</label>
 							<div class="col-sm-3">
-								<select id="angkatan" class="form-select">
+								<select id="angkatan" class="form-control select2">
 									<option value="2020" selected>2020/2021</option>
 									<option value="2019">2019/2020</option>
 									<option value="2018">2018/2019</option>
@@ -129,7 +129,7 @@
 						<div class="row mb-3">
 							<label for="angkatan" class="col-sm-3 col-form-label">Silahkan Pilih Mata Kuliah</label>
 							<div class="col-sm-3">
-								<select id="mk" class="form-select">
+								<select id="mk" class="form-control select2">
 									<option value="2020">TIN 101</option>
 									<option value="2019">TIN 202</option>
 									<option value="2018">TIN 230</option>

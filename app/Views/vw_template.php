@@ -82,6 +82,10 @@
 	<script src="<?= base_url('plugin/dropify/js/dropify.min.js') ?>"></script>
 	<script src="<?= base_url('scripts/fileUpload.demo.min.js') ?>"></script>
 
+    <!-- Select2 -->
+  <link rel="stylesheet" href="<?= base_url('Adminlte/plugins/select2/css/select2.min.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('Adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') ?>">
+
 
 
 </head>
