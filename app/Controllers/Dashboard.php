@@ -12,7 +12,8 @@ class Dashboard extends Controller
         
         // Memeriksa apakah pengguna sudah login dan memiliki level admin (level = 0)
         if (!session()->get('loggedin') || session()->get('level') != 0) {
-            return redirect()->to('Auth/login'); // Redirect ke halaman login jika tidak memenuhi kriteria
+            header('Location: ' . base_url('Auth/login'));
+            exit(); 
         }
     }
 

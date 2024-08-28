@@ -7,6 +7,13 @@ use CodeIgniter\Controller;
 
 class Auth extends Controller
 {
+    protected $session;
+
+    public function __construct()
+    {
+        $this->session = session();
+    }
+
     public function index()
     {
         throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -14,20 +21,8 @@ class Auth extends Controller
 
     public function login()
     {
-        $session = session();
-
-        if ($session->get('loggedin')) {
-            if ($session->get('level') == 1) {
-                return redirect()->to('DashboardDosen');
-            } elseif ($session->get('level') == 2) {
-                return redirect()->to('DashboardMahasiswa');
-            } elseif ($session->get('level') == 3) {
-                return redirect()->to('DashboardOperator');
-            } elseif ($session->get('level') == 4) {
-                return redirect()->to('DashboardGuest');
-            } else {
-                return redirect()->to('Dashboard');                
-            }
+        if ($this->session->get('loggedin')) {
+            return $this->redirectUserByLevel();
         } else {
             $authModel = new AuthModel();
             $validation = \Config\Services::validation();
@@ -44,21 +39,10 @@ class Auth extends Controller
             $arr['keterangan'] = 1;
 
             if ($authModel->login($username, $password)) {
-                $session->set('loggedin', true);
-
-                if ($session->get('level') == 1) {
-                    return redirect()->to('DashboardDosen');
-                } elseif ($session->get('level') == 2) {
-                    return redirect()->to('DashboardMahasiswa');
-                } elseif ($session->get('level') == 3) {
-                    return redirect()->to('DashboardOperator');
-                } elseif ($session->get('level') == 4) {
-                    return redirect()->to('DashboardGuest'); 
-                } else {
-                    return redirect()->to('Dashboard');                
-                }
+                $this->session->set('loggedin', true);
+                return $this->redirectUserByLevel();
             } else {
-                $session->setFlashdata('message_login_error', 'Login Gagal, pastikan username dan password benar!');
+                $this->session->setFlashdata('message_login_error', 'Login Gagal, pastikan username dan password benar!');
             }
 
             $arr['keterangan'] = 0;
@@ -68,10 +52,25 @@ class Auth extends Controller
 
     public function logout()
     {
-        $session = session();
         $authModel = new AuthModel();
-        $session->destroy();
+        $this->session->destroy();
         $authModel->logout();
         return redirect()->to('Auth/login');
+    }
+
+    private function redirectUserByLevel()
+    {
+        switch ($this->session->get('level')) {
+            case 1:
+                return redirect()->to('DashboardDosen');
+            case 2:
+                return redirect()->to('DashboardMahasiswa');
+            case 3:
+                return redirect()->to('DashboardOperator');
+            case 4:
+                return redirect()->to('DashboardGuest');
+            default:
+                return redirect()->to('Dashboard');
+        }
     }
 }
