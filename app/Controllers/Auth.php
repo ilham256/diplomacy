@@ -8,37 +8,39 @@ use CodeIgniter\Controller;
 class Auth extends Controller
 {
     protected $session;
+    protected $authModel; // Tambahkan deklarasi properti untuk AuthModel
+    protected $validation; // Tambahkan deklarasi properti untuk validation
 
     public function __construct()
     {
         $this->session = session();
+        $this->authModel = new AuthModel(); // Inisialisasi AuthModel di konstruktor
+        $this->validation = \Config\Services::validation(); // Inisialisasi validation di konstruktor
     }
 
     public function index()
     {
         throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-    }  
+    }
 
     public function login()
     {
         if ($this->session->get('loggedin')) {
             return $this->redirectUserByLevel();
         } else {
-            $authModel = new AuthModel();
-            $validation = \Config\Services::validation();
-
-            $rules = $authModel->rules();
-            $validation->setRules($rules);
+            // Gunakan properti yang sudah dideklarasikan dan diinisialisasi di konstruktor
+            $rules = $this->authModel->rules();
+            $this->validation->setRules($rules);
 
             if (!$this->validate($rules)) {
-                return view('login_form', ['validation' => $validation]);
+                return view('login_form', ['validation' => $this->validation]);
             }
 
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
             $arr['keterangan'] = 1;
 
-            if ($authModel->login($username, $password)) {
+            if ($this->authModel->login($username, $password)) {
                 $this->session->set('loggedin', true);
                 return $this->redirectUserByLevel();
             } else {
@@ -46,15 +48,14 @@ class Auth extends Controller
             }
 
             $arr['keterangan'] = 0;
-            return view('login_form', $arr);  
+            return view('login_form', $arr);
         }
     }
 
     public function logout()
     {
-        $authModel = new AuthModel();
         $this->session->destroy();
-        $authModel->logout();
+        $this->authModel->logout();
         return redirect()->to('Auth/login');
     }
 
