@@ -38,7 +38,7 @@
 <div class="login-box">
   <div class="login-logo">
     <a ><b> <strong>DIPLOMACY </strong> </b></a>
-    <p style="font-size: 30px;"> Sistem Assesmen OBE PS TIN</p>
+    <p style="font-size: 30px;"> Sistem Assesmen OBE PS TIN 1.5</p>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -95,7 +95,7 @@
           <br>
           <br>
           <ul class="list-unstyled">
-            <li class="mb-2">v.1.4</li>
+            <li class="mb-2">v.1.5</li>
           </ul>
         </div>
       </div>
