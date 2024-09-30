@@ -37,7 +37,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a ><b> <strong>DIPLOMACY .1.5</strong> </b></a>
+    <a ><b> <strong>DIPLOMACY .1.6</strong> </b></a>
     <p style="font-size: 30px;"> Sistem Assesmen OBE PSTIN</p>
   </div>
   <!-- /.login-logo -->
