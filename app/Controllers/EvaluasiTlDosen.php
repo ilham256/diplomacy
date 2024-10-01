@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\MatakuliahModel;
 use App\Models\MahasiswaModel;
-use App\Models\EvaluasiTlModel;
+use App\Models\EvaluasiTLModel;
 use App\Models\KatkinModel;
 
 class EvaluasiTlDosen extends BaseController
@@ -18,7 +18,7 @@ class EvaluasiTlDosen extends BaseController
     {
         $this->matakuliahModel = new MatakuliahModel();
         $this->mahasiswaModel = new MahasiswaModel();
-        $this->evaluasiTlModel = new EvaluasiTlModel();
+        $this->evaluasiTlModel = new EvaluasiTLModel(); 
         $this->katkinModel = new KatkinModel();
         
         if (!session()->get('loggedin') || session()->get('level') != 1) {

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\mahasiswaModel;
+use App\Models\MahasiswaModel;
 use CodeIgniter\Controller;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
@@ -12,7 +12,7 @@ class Mahasiswa extends Controller {
     protected $mahasiswaModel;
 
     public function __construct() {
-        $this->mahasiswaModel = new mahasiswaModel();
+        $this->mahasiswaModel = new MahasiswaModel();
         $session = session();
         if (!$session->get('loggedin') || $session->get('level') != 0) {
             header('Location: ' . base_url('Auth/login'));

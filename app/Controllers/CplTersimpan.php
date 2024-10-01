@@ -7,15 +7,15 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
 class CplTersimpan extends BaseController 
 {
-    protected $cplTersimpanModel;
-    protected $matakuliahModel;
-    protected $mahasiswaModel;
-    protected $katkinModel;
-    protected $kinumumModel;
+    protected $CpltersimpanModel; 
+    protected $MatakuliahModel;
+    protected $MahasiswaModel;
+    protected $KatkinModel;
+    protected $KinumumModel;
 
     public function __construct()
     {
-        $this->cplTersimpanModel = new \App\Models\CplTersimpanModel();
+        $this->cplTersimpanModel = new \App\Models\CpltersimpanModel();
         $this->matakuliahModel = new \App\Models\MatakuliahModel();
         $this->mahasiswaModel = new \App\Models\MahasiswaModel();
         $this->katkinModel = new \App\Models\KatkinModel();
