@@ -33,8 +33,8 @@ $routes->get('DashboardMahasiswa/akun', 'DashboardMahasiswa::akun');
 $routes->get('dashboard_mahasiswa/edit_password', 'DashboardMahasiswa::edit_password');
 $routes->post('dashboard_mahasiswa/edit_password', 'DashboardMahasiswa::edit_password');
 
-$routes->get('DashboardOperator', 'Dashboard::index');
-
+$routes->get('DashboardOperator', 'DashboardOperator::index');
+$routes->get('dashboard_operator', 'DashboardOperator::index');
 // Routes untuk Akun controller
 $routes->get('akun', 'Akun::index');
 $routes->get('akun/ganti_password', 'Akun::ganti_password');
@@ -302,30 +302,31 @@ $routes->get('/report/relevansi_ppm', 'Report::relevansi_ppm');
 $routes->get('/report/efektivitas_cpl', 'Report::efektivitas_cpl');
 $routes->get('/report/report_epbm', 'Report::report_epbm');
 
-$routes->group('reportdosen', ['namespace' => 'App\Controllers'], function($routes) {
-    $routes->get('/', 'ReportDosen::index');
-    $routes->get('mahasiswa', 'ReportDosen::mahasiswa');
-    $routes->get('kinerja_cpmk_mahasiswa', 'ReportDosen::kinerja_cpmk_mahasiswa');
-    $routes->get('download_report_mahasiswa', 'ReportDosen::download_report_mahasiswa');
-    $routes->get('mata_kuliah', 'ReportDosen::mata_kuliah');
-    $routes->get('download_report_mata_kuliah', 'ReportDosen::download_report_mata_kuliah');
-    $routes->get('relevansi_ppm', 'ReportDosen::relevansi_ppm');
-    $routes->get('efektivitas_cpl', 'ReportDosen::efektivitas_cpl');
-    $routes->get('report_epbm_copy', 'ReportDosen::report_epbm_copy');
-    $routes->get('report_epbm', 'ReportDosen::report_epbm');
-});
+$routes->get('/reportdosen', 'ReportDosen::index');
+$routes->post('/reportdosen', 'ReportDosen::index');
+$routes->get('/reportdosen/mahasiswa', 'ReportDosen::mahasiswa');
+$routes->get('/reportdosen/kinerja_cpmk_mahasiswa', 'ReportDosen::kinerja_cpmk_mahasiswa');
+$routes->post('/reportdosen/mahasiswa', 'ReportDosen::mahasiswa');
+$routes->post('/reportdosen/kinerja_cpmk_mahasiswa', 'ReportDosen::kinerja_cpmk_mahasiswa');
+$routes->post('/reportdosen/download_report_mahasiswa', 'ReportDosen::download_report_mahasiswa');
+$routes->get('/reportdosen/mata_kuliah', 'ReportDosen::mata_kuliah');
+$routes->post('/reportdosen/mata_kuliah', 'ReportDosen::mata_kuliah');
+$routes->post('/reportdosen/download_report_mata_kuliah', 'ReportDosen::download_report_mata_kuliah');
+$routes->get('/reportdosen/relevansi_ppm', 'ReportDosen::relevansi_ppm');
+$routes->get('/reportdosen/efektivitas_cpl', 'ReportDosen::efektivitas_cpl');
+$routes->get('/reportdosen/report_epbm', 'ReportDosen::report_epbm');
  
 $routes->group('reportguest', ['namespace' => 'App\Controllers'], function($routes) {
-    $routes->get('/', 'ReportDosen::index');
-    $routes->get('mahasiswa', 'ReportDosen::mahasiswa');
-    $routes->get('kinerja_cpmk_mahasiswa', 'ReportDosen::kinerja_cpmk_mahasiswa');
-    $routes->get('download_report_mahasiswa', 'ReportDosen::download_report_mahasiswa');
-    $routes->get('mata_kuliah', 'ReportDosen::mata_kuliah');
-    $routes->get('download_report_mata_kuliah', 'ReportDosen::download_report_mata_kuliah');
-    $routes->get('relevansi_ppm', 'ReportDosen::relevansi_ppm');
-    $routes->get('efektivitas_cpl', 'ReportDosen::efektivitas_cpl');
-    $routes->get('report_epbm_copy', 'ReportDosen::report_epbm_copy');
-    $routes->get('report_epbm', 'ReportDosen::report_epbm');
+    $routes->get('/', 'ReportGuest::index');
+    $routes->get('mahasiswa', 'ReportGuest::mahasiswa');
+    $routes->get('kinerja_cpmk_mahasiswa', 'ReportGuest::kinerja_cpmk_mahasiswa');
+    $routes->get('download_report_mahasiswa', 'ReportGuest::download_report_mahasiswa');
+    $routes->get('mata_kuliah', 'ReportGuest::mata_kuliah');
+    $routes->get('download_report_mata_kuliah', 'ReportGuest::download_report_mata_kuliah');
+    $routes->get('relevansi_ppm', 'ReportGuest::relevansi_ppm');
+    $routes->get('efektivitas_cpl', 'ReportGuest::efektivitas_cpl');
+    $routes->get('report_epbm_copy', 'ReportGuest::report_epbm_copy');
+    $routes->get('report_epbm', 'ReportGuest::report_epbm');
 });
 
 $routes->group('reportmahasiswa', ['namespace' => 'App\Controllers'], function($routes) { 
@@ -338,16 +339,16 @@ $routes->group('reportmahasiswa', ['namespace' => 'App\Controllers'], function($
 });
 
 $routes->get('/user/admin', 'User::admin');
-$routes->get('/user/admin/tambah', 'User::tambah_admin');
-$routes->post('/user/admin/submit', 'User::submit_tambah_admin');
-$routes->get('/user/admin/hapus/(:segment)', 'User::hapus_admin/$1');
+$routes->get('/user/tambah_admin', 'User::tambah_admin');
+$routes->post('/user/submit_tambah_admin', 'User::submit_tambah_admin');
+$routes->get('/user/hapus_Admin/(:segment)', 'User::hapus_admin/$1');
 
 $routes->get('/user/dosen', 'User::dosen');
-$routes->get('/user/dosen/tambah', 'User::tambah_dosen');
-$routes->post('/user/dosen/submit', 'User::submit_tambah_dosen');
-$routes->get('/user/dosen/hapus/(:segment)', 'User::hapus_dosen/$1');
+$routes->get('/user/tambah_dosen', 'User::tambah_dosen');
+$routes->post('/user/submit_tambah_dosen', 'User::submit_tambah_dosen');
+$routes->get('/user/hapus_Dosen/(:segment)', 'User::hapus_dosen/$1');
 
 $routes->get('/user/mahasiswa', 'User::mahasiswa');
-$routes->get('/user/mahasiswa/tambah', 'User::tambah_mahasiswa');
-$routes->post('/user/mahasiswa/submit', 'User::submit_tambah_mahasiswa');
-$routes->get('/user/mahasiswa/hapus/(:segment)', 'User::hapus_mahasiswa/$1');
+$routes->get('/user/tambah_mahasiswa', 'User::tambah_mahasiswa');
+$routes->post('/user/submit_tambah_mahasiswa', 'User::submit_tambah_mahasiswa');
+$routes->get('/user/hapus_Mahasiswa/(:segment)', 'User::hapus_mahasiswa/$1');

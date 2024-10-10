@@ -34,7 +34,7 @@
                         <td><span class="label label-success"><?php echo $r->username; ?></span></td>
                         <td><?php echo $r->last_login; ?></td>
                         <td>
-                        <a href="<?= base_url ('user/hapus_Admin/').$r->id; ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data admin ?')" >Delete</a>
+                        <a href="<?= base_url ('user/hapus_Dosen/').$r->id; ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data admin ?')" >Delete</a>
                       	</td>
                     </tr>
                     <?php $i++; } ?>

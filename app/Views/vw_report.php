@@ -31,8 +31,13 @@
 							<form role="form" id="contactform" action="<?php echo site_url('report')?>" method="post">
 							<div class="row mb-3">
 								<label for="mata_kuliah" class="col-sm-3 col-form-label">Silahkan Masukkan NIM</label>
-								<div class="col-sm-3">
-									<input type="text" name="nim_3" class="form-control" placeholder="NIM" maxlength="30" required>					
+								<div class="col-sm-6">
+									<select id="nim_3" class="form-control select2" name="nim_3" required>
+										<option value="" style="background: lightblue;" selected disabled>- Mahasiswa -</option>
+										<?php $i = 1; foreach($dt_mahasiswa_2 as $d) { ?>
+										<option value="<?php echo $d['Nim']; ?>"><?php echo $d['Nim'].' - '.$d['Nama'].' - smt('.$d['SemesterMahasiswa'].') - stat('.$d['StatusAkademik'].')'; ?></option>
+										<?php $i++; } ?>
+									</select>			
 								</div>
 							</div>
 							<div class="row mb-3">

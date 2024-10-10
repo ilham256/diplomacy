@@ -43,8 +43,9 @@ class ReportDosen extends BaseController
     public function index()
     {
         
+
         $arr['breadcrumbs'] = 'report';
-        $arr['content'] = 'vw_report';
+        $arr['content'] = 'login_dosen/vw_report';
 
         $arr['mata_kuliah'] = $this->matakuliahModel->getMatakuliah();
         $arr['katkin'] = $this->katkinModel->getKatkin();
@@ -62,6 +63,34 @@ class ReportDosen extends BaseController
 
         $target = $this->katkinModel->getKatkin();
         $target_cpl = ($target["0"]->nilai_target_pencapaian_cpl);
+
+        // Mengambil data mahasiswa dari API
+        $currentYear = date('Y');
+        $startYear = 2017;
+        $tahun_report = range($startYear, $currentYear - 1);
+
+        function curl($url)
+        {
+            $curl = \Config\Services::curlrequest();
+            $headers = [
+                'accept' => 'text/plain',
+                'X-IPBAPI-TOKEN' => 'Bearer 86f2760d-7293-36f4-833f-1d29aaace42e'
+            ];
+            $response = $curl->request('GET', $url, [
+                'headers' => $headers,
+                'http_errors' => false,
+            ]);
+            return $response->getBody();
+        }
+
+        $arr['dt_mahasiswa_2'] = [];
+        foreach ($tahun_report as $year) {
+            $response = curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=$year");
+            $dt_mahasisw = json_decode($response, true);
+            $arr['dt_mahasiswa_2'] = array_merge($arr['dt_mahasiswa_2'], $dt_mahasisw);
+        }
+
+        $dt_mahasiswa = $arr['dt_mahasiswa_2'];
 
         if ($this->request->getPost('pilih_3')) {
             $nim_3 = $this->request->getPost('nim_3');
@@ -174,14 +203,14 @@ class ReportDosen extends BaseController
         }
 
         // Load view
-        return view('vw_template', $arr);
+        return view('vw_template_dosen', $arr);
     }
 
 
-	public function mahasiswa()
+    public function mahasiswa()
     {
         $data['breadcrumbs'] = 'report_mahasiswa';
-        $data['content'] = 'report/vw_report_mahasiswa';
+        $data['content'] = 'login_dosen/report/vw_report_mahasiswa';
 
         $data['mata_kuliah'] = $this->matakuliahModel->getMatakuliah();
         $data['katkin'] = $this->katkinModel->getKatkin();
@@ -217,6 +246,7 @@ class ReportDosen extends BaseController
         }
 
         $dt_mahasiswa = $data['dt_mahasiswa_2'];
+        //dd($data['dt_mahasiswa_2']);
 
         // Sub Menu Rapor Mahasiswa
         $rumus_cpl = $this->kinumumModel->getCplRumusDeskriptor();
@@ -301,7 +331,7 @@ class ReportDosen extends BaseController
             $data['ttl_rapor_mahasiswa'] = '-';
             $data['tahun_masuk_rapor_mahasiswa'] = '-';
         }
-		//dd($data);
+        //dd($data);
         // Sub Menu Rapor Mata Kuliah
         // echo '<pre>';  var_dump($data['nilai_mk_raport']); echo '</pre>';
         // echo '<pre>';  var_dump($nilai_mahasiswa_tak_langsung); echo '</pre>';
@@ -309,13 +339,13 @@ class ReportDosen extends BaseController
         // echo '<pre>';  var_dump($mahasiswa); echo '</pre>';
         // echo '<pre>';  var_dump($mahasiswa[0]); echo '</pre>';
         
-        return view('vw_template', $data);
+        return view('vw_template_dosen', $data);
     }
 
-	 public function kinerja_cpmk_mahasiswa()
+     public function kinerja_cpmk_mahasiswa()
     {
         $arr['breadcrumbs'] = 'report_kinerja_cpmk_mahasiswa';
-        $arr['content'] = 'report/vw_report_kinerja_cpmk_mahasiswa';
+        $arr['content'] = 'login_dosen/report/vw_report_kinerja_cpmk_mahasiswa';
 
         $arr['mata_kuliah'] = $this->matakuliahModel->getmatakuliah();
         $arr['katkin'] = $this->katkinModel->getkatkin();
@@ -346,15 +376,28 @@ class ReportDosen extends BaseController
             array_push($tahun_report, $i);
         }
 
-        $dt_mahasiswa_2 = [];
-        foreach ($tahun_report as $key) {
-            $send = $this->curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=".$key);
-            $dt_mahasisw = json_decode($send, true);
-
-            array_push($dt_mahasiswa_2, $dt_mahasisw);
+        function curl($url)
+        {
+            $curl = \Config\Services::curlrequest();
+            $headers = [
+                'accept' => 'text/plain',
+                'X-IPBAPI-TOKEN' => 'Bearer 86f2760d-7293-36f4-833f-1d29aaace42e'
+            ];
+            $response = $curl->request('GET', $url, [
+                'headers' => $headers,
+                'http_errors' => false,
+            ]);
+            return $response->getBody();
         }
 
-        $dt_mahasiswa = array_reduce($dt_mahasiswa_2, 'array_merge', []);
+        $arr['dt_mahasiswa_2'] = [];
+        foreach ($tahun_report as $year) {
+            $response = curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=$year");
+            $dt_mahasisw = json_decode($response, true);
+            $arr['dt_mahasiswa_2'] = array_merge($arr['dt_mahasiswa_2'], $dt_mahasisw);
+        }
+
+        $dt_mahasiswa = $arr['dt_mahasiswa_2'];
 
         if ($this->request->getPost('pilih')) {
             $nim = $this->request->getPost('nim');
@@ -409,7 +452,7 @@ class ReportDosen extends BaseController
             array_push($arr['nilai_cpmk'], $t_n_cpmk);
         }
 
-        return view('vw_template', $arr);
+        return view('vw_template_dosen', $arr);
     }
 
     private function curl($url)
@@ -427,10 +470,10 @@ class ReportDosen extends BaseController
         return $output;
     }
 
-	public function download_report_mahasiswa()
+    public function download_report_mahasiswa()
     {
         $data['breadcrumbs'] = 'report_mahasiswa';
-        $data['content'] = 'report/vw_report_mahasiswa_print';
+        $data['content'] = 'login_dosen/report/vw_report_mahasiswa_print';
 
         $matakuliahModel = new MatakuliahModel();
         $katkinModel = new KatkinModel();
@@ -538,669 +581,669 @@ class ReportDosen extends BaseController
         return view('vw_template_print', $data);
     }
  
-	public function mata_kuliah()
-	{
-		$data['breadcrumbs'] = 'report_mata_kuliah';
-		$data['content'] = 'report/vw_report_mata_kuliah';
+    public function mata_kuliah()
+    {
+        $data['breadcrumbs'] = 'report_mata_kuliah';
+        $data['content'] = 'login_dosen/report/vw_report_mata_kuliah';
 
-		$data['mata_kuliah'] = $this->matakuliahModel->getMatakuliah();
-		$data['simpanan_mk'] = 'TIN211';
-		$data['tahun_mk'] = 2018;
-		$target = $this->katkinModel->getKatkin();
-		$data['target_cpl'] = $target;
+        $data['mata_kuliah'] = $this->matakuliahModel->getMatakuliah();
+        $data['simpanan_mk'] = 'TIN211';
+        $data['tahun_mk'] = 2018;
+        $target = $this->katkinModel->getKatkin();
+        $data['target_cpl'] = $target;
 
-		if ($this->request->getPost('pilih_4')) {
-			$th = $this->request->getPost('tahun');
-			$data['tahun_mk'] = $th;
+        if ($this->request->getPost('pilih_4')) {
+            $th = $this->request->getPost('tahun');
+            $data['tahun_mk'] = $th;
 
-			$mk_1 = $this->request->getPost('mk');
-			$data['simpanan_mk'] = $mk_1;
+            $mk_1 = $this->request->getPost('mk');
+            $data['simpanan_mk'] = $mk_1;
 
-			$data['status_aktif'] = '';
-			$data['status_aktif_2'] = '';
-			$data['status_aktif_4'] = 'show active';
+            $data['status_aktif'] = '';
+            $data['status_aktif_2'] = '';
+            $data['status_aktif_4'] = 'show active';
 
-			$data['naf'] = '';
-			$data['naf_2'] = '';
-			$data['naf_4'] = 'active';
-		}
+            $data['naf'] = '';
+            $data['naf_2'] = '';
+            $data['naf_4'] = 'active';
+        }
 
-		$data['data_mk'] = $this->reportModel->getDataMk($data['simpanan_mk']);
+        $data['data_mk'] = $this->reportModel->getDataMk($data['simpanan_mk']);
 
-		// dari Database
-		$mahasiswa_2 = $this->kinumumModel->getMahasiswaTahun($data['tahun_mk']);
-		$mahasiswa = [];
+        // dari Database
+        $mahasiswa_2 = $this->kinumumModel->getMahasiswaTahun($data['tahun_mk']);
+        $mahasiswa = [];
 
-		foreach ($mahasiswa_2 as $key) {
-			$data_m = [
-				"Nim" => $key->nim,
-				"Nama" => $key->nama,
-				"SemesterMahasiswa" => $key->SemesterMahasiswa,
-				"StatusAkademik" => $key->StatusAkademik,
-				"tahun" => $key->tahun_masuk
-			];
-			array_push($mahasiswa, $data_m);
-		}
+        foreach ($mahasiswa_2 as $key) {
+            $data_m = [
+                "Nim" => $key->nim,
+                "Nama" => $key->nama,
+                "SemesterMahasiswa" => $key->SemesterMahasiswa,
+                "StatusAkademik" => $key->StatusAkademik,
+                "tahun" => $key->tahun_masuk
+            ];
+            array_push($mahasiswa, $data_m);
+        }
 
-		$mk_raport = $this->reportModel->getMkCpmk($data['simpanan_mk']);
-		$data['mk_raport'] = [];
-		$data['nilai_mk_raport'] = [];
-		$data['nilai_mk_raport_keseluruhan'] = [];
-		$data['nilai_mk_raport_tl'] = [];
-		$data['nilai_mk_raport_tak_langsung'] = [];
-		$data['jumlah'] = [];
+        $mk_raport = $this->reportModel->getMkCpmk($data['simpanan_mk']);
+        $data['mk_raport'] = [];
+        $data['nilai_mk_raport'] = [];
+        $data['nilai_mk_raport_keseluruhan'] = [];
+        $data['nilai_mk_raport_tl'] = [];
+        $data['nilai_mk_raport_tak_langsung'] = [];
+        $data['jumlah'] = [];
 
-		foreach ($mk_raport as $key_0) {
-			array_push($data['mk_raport'], $key_0->id_cpmk_langsung);
-		}
+        foreach ($mk_raport as $key_0) {
+            array_push($data['mk_raport'], $key_0->id_cpmk_langsung);
+        }
 
-		// Perhitungan CPMK Langsung
-		foreach ($mk_raport as $key) {
-			$nilai_mk_raport_s = [];
-			$nilai_mk_raport_s_tl = [];
-			foreach ($mahasiswa as $key_2) {
-				$nilai_mahasiswa = $this->reportModel->getNilaiCpmk($key->id_matakuliah_has_cpmk, $key_2['Nim']);
+        // Perhitungan CPMK Langsung
+        foreach ($mk_raport as $key) {
+            $nilai_mk_raport_s = [];
+            $nilai_mk_raport_s_tl = [];
+            foreach ($mahasiswa as $key_2) {
+                $nilai_mahasiswa = $this->reportModel->getNilaiCpmk($key->id_matakuliah_has_cpmk, $key_2['Nim']);
 
-				if (empty($nilai_mahasiswa)) {
-					$nilai_mahasiswa = 0;
-				}
+                if (empty($nilai_mahasiswa)) {
+                    $nilai_mahasiswa = 0;
+                }
 
-				if ($nilai_mahasiswa == 0) {
-					array_push($nilai_mk_raport_s, $nilai_mahasiswa);
-				} else {
-					$nilai_sementara = [];
-					$nilai_sementara_tl = [];
-					foreach ($nilai_mahasiswa as $key_2) {
-						array_push($nilai_sementara, $key_2->nilai_langsung);
-						array_push($nilai_sementara_tl, $key_2->nilai_tak_langsung);
-					}
+                if ($nilai_mahasiswa == 0) {
+                    array_push($nilai_mk_raport_s, $nilai_mahasiswa);
+                } else {
+                    $nilai_sementara = [];
+                    $nilai_sementara_tl = [];
+                    foreach ($nilai_mahasiswa as $key_2) {
+                        array_push($nilai_sementara, $key_2->nilai_langsung);
+                        array_push($nilai_sementara_tl, $key_2->nilai_tak_langsung);
+                    }
 
-					$average = array_sum($nilai_sementara) / count($nilai_sementara);
-					$average_tl = array_sum($nilai_sementara_tl) / count($nilai_sementara_tl);
-					array_push($nilai_mk_raport_s, $average);
-					array_push($nilai_mk_raport_s_tl, $average_tl);
-				}
-			}
+                    $average = array_sum($nilai_sementara) / count($nilai_sementara);
+                    $average_tl = array_sum($nilai_sementara_tl) / count($nilai_sementara_tl);
+                    array_push($nilai_mk_raport_s, $average);
+                    array_push($nilai_mk_raport_s_tl, $average_tl);
+                }
+            }
 
-			$j = 0;
-			foreach ($nilai_mk_raport_s as $k) {
-				if ($k > 0.0) {
-					$j += 1;
-				}
-			}
+            $j = 0;
+            foreach ($nilai_mk_raport_s as $k) {
+                if ($k > 0.0) {
+                    $j += 1;
+                }
+            }
 
-			if ($j == 0) {
-				$j = 1;
-			}
+            if ($j == 0) {
+                $j = 1;
+            }
 
-			$j_tl = 0;
-			foreach ($nilai_mk_raport_s_tl as $k_tl) {
-				if ($k_tl > 0.0) {
-					$j_tl += 1;
-				}
-			}
+            $j_tl = 0;
+            foreach ($nilai_mk_raport_s_tl as $k_tl) {
+                if ($k_tl > 0.0) {
+                    $j_tl += 1;
+                }
+            }
 
-			if ($j_tl == 0) {
-				$j_tl = 1;
-			}
+            if ($j_tl == 0) {
+                $j_tl = 1;
+            }
 
-			$dt_avg = array_sum($nilai_mk_raport_s) / $j;
-			$dt_avg_tl = array_sum($nilai_mk_raport_s_tl) / $j_tl;
+            $dt_avg = array_sum($nilai_mk_raport_s) / $j;
+            $dt_avg_tl = array_sum($nilai_mk_raport_s_tl) / $j_tl;
 
-			array_push($data['nilai_mk_raport'], $dt_avg);
-			array_push($data['nilai_mk_raport_keseluruhan'], $nilai_mk_raport_s);
-			array_push($data['jumlah'], $j);
-		}
+            array_push($data['nilai_mk_raport'], $dt_avg);
+            array_push($data['nilai_mk_raport_keseluruhan'], $nilai_mk_raport_s);
+            array_push($data['jumlah'], $j);
+        }
 
-		// Perhitungan CPMK tak langsung
-		foreach ($mk_raport as $key) {
-			$nilai_mk_raport_tak_langsung_s = [];
-			foreach ($mahasiswa as $key_2) {
-				$nilai_mahasiswa_tak_langsung = $this->reportModel->getNilaiCpmkTl($key->id_matakuliah_has_cpmk, $key_2['Nim']);
+        // Perhitungan CPMK tak langsung
+        foreach ($mk_raport as $key) {
+            $nilai_mk_raport_tak_langsung_s = [];
+            foreach ($mahasiswa as $key_2) {
+                $nilai_mahasiswa_tak_langsung = $this->reportModel->getNilaiCpmkTl($key->id_matakuliah_has_cpmk, $key_2['Nim']);
 
-				if (empty($nilai_mahasiswa_tak_langsung)) {
-					$nilai_mahasiswa_tak_langsung = 0;
-				}
+                if (empty($nilai_mahasiswa_tak_langsung)) {
+                    $nilai_mahasiswa_tak_langsung = 0;
+                }
 
-				if ($nilai_mahasiswa_tak_langsung == 0) {
-					array_push($nilai_mk_raport_tak_langsung_s, $nilai_mahasiswa_tak_langsung);
-				} else {
-					$nilai_sementara_tl = [];
-					foreach ($nilai_mahasiswa_tak_langsung as $key_2) {
-						array_push($nilai_sementara_tl, $key_2->nilai_tak_langsung);
-					}
+                if ($nilai_mahasiswa_tak_langsung == 0) {
+                    array_push($nilai_mk_raport_tak_langsung_s, $nilai_mahasiswa_tak_langsung);
+                } else {
+                    $nilai_sementara_tl = [];
+                    foreach ($nilai_mahasiswa_tak_langsung as $key_2) {
+                        array_push($nilai_sementara_tl, $key_2->nilai_tak_langsung);
+                    }
 
-					$average_tl = array_sum($nilai_sementara_tl) / count($nilai_sementara_tl);
-					array_push($nilai_mk_raport_tak_langsung_s, $average_tl);
-				}
-			}
+                    $average_tl = array_sum($nilai_sementara_tl) / count($nilai_sementara_tl);
+                    array_push($nilai_mk_raport_tak_langsung_s, $average_tl);
+                }
+            }
 
-			$j = 0;
-			foreach ($nilai_mk_raport_tak_langsung_s as $k) {
-				if ($k > 0.0) {
-					$j += 1;
-				}
-			}
+            $j = 0;
+            foreach ($nilai_mk_raport_tak_langsung_s as $k) {
+                if ($k > 0.0) {
+                    $j += 1;
+                }
+            }
 
-			if ($j == 0) {
-				$j = 1;
-			}
+            if ($j == 0) {
+                $j = 1;
+            }
 
-			$dt_avg = array_sum($nilai_mk_raport_tak_langsung_s) / $j;
-			array_push($data['nilai_mk_raport_tak_langsung'], $dt_avg);
-		}
+            $dt_avg = array_sum($nilai_mk_raport_tak_langsung_s) / $j;
+            array_push($data['nilai_mk_raport_tak_langsung'], $dt_avg);
+        }
 
-		// EPBM mata_kuliah
-		$data['data_epbm_dosen'] = $this->reportModel->getEpbmMataKuliahHasDosen();
-		$data['data_epbm_mk'] = $this->reportModel->getEpbmMataKuliah();
-		$data['data_dosen'] = $this->reportModel->getDosen();
-		$data['data_psd'] = $this->reportModel->getPsd();
-		$data['psd'] = [];
+        // EPBM mata_kuliah
+        $data['data_epbm_dosen'] = $this->reportModel->getEpbmMataKuliahHasDosen();
+        $data['data_epbm_mk'] = $this->reportModel->getEpbmMataKuliah();
+        $data['data_dosen'] = $this->reportModel->getDosen();
+        $data['data_psd'] = $this->reportModel->getPsd();
+        $data['psd'] = [];
 
-		//$data['tahun'] = '2015';
-		//$data['semester'] = 'Ganjil';
-		//$data['dosen'] = '196106301986032003';
+        //$data['tahun'] = '2015';
+        //$data['semester'] = 'Ganjil';
+        //$data['dosen'] = '196106301986032003';
 
-		//$data['data_epbm_dosen_select'] = $this->reportModel->getEpbmMataKuliahHasDosenSelect($data['dosen']);
-		$data['data_epbm_mk_select'] = $this->reportModel->getEpbmMataKuliahHasDosenMkSelect($data['simpanan_mk']);
-		$data['data_tahun'] = $this->reportModel->getTahun();
-		$data['data_semester'] = ['Ganjil', 'Genap'];
+        //$data['data_epbm_dosen_select'] = $this->reportModel->getEpbmMataKuliahHasDosenSelect($data['dosen']);
+        $data['data_epbm_mk_select'] = $this->reportModel->getEpbmMataKuliahHasDosenMkSelect($data['simpanan_mk']);
+        $data['data_tahun'] = $this->reportModel->getTahun();
+        $data['data_semester'] = ['Ganjil', 'Genap'];
 
-		$data['data_nilai_epbm_mk'] = [];
-		$data['data_nilai_epbm_dosen'] = [];
-		$data['data_diagram_epbm_mk'] = [];
-		$data['data_diagram_epbm_dosen'] = [];
-		$data['kode_epbm_dosen'] = [];
-		$data['nama_mata_kuliah'] = [];
-		$data['nama_tahun'] = [];
-		$data['nama_semester'] = [];
-		$data['nama_dosen'] = [];
-		$data['NIP_dosen'] = [];
+        $data['data_nilai_epbm_mk'] = [];
+        $data['data_nilai_epbm_dosen'] = [];
+        $data['data_diagram_epbm_mk'] = [];
+        $data['data_diagram_epbm_dosen'] = [];
+        $data['kode_epbm_dosen'] = [];
+        $data['nama_mata_kuliah'] = [];
+        $data['nama_tahun'] = [];
+        $data['nama_semester'] = [];
+        $data['nama_dosen'] = [];
+        $data['NIP_dosen'] = [];
 
-		//echo '<pre>';  var_dump($data['data_epbm_mk_select']); echo '</pre>';
+        //echo '<pre>';  var_dump($data['data_epbm_mk_select']); echo '</pre>';
 
-		foreach ($data['data_semester'] as $key2) {
-			foreach ($data['data_epbm_mk_select'] as $key) {
-				$data_nilai_epbm_mk = $this->reportModel->getNilaiEpbmMk($data['tahun_mk'], $key2, $key->kode_epbm_mk);
-				$data_nilai_epbm_dosen = $this->reportModel->getNilaiRaportEpbmDosen($data['tahun_mk'], $key2, $key->kode_epbm_mk_has_dosen);
+        foreach ($data['data_semester'] as $key2) {
+            foreach ($data['data_epbm_mk_select'] as $key) {
+                $data_nilai_epbm_mk = $this->reportModel->getNilaiEpbmMk($data['tahun_mk'], $key2, $key->kode_epbm_mk);
+                $data_nilai_epbm_dosen = $this->reportModel->getNilaiRaportEpbmDosen($data['tahun_mk'], $key2, $key->kode_epbm_mk_has_dosen);
 
-				$data_diagram_epbm_mk = [];
-				$data_diagram_epbm_dosen = [];
-				$psd = [];
-				//echo '<pre>';  var_dump($data_nilai_epbm_mk); echo '</pre>';
+                $data_diagram_epbm_mk = [];
+                $data_diagram_epbm_dosen = [];
+                $psd = [];
+                //echo '<pre>';  var_dump($data_nilai_epbm_mk); echo '</pre>';
 
-				if (!empty($data_nilai_epbm_dosen)) {
-					for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
-						array_push($psd, $data['data_psd'][$i]->nama);
-						array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
-						array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
-					}
+                if (!empty($data_nilai_epbm_dosen)) {
+                    for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
+                        array_push($psd, $data['data_psd'][$i]->nama);
+                        array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
+                        array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
+                    }
 
-					array_push($data['data_nilai_epbm_mk'], $data_nilai_epbm_mk);
-					array_push($data['data_nilai_epbm_dosen'], $data_nilai_epbm_dosen);
-					array_push($data['psd'], $psd);
-					array_push($data['data_diagram_epbm_mk'], $data_diagram_epbm_mk);
-					array_push($data['data_diagram_epbm_dosen'], $data_diagram_epbm_dosen);
-					array_push($data['kode_epbm_dosen'], $key->kode_epbm_mk);
-					array_push($data['nama_mata_kuliah'], $key->nama_mata_kuliah);
-					array_push($data['nama_tahun'], $data['tahun_mk']);
-					array_push($data['nama_semester'], $key2);
-					array_push($data['nama_dosen'], $key->nama_dosen);
-					array_push($data['NIP_dosen'], $key->NIP);
-				}
-			}
-		}
+                    array_push($data['data_nilai_epbm_mk'], $data_nilai_epbm_mk);
+                    array_push($data['data_nilai_epbm_dosen'], $data_nilai_epbm_dosen);
+                    array_push($data['psd'], $psd);
+                    array_push($data['data_diagram_epbm_mk'], $data_diagram_epbm_mk);
+                    array_push($data['data_diagram_epbm_dosen'], $data_diagram_epbm_dosen);
+                    array_push($data['kode_epbm_dosen'], $key->kode_epbm_mk);
+                    array_push($data['nama_mata_kuliah'], $key->nama_mata_kuliah);
+                    array_push($data['nama_tahun'], $data['tahun_mk']);
+                    array_push($data['nama_semester'], $key2);
+                    array_push($data['nama_dosen'], $key->nama_dosen);
+                    array_push($data['NIP_dosen'], $key->NIP);
+                }
+            }
+        }
 
-		//echo '<pre>';  var_dump($data['cpl']); echo '</pre>';
-		//echo '<pre>';  var_dump($data['nilai_diagram_cpl']); echo '</pre>';
-		//echo '<pre>';  var_dump($mahasiswa_2); echo '</pre>';
-		//echo '<pre>';  var_dump($data['nilai_mk_raport_keseluruhan']); echo '</pre>';
-		//echo '<pre>';  var_dump($data['tahun_mk']); echo '</pre>';
-		//echo '<pre>';  var_dump($mahasiswa_2); echo '</pre>';
-		return view('vw_template', $data);
-	}
+        //echo '<pre>';  var_dump($data['cpl']); echo '</pre>';
+        //echo '<pre>';  var_dump($data['nilai_diagram_cpl']); echo '</pre>';
+        //echo '<pre>';  var_dump($mahasiswa_2); echo '</pre>';
+        //echo '<pre>';  var_dump($data['nilai_mk_raport_keseluruhan']); echo '</pre>';
+        //echo '<pre>';  var_dump($data['tahun_mk']); echo '</pre>';
+        //echo '<pre>';  var_dump($mahasiswa_2); echo '</pre>';
+        return view('vw_template_dosen', $data);
+    }
  
- 	public function download_report_mata_kuliah()
-	{
-		$data['breadcrumbs'] = 'report_mata_kuliah';
-		$data['content'] = 'report/vw_report_mata_kuliah_print';
-
-		$data['mata_kuliah'] = $this->matakuliahModel->getMatakuliah();
-		$data['simpanan_mk'] = 'TIN211';
-		$data['tahun_mk'] = 2018;
-		$target = $this->katkinModel->getKatkin();
-		$data['target_cpl'] = $target;
-
-		if (!empty($this->request->getPost('download', true))) {
-			$th = $this->request->getPost('tahun', true);
-			$data['tahun_mk'] = $th;
-
-			$mk_1 = $this->request->getPost('mk', true);
-			$data['simpanan_mk'] = $mk_1;
-
-			$data['status_aktif'] = '';
-			$data['status_aktif_2'] = '';
-			$data['status_aktif_4'] = 'show active';
-
-			$data['naf'] = '';
-			$data['naf_2'] = '';
-			$data['naf_4'] = 'active';
-		}
-
-		$data['data_mk'] = $this->reportModel->getDataMk($data['simpanan_mk']);
-
-		// dari Database
-		$mahasiswa_2 = $this->kinumumModel->getMahasiswaTahun($data['tahun_mk']);
-		$mahasiswa = [];
-
-		foreach ($mahasiswa_2 as $key) {
-			$data_m = [
-				"Nim" => $key->nim,
-				"Nama" => $key->nama,
-				"SemesterMahasiswa" => $key->SemesterMahasiswa,
-				"StatusAkademik" => $key->StatusAkademik,
-				"tahun" => $key->tahun_masuk
-			];
-			array_push($mahasiswa, $data_m);
-		}
-
-		$mk_raport = $this->reportModel->getMkCpmk($data['simpanan_mk']);
-		$data['mk_raport'] = [];
-		$data['nilai_mk_raport'] = [];
-		$data['nilai_mk_raport_keseluruhan'] = [];
-		$data['nilai_mk_raport_tl'] = [];
-		$data['nilai_mk_raport_tak_langsung'] = [];
-		$data['jumlah'] = [];
-
-		foreach ($mk_raport as $key_0) {
-			array_push($data['mk_raport'], $key_0->id_cpmk_langsung);
-		}
-
-		foreach ($mk_raport as $key) {
-			$nilai_mk_raport_s = [];
-			$nilai_mk_raport_s_tl = [];
-			foreach ($mahasiswa as $key_2) {
-				$nilai_mahasiswa = $this->reportModel->getNilaiCpmk($key->id_matakuliah_has_cpmk, $key_2['Nim']);
-
-				if (empty($nilai_mahasiswa)) {
-					$nilai_mahasiswa = 0;
-				}
-
-				if ($nilai_mahasiswa == 0) {
-					array_push($nilai_mk_raport_s, $nilai_mahasiswa);
-				} else {
-					$nilai_sementara = [];
-					$nilai_sementara_tl = [];
-					foreach ($nilai_mahasiswa as $key_2) {
-						array_push($nilai_sementara, $key_2->nilai_langsung);
-						array_push($nilai_sementara_tl, $key_2->nilai_tak_langsung);
-					}
-
-					$average = array_sum($nilai_sementara) / count($nilai_sementara);
-					$average_tl = array_sum($nilai_sementara_tl) / count($nilai_sementara_tl);
-					array_push($nilai_mk_raport_s, $average);
-					array_push($nilai_mk_raport_s_tl, $average_tl);
-				}
-			}
-
-			$j = 0;
-			foreach ($nilai_mk_raport_s as $k) {
-				if ($k > 0.0) {
-					$j += 1;
-				}
-			}
-
-			if ($j == 0) {
-				$j = 1;
-			}
-
-			$j_tl = 0;
-			foreach ($nilai_mk_raport_s_tl as $k_tl) {
-				if ($k_tl > 0.0) {
-					$j_tl += 1;
-				}
-			}
-
-			if ($j_tl == 0) {
-				$j_tl = 1;
-			}
-
-			$dt_avg = array_sum($nilai_mk_raport_s) / $j;
-			$dt_avg_tl = array_sum($nilai_mk_raport_s_tl) / $j_tl;
-
-			array_push($data['nilai_mk_raport'], $dt_avg);
-			array_push($data['nilai_mk_raport_keseluruhan'], $nilai_mk_raport_s);
-			array_push($data['jumlah'], $j);
-		}
-
-		foreach ($mk_raport as $key) {
-			$nilai_mk_raport_tak_langsung_s = [];
-			foreach ($mahasiswa as $key_2) {
-				$nilai_mahasiswa_tak_langsung = $this->reportModel->getNilaiCpmkTl($key->id_matakuliah_has_cpmk, $key_2['Nim']);
-
-				if (empty($nilai_mahasiswa_tak_langsung)) {
-					$nilai_mahasiswa_tak_langsung = 0;
-				}
-
-				if ($nilai_mahasiswa_tak_langsung == 0) {
-					array_push($nilai_mk_raport_tak_langsung_s, $nilai_mahasiswa_tak_langsung);
-				} else {
-					$nilai_sementara_tl = [];
-					foreach ($nilai_mahasiswa_tak_langsung as $key_2) {
-						array_push($nilai_sementara_tl, $key_2->nilai_tak_langsung);
-					}
-
-					$average_tl = array_sum($nilai_sementara_tl) / count($nilai_sementara_tl);
-					array_push($nilai_mk_raport_tak_langsung_s, $average_tl);
-				}
-			}
-
-			$j = 0;
-			foreach ($nilai_mk_raport_tak_langsung_s as $k) {
-				if ($k > 0.0) {
-					$j += 1;
-				}
-			}
-
-			if ($j == 0) {
-				$j = 1;
-			}
-
-			$dt_avg = array_sum($nilai_mk_raport_tak_langsung_s) / $j;
-			array_push($data['nilai_mk_raport_tak_langsung'], $dt_avg);
-		}
-
-		// EPBM mata_kuliah
-		$data['data_epbm_dosen'] = $this->reportModel->getEpbmMataKuliahHasDosen();
-		$data['data_epbm_mk'] = $this->reportModel->getEpbmMataKuliah();
-		$data['data_dosen'] = $this->reportModel->getDosen();
-		$data['data_psd'] = $this->reportModel->getPsd();
-		$data['psd'] = [];
-
-		$data['data_epbm_mk_select'] = $this->reportModel->getEpbmMataKuliahHasDosenMkSelect($data['simpanan_mk']);
-		$data['data_tahun'] = $this->reportModel->getTahun();
-		$data['data_semester'] = ['Ganjil', 'Genap'];
-
-		$data['data_nilai_epbm_mk'] = [];
-		$data['data_nilai_epbm_dosen'] = [];
-		$data['data_diagram_epbm_mk'] = [];
-		$data['data_diagram_epbm_dosen'] = [];
-		$data['kode_epbm_dosen'] = [];
-		$data['nama_mata_kuliah'] = [];
-		$data['nama_tahun'] = [];
-		$data['nama_semester'] = [];
-		$data['nama_dosen'] = [];
-		$data['NIP_dosen'] = [];
-
-		foreach ($data['data_semester'] as $key2) {
-			foreach ($data['data_epbm_mk_select'] as $key) {
-				$data_nilai_epbm_mk = $this->reportModel->getNilaiEpbmMk($data['tahun_mk'], $key2, $key->kode_epbm_mk);
-				$data_nilai_epbm_dosen = $this->reportModel->getNilaiRaportEpbmDosen($data['tahun_mk'], $key2, $key->kode_epbm_mk_has_dosen);
-
-				$data_diagram_epbm_mk = [];
-				$data_diagram_epbm_dosen = [];
-				$psd = [];
-
-				if (!empty($data_nilai_epbm_dosen)) {
-					for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
-						array_push($psd, $data['data_psd'][$i]->nama);
-						array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
-						array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
-					}
-
-					array_push($data['data_nilai_epbm_mk'], $data_nilai_epbm_mk);
-					array_push($data['data_nilai_epbm_dosen'], $data_nilai_epbm_dosen);
-					array_push($data['psd'], $psd);
-					array_push($data['data_diagram_epbm_mk'], $data_diagram_epbm_mk);
-					array_push($data['data_diagram_epbm_dosen'], $data_diagram_epbm_dosen);
-					array_push($data['kode_epbm_dosen'], $key->kode_epbm_mk);
-					array_push($data['nama_mata_kuliah'], $key->nama_mata_kuliah);
-					array_push($data['nama_tahun'], $data['tahun_mk']);
-					array_push($data['nama_semester'], $key2);
-					array_push($data['nama_dosen'], $key->nama_dosen);
-					array_push($data['NIP_dosen'], $key->NIP);
-				}
-			}
-		}
-
-		$data['title_print'] = "Report MataKuliah " . $data['data_mk'][0]->nama_mata_kuliah . " Angkatan " . $data['tahun_mk'];
-		return view('vw_template_print', $data);
-	}
-
-	public function relevansi_ppm()
-	{
-		$data['breadcrumbs'] = 'report_relevansi_ppm';
-		$data['content'] = 'report/vw_report_relevansi_ppm';
-
-		$data['relevansi_ppm'] = $this->reportModel->getRelevansiPpm();
-		$data['ppm'] = $this->reportModel->getPpm();
-		$data['cpl'] = $this->reportModel->getCpl();
-		$data['nilai_ppm'] = [];
-		$data['nilai_cpl'] = [];
-		$data['nilai_diagram_ppm'] = [];
-		$data['nilai_diagram_cpl'] = [];
-		$data['nama_cpl'] = [];
-		$data['nama_ppm'] = [];
-
-		foreach ($data['cpl'] as $key) {
-			$nilai_ppm_cpl = [];
-			foreach ($data['relevansi_ppm'] as $key2) {
-				$nilai = $this->reportModel->getNilaiPpmCpl($key->id_cpl_langsung, $key2->id_relevansi_ppm);
-				$n = intval($nilai['0']->nilai_relevansi_ppm_cpl);
-				array_push($nilai_ppm_cpl, $n);
-			}
-			$average_nilai_ppm_cpl = array_sum($nilai_ppm_cpl) / count($nilai_ppm_cpl);
-			array_push($data['nilai_cpl'], $nilai_ppm_cpl);
-			array_push($data['nama_cpl'], $key->nama);
-		}
-
-		foreach ($data['ppm'] as $key) {
-			$nilai_ppm = [];
-			foreach ($data['relevansi_ppm'] as $key2) {
-				$nilai = $this->reportModel->getNilaiPpm($key->id, $key2->id_relevansi_ppm);
-				$n = intval($nilai['0']->nilai_relevansi_ppm);
-				array_push($nilai_ppm, $n);
-			}
-			$average_nilai_ppm = array_sum($nilai_ppm) / count($nilai_ppm);
-			array_push($data['nilai_ppm'], $nilai_ppm);
-			array_push($data['nama_ppm'], $key->nama);
-		}
-
-		for ($i = 1; $i < 6; $i++) {
-			$nilai_diagram = [];
-			for ($j = 0; $j < count($data['cpl']); $j++) {
-				$n = 0;
-				foreach ($data['nilai_cpl'][$j] as $key) {
-					if ($key == $i) {
-						$n += 1;
-					}
-				}
-				$m = round($n / count($data['nilai_cpl'][$j]) * 100);
-				array_push($nilai_diagram, $m);
-			}
-			array_push($data['nilai_diagram_cpl'], $nilai_diagram);
-		}
-
-		for ($i = 1; $i < 6; $i++) {
-			$nilai_diagram = [];
-			for ($j = 0; $j < count($data['ppm']); $j++) {
-				$n = 0;
-				foreach ($data['nilai_ppm'][$j] as $key) {
-					if ($key == $i) {
-						$n += 1;
-					}
-				}
-				$m = round($n / count($data['nilai_ppm'][$j]) * 100);
-				array_push($nilai_diagram, $m);
-			}
-			array_push($data['nilai_diagram_ppm'], $nilai_diagram);
-		}
-
-		return view('vw_template', $data);
-	}
-
-
-	public function efektivitas_cpl()
-	{
-		$data['breadcrumbs'] = 'report_efektivitas_cpl';
-		$data['content'] = 'report/vw_report_efektivitas_cpl';
-
-		$data['mahasiswa'] = $this->reportModel->getMahasiswa();
-		$data['cpl'] = $this->reportModel->getCpl();
-		$data['nilai_cpl'] = [];
-		$data['nilai_cpl_keseluruhan'] = [];
-		$data['jumlah'] = [];
-		$data['nilai_diagram'] = [];
-		$data['nama_cpl'] = [];
-
-		foreach ($data['cpl'] as $key) {
-			$nilai_efektivitas_cpl = [];
-			foreach ($data['mahasiswa'] as $key2) {
-				$nilai = $this->reportModel->getNilaiEfektivitasCpl($key->id_cpl_langsung, $key2->nim);
-				$n = empty($nilai) ? 0 : intval($nilai['0']->nilai);
-				array_push($nilai_efektivitas_cpl, $n);
-			}
-
-			$j = 0;
-			foreach ($nilai_efektivitas_cpl as $k) {
-				if ($k > 0.0) {
-					$j += 1;
-				}
-			}
-
-			if ($j == 0) {
-				$j = 1;
-			}
-
-			$average_nilai_cpl = array_sum($nilai_efektivitas_cpl) / $j;
-			array_push($data['nilai_cpl'], round($average_nilai_cpl));
-			array_push($data['jumlah'], $j);
-			array_push($data['nilai_cpl_keseluruhan'], $nilai_efektivitas_cpl);
-			array_push($data['nama_cpl'], $key->nama);
-		}
-
-		for ($i = 1; $i < 8; $i++) {
-			$nilai_diagram = [];
-			for ($j = 0; $j < count($data['cpl']); $j++) {
-				$n = 0;
-				foreach ($data['nilai_cpl_keseluruhan'][$j] as $key) {
-					if ($key == $i) {
-						$n += 1;
-					}
-				}
-				$m = round($n / $data['jumlah'][$j] * 100);
-				array_push($nilai_diagram, $m);
-			}
-			array_push($data['nilai_diagram'], $nilai_diagram);
-		}
-
-		return view('vw_template', $data);
-	}
-
-
-	public function report_epbm_copy()
-	{
-		$data['breadcrumbs'] = 'report';
-		$data['content'] = 'report/vw_report_epbm';
-
-		$data['data_epbm_dosen'] = $this->reportModel->getEpbmMataKuliahHasDosen();
-		$data['data_epbm_mk'] = $this->reportModel->getEpbmMataKuliah();
-		$data['data_dosen'] = $this->reportModel->getDosen();
-		$data['data_psd'] = $this->reportModel->getPsd();
-		$data['psd'] = [];
-
-		$data['tahun'] = '2015';
-		$data['semester'] = 'Ganjil';
-		$data['dosen'] = '196106301986032003';
-		$data['mk'] = 'TIN213 / 1';
-
-		if ($this->request->getPost('pilih')) {
-			$data['tahun'] = $this->request->getPost('tahun');
-			$data['semester'] = $this->request->getPost('semester');
-			$data['dosen'] = $this->request->getPost('dosen');
-			$data['mk'] = $this->request->getPost('mk');
-		}
-
-		$data['data_nilai_epbm_mk'] = $this->reportModel->getNilaiEpbmMk($data['tahun'], $data['semester'], $data['mk']);
-		$data['data_nilai_epbm_dosen'] = $this->reportModel->getNilaiEpbmDosen($data['tahun'], $data['semester'], $data['mk'] . "_" . $data['dosen']);
-
-		$data['data_diagram_epbm_mk'] = [];
-		$data['data_diagram_epbm_dosen'] = [];
-
-		for ($i = 1; $i < count($data['data_nilai_epbm_mk']); $i++) {
-			array_push($data['psd'], $data['data_psd'][$i]->nama);
-			array_push($data['data_diagram_epbm_mk'], $data['data_nilai_epbm_mk'][$i]->nilai);
-			array_push($data['data_diagram_epbm_dosen'], $data['data_nilai_epbm_dosen'][$i]->nilai);
-		}
-
-		return view('vw_template', $data);
-	}
-
-
-	public function report_epbm()
-	{
-		$data['breadcrumbs'] = 'report_epbm';
-		$data['content'] = 'report/vw_report_epbm_2';
-
-		$data['data_epbm_dosen'] = $this->reportModel->getEpbmMataKuliahHasDosen();
-		$data['data_epbm_mk'] = $this->reportModel->getEpbmMataKuliah();
-		$data['data_dosen'] = $this->reportModel->getDosen();
-		$data['data_psd'] = $this->reportModel->getPsd();
-		$data['psd'] = [];
-
-		$data['tahun'] = '2015';
-		$data['semester'] = 'Ganjil';
-		$data['dosen'] = '196106301986032003';
-
-		if ($this->request->getPost('pilih')) {
-			$data['dosen'] = $this->request->getPost('dosen');
-		}
-
-		$data['data_epbm_dosen_select'] = $this->reportModel->getEpbmMataKuliahHasDosenSelect($data['dosen']);
-		$data['data_tahun'] = $this->reportModel->getTahun();
-		$data['data_semester'] = ['Ganjil', 'Genap'];
-
-		$data['data_nilai_epbm_mk'] = [];
-		$data['data_nilai_epbm_dosen'] = [];
-		$data['data_diagram_epbm_mk'] = [];
-		$data['data_diagram_epbm_dosen'] = [];
-		$data['kode_epbm_dosen'] = [];
-		$data['nama_mata_kuliah'] = [];
-		$data['nama_tahun'] = [];
-		$data['nama_semester'] = [];
-
-		foreach ($data['data_tahun'] as $key1) {
-			foreach ($data['data_semester'] as $key2) {
-				foreach ($data['data_epbm_dosen_select'] as $key) {
-					$data_nilai_epbm_mk = $this->reportModel->getNilaiEpbmMk($key1->tahun, $key2, $key->kode_epbm_mk);
-					$data_nilai_epbm_dosen = $this->reportModel->getNilaiEpbmDosen($key1->tahun, $key2, $key->kode_epbm_mk . "_" . $data['dosen']);
-
-					$data_diagram_epbm_mk = [];
-					$data_diagram_epbm_dosen = [];
-					$psd = [];
-
-					if (!empty($data_nilai_epbm_dosen)) {
-						for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
-							array_push($psd, $data['data_psd'][$i]->nama);
-							array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
-							array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
-						}
-
-						array_push($data['data_nilai_epbm_mk'], $data_nilai_epbm_mk);
-						array_push($data['data_nilai_epbm_dosen'], $data_nilai_epbm_dosen);
-						array_push($data['psd'], $psd);
-						array_push($data['data_diagram_epbm_mk'], $data_diagram_epbm_mk);
-						array_push($data['data_diagram_epbm_dosen'], $data_diagram_epbm_dosen);
-						array_push($data['kode_epbm_dosen'], $key->kode_epbm_mk);
-						array_push($data['nama_mata_kuliah'], $key->nama_mata_kuliah);
-						array_push($data['nama_tahun'], $key1->tahun);
-						array_push($data['nama_semester'], $key2);
-					}
-				}
-			}
-		}
-
-		return view('vw_template', $data);
-	}
+    public function download_report_mata_kuliah()
+    {
+        $data['breadcrumbs'] = 'report_mata_kuliah';
+        $data['content'] = 'login_dosen/report/vw_report_mata_kuliah_print';
+
+        $data['mata_kuliah'] = $this->matakuliahModel->getMatakuliah();
+        $data['simpanan_mk'] = 'TIN211';
+        $data['tahun_mk'] = 2018;
+        $target = $this->katkinModel->getKatkin();
+        $data['target_cpl'] = $target;
+
+        if (!empty($this->request->getPost('download', true))) {
+            $th = $this->request->getPost('tahun', true);
+            $data['tahun_mk'] = $th;
+
+            $mk_1 = $this->request->getPost('mk', true);
+            $data['simpanan_mk'] = $mk_1;
+
+            $data['status_aktif'] = '';
+            $data['status_aktif_2'] = '';
+            $data['status_aktif_4'] = 'show active';
+
+            $data['naf'] = '';
+            $data['naf_2'] = '';
+            $data['naf_4'] = 'active';
+        }
+
+        $data['data_mk'] = $this->reportModel->getDataMk($data['simpanan_mk']);
+
+        // dari Database
+        $mahasiswa_2 = $this->kinumumModel->getMahasiswaTahun($data['tahun_mk']);
+        $mahasiswa = [];
+
+        foreach ($mahasiswa_2 as $key) {
+            $data_m = [
+                "Nim" => $key->nim,
+                "Nama" => $key->nama,
+                "SemesterMahasiswa" => $key->SemesterMahasiswa,
+                "StatusAkademik" => $key->StatusAkademik,
+                "tahun" => $key->tahun_masuk
+            ];
+            array_push($mahasiswa, $data_m);
+        }
+
+        $mk_raport = $this->reportModel->getMkCpmk($data['simpanan_mk']);
+        $data['mk_raport'] = [];
+        $data['nilai_mk_raport'] = [];
+        $data['nilai_mk_raport_keseluruhan'] = [];
+        $data['nilai_mk_raport_tl'] = [];
+        $data['nilai_mk_raport_tak_langsung'] = [];
+        $data['jumlah'] = [];
+
+        foreach ($mk_raport as $key_0) {
+            array_push($data['mk_raport'], $key_0->id_cpmk_langsung);
+        }
+
+        foreach ($mk_raport as $key) {
+            $nilai_mk_raport_s = [];
+            $nilai_mk_raport_s_tl = [];
+            foreach ($mahasiswa as $key_2) {
+                $nilai_mahasiswa = $this->reportModel->getNilaiCpmk($key->id_matakuliah_has_cpmk, $key_2['Nim']);
+
+                if (empty($nilai_mahasiswa)) {
+                    $nilai_mahasiswa = 0;
+                }
+
+                if ($nilai_mahasiswa == 0) {
+                    array_push($nilai_mk_raport_s, $nilai_mahasiswa);
+                } else {
+                    $nilai_sementara = [];
+                    $nilai_sementara_tl = [];
+                    foreach ($nilai_mahasiswa as $key_2) {
+                        array_push($nilai_sementara, $key_2->nilai_langsung);
+                        array_push($nilai_sementara_tl, $key_2->nilai_tak_langsung);
+                    }
+
+                    $average = array_sum($nilai_sementara) / count($nilai_sementara);
+                    $average_tl = array_sum($nilai_sementara_tl) / count($nilai_sementara_tl);
+                    array_push($nilai_mk_raport_s, $average);
+                    array_push($nilai_mk_raport_s_tl, $average_tl);
+                }
+            }
+
+            $j = 0;
+            foreach ($nilai_mk_raport_s as $k) {
+                if ($k > 0.0) {
+                    $j += 1;
+                }
+            }
+
+            if ($j == 0) {
+                $j = 1;
+            }
+
+            $j_tl = 0;
+            foreach ($nilai_mk_raport_s_tl as $k_tl) {
+                if ($k_tl > 0.0) {
+                    $j_tl += 1;
+                }
+            }
+
+            if ($j_tl == 0) {
+                $j_tl = 1;
+            }
+
+            $dt_avg = array_sum($nilai_mk_raport_s) / $j;
+            $dt_avg_tl = array_sum($nilai_mk_raport_s_tl) / $j_tl;
+
+            array_push($data['nilai_mk_raport'], $dt_avg);
+            array_push($data['nilai_mk_raport_keseluruhan'], $nilai_mk_raport_s);
+            array_push($data['jumlah'], $j);
+        }
+
+        foreach ($mk_raport as $key) {
+            $nilai_mk_raport_tak_langsung_s = [];
+            foreach ($mahasiswa as $key_2) {
+                $nilai_mahasiswa_tak_langsung = $this->reportModel->getNilaiCpmkTl($key->id_matakuliah_has_cpmk, $key_2['Nim']);
+
+                if (empty($nilai_mahasiswa_tak_langsung)) {
+                    $nilai_mahasiswa_tak_langsung = 0;
+                }
+
+                if ($nilai_mahasiswa_tak_langsung == 0) {
+                    array_push($nilai_mk_raport_tak_langsung_s, $nilai_mahasiswa_tak_langsung);
+                } else {
+                    $nilai_sementara_tl = [];
+                    foreach ($nilai_mahasiswa_tak_langsung as $key_2) {
+                        array_push($nilai_sementara_tl, $key_2->nilai_tak_langsung);
+                    }
+
+                    $average_tl = array_sum($nilai_sementara_tl) / count($nilai_sementara_tl);
+                    array_push($nilai_mk_raport_tak_langsung_s, $average_tl);
+                }
+            }
+
+            $j = 0;
+            foreach ($nilai_mk_raport_tak_langsung_s as $k) {
+                if ($k > 0.0) {
+                    $j += 1;
+                }
+            }
+
+            if ($j == 0) {
+                $j = 1;
+            }
+
+            $dt_avg = array_sum($nilai_mk_raport_tak_langsung_s) / $j;
+            array_push($data['nilai_mk_raport_tak_langsung'], $dt_avg);
+        }
+
+        // EPBM mata_kuliah
+        $data['data_epbm_dosen'] = $this->reportModel->getEpbmMataKuliahHasDosen();
+        $data['data_epbm_mk'] = $this->reportModel->getEpbmMataKuliah();
+        $data['data_dosen'] = $this->reportModel->getDosen();
+        $data['data_psd'] = $this->reportModel->getPsd();
+        $data['psd'] = [];
+
+        $data['data_epbm_mk_select'] = $this->reportModel->getEpbmMataKuliahHasDosenMkSelect($data['simpanan_mk']);
+        $data['data_tahun'] = $this->reportModel->getTahun();
+        $data['data_semester'] = ['Ganjil', 'Genap'];
+
+        $data['data_nilai_epbm_mk'] = [];
+        $data['data_nilai_epbm_dosen'] = [];
+        $data['data_diagram_epbm_mk'] = [];
+        $data['data_diagram_epbm_dosen'] = [];
+        $data['kode_epbm_dosen'] = [];
+        $data['nama_mata_kuliah'] = [];
+        $data['nama_tahun'] = [];
+        $data['nama_semester'] = [];
+        $data['nama_dosen'] = [];
+        $data['NIP_dosen'] = [];
+
+        foreach ($data['data_semester'] as $key2) {
+            foreach ($data['data_epbm_mk_select'] as $key) {
+                $data_nilai_epbm_mk = $this->reportModel->getNilaiEpbmMk($data['tahun_mk'], $key2, $key->kode_epbm_mk);
+                $data_nilai_epbm_dosen = $this->reportModel->getNilaiRaportEpbmDosen($data['tahun_mk'], $key2, $key->kode_epbm_mk_has_dosen);
+
+                $data_diagram_epbm_mk = [];
+                $data_diagram_epbm_dosen = [];
+                $psd = [];
+
+                if (!empty($data_nilai_epbm_dosen)) {
+                    for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
+                        array_push($psd, $data['data_psd'][$i]->nama);
+                        array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
+                        array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
+                    }
+
+                    array_push($data['data_nilai_epbm_mk'], $data_nilai_epbm_mk);
+                    array_push($data['data_nilai_epbm_dosen'], $data_nilai_epbm_dosen);
+                    array_push($data['psd'], $psd);
+                    array_push($data['data_diagram_epbm_mk'], $data_diagram_epbm_mk);
+                    array_push($data['data_diagram_epbm_dosen'], $data_diagram_epbm_dosen);
+                    array_push($data['kode_epbm_dosen'], $key->kode_epbm_mk);
+                    array_push($data['nama_mata_kuliah'], $key->nama_mata_kuliah);
+                    array_push($data['nama_tahun'], $data['tahun_mk']);
+                    array_push($data['nama_semester'], $key2);
+                    array_push($data['nama_dosen'], $key->nama_dosen);
+                    array_push($data['NIP_dosen'], $key->NIP);
+                }
+            }
+        }
+
+        $data['title_print'] = "Report MataKuliah " . $data['data_mk'][0]->nama_mata_kuliah . " Angkatan " . $data['tahun_mk'];
+        return view('vw_template_print', $data);
+    }
+
+    public function relevansi_ppm()
+    {
+        $data['breadcrumbs'] = 'report_relevansi_ppm';
+        $data['content'] = 'login_dosen/report/vw_report_relevansi_ppm';
+
+        $data['relevansi_ppm'] = $this->reportModel->getRelevansiPpm();
+        $data['ppm'] = $this->reportModel->getPpm();
+        $data['cpl'] = $this->reportModel->getCpl();
+        $data['nilai_ppm'] = [];
+        $data['nilai_cpl'] = [];
+        $data['nilai_diagram_ppm'] = [];
+        $data['nilai_diagram_cpl'] = [];
+        $data['nama_cpl'] = [];
+        $data['nama_ppm'] = [];
+
+        foreach ($data['cpl'] as $key) {
+            $nilai_ppm_cpl = [];
+            foreach ($data['relevansi_ppm'] as $key2) {
+                $nilai = $this->reportModel->getNilaiPpmCpl($key->id_cpl_langsung, $key2->id_relevansi_ppm);
+                $n = intval($nilai['0']->nilai_relevansi_ppm_cpl);
+                array_push($nilai_ppm_cpl, $n);
+            }
+            $average_nilai_ppm_cpl = array_sum($nilai_ppm_cpl) / count($nilai_ppm_cpl);
+            array_push($data['nilai_cpl'], $nilai_ppm_cpl);
+            array_push($data['nama_cpl'], $key->nama);
+        }
+
+        foreach ($data['ppm'] as $key) {
+            $nilai_ppm = [];
+            foreach ($data['relevansi_ppm'] as $key2) {
+                $nilai = $this->reportModel->getNilaiPpm($key->id, $key2->id_relevansi_ppm);
+                $n = intval($nilai['0']->nilai_relevansi_ppm);
+                array_push($nilai_ppm, $n);
+            }
+            $average_nilai_ppm = array_sum($nilai_ppm) / count($nilai_ppm);
+            array_push($data['nilai_ppm'], $nilai_ppm);
+            array_push($data['nama_ppm'], $key->nama);
+        }
+
+        for ($i = 1; $i < 6; $i++) {
+            $nilai_diagram = [];
+            for ($j = 0; $j < count($data['cpl']); $j++) {
+                $n = 0;
+                foreach ($data['nilai_cpl'][$j] as $key) {
+                    if ($key == $i) {
+                        $n += 1;
+                    }
+                }
+                $m = round($n / count($data['nilai_cpl'][$j]) * 100);
+                array_push($nilai_diagram, $m);
+            }
+            array_push($data['nilai_diagram_cpl'], $nilai_diagram);
+        }
+
+        for ($i = 1; $i < 6; $i++) {
+            $nilai_diagram = [];
+            for ($j = 0; $j < count($data['ppm']); $j++) {
+                $n = 0;
+                foreach ($data['nilai_ppm'][$j] as $key) {
+                    if ($key == $i) {
+                        $n += 1;
+                    }
+                }
+                $m = round($n / count($data['nilai_ppm'][$j]) * 100);
+                array_push($nilai_diagram, $m);
+            }
+            array_push($data['nilai_diagram_ppm'], $nilai_diagram);
+        }
+
+        return view('vw_template_dosen', $data);
+    }
+
+
+    public function efektivitas_cpl()
+    {
+        $data['breadcrumbs'] = 'report_efektivitas_cpl';
+        $data['content'] = 'login_dosen/report/vw_report_efektivitas_cpl';
+
+        $data['mahasiswa'] = $this->reportModel->getMahasiswa();
+        $data['cpl'] = $this->reportModel->getCpl();
+        $data['nilai_cpl'] = [];
+        $data['nilai_cpl_keseluruhan'] = [];
+        $data['jumlah'] = [];
+        $data['nilai_diagram'] = [];
+        $data['nama_cpl'] = [];
+
+        foreach ($data['cpl'] as $key) {
+            $nilai_efektivitas_cpl = [];
+            foreach ($data['mahasiswa'] as $key2) {
+                $nilai = $this->reportModel->getNilaiEfektivitasCpl($key->id_cpl_langsung, $key2->nim);
+                $n = empty($nilai) ? 0 : intval($nilai['0']->nilai);
+                array_push($nilai_efektivitas_cpl, $n);
+            }
+
+            $j = 0;
+            foreach ($nilai_efektivitas_cpl as $k) {
+                if ($k > 0.0) {
+                    $j += 1;
+                }
+            }
+
+            if ($j == 0) {
+                $j = 1;
+            }
+
+            $average_nilai_cpl = array_sum($nilai_efektivitas_cpl) / $j;
+            array_push($data['nilai_cpl'], round($average_nilai_cpl));
+            array_push($data['jumlah'], $j);
+            array_push($data['nilai_cpl_keseluruhan'], $nilai_efektivitas_cpl);
+            array_push($data['nama_cpl'], $key->nama);
+        }
+
+        for ($i = 1; $i < 8; $i++) {
+            $nilai_diagram = [];
+            for ($j = 0; $j < count($data['cpl']); $j++) {
+                $n = 0;
+                foreach ($data['nilai_cpl_keseluruhan'][$j] as $key) {
+                    if ($key == $i) {
+                        $n += 1;
+                    }
+                }
+                $m = round($n / $data['jumlah'][$j] * 100);
+                array_push($nilai_diagram, $m);
+            }
+            array_push($data['nilai_diagram'], $nilai_diagram);
+        }
+
+        return view('vw_template_dosen', $data);
+    }
+
+
+    public function report_epbm_copy()
+    {
+        $data['breadcrumbs'] = 'report';
+        $data['content'] = 'login_dosen/report/vw_report_epbm';
+
+        $data['data_epbm_dosen'] = $this->reportModel->getEpbmMataKuliahHasDosen();
+        $data['data_epbm_mk'] = $this->reportModel->getEpbmMataKuliah();
+        $data['data_dosen'] = $this->reportModel->getDosen();
+        $data['data_psd'] = $this->reportModel->getPsd();
+        $data['psd'] = [];
+
+        $data['tahun'] = '2015';
+        $data['semester'] = 'Ganjil';
+        $data['dosen'] = '196106301986032003';
+        $data['mk'] = 'TIN213 / 1';
+
+        if ($this->request->getPost('pilih')) {
+            $data['tahun'] = $this->request->getPost('tahun');
+            $data['semester'] = $this->request->getPost('semester');
+            $data['dosen'] = $this->request->getPost('dosen');
+            $data['mk'] = $this->request->getPost('mk');
+        }
+
+        $data['data_nilai_epbm_mk'] = $this->reportModel->getNilaiEpbmMk($data['tahun'], $data['semester'], $data['mk']);
+        $data['data_nilai_epbm_dosen'] = $this->reportModel->getNilaiEpbmDosen($data['tahun'], $data['semester'], $data['mk'] . "_" . $data['dosen']);
+
+        $data['data_diagram_epbm_mk'] = [];
+        $data['data_diagram_epbm_dosen'] = [];
+
+        for ($i = 1; $i < count($data['data_nilai_epbm_mk']); $i++) {
+            array_push($data['psd'], $data['data_psd'][$i]->nama);
+            array_push($data['data_diagram_epbm_mk'], $data['data_nilai_epbm_mk'][$i]->nilai);
+            array_push($data['data_diagram_epbm_dosen'], $data['data_nilai_epbm_dosen'][$i]->nilai);
+        }
+
+        return view('vw_template_dosen', $data);
+    }
+
+
+    public function report_epbm()
+    {
+        $data['breadcrumbs'] = 'report_epbm';
+        $data['content'] = 'login_dosen/report/vw_report_epbm_2';
+
+        $data['data_epbm_dosen'] = $this->reportModel->getEpbmMataKuliahHasDosen();
+        $data['data_epbm_mk'] = $this->reportModel->getEpbmMataKuliah();
+        $data['data_dosen'] = $this->reportModel->getDosen();
+        $data['data_psd'] = $this->reportModel->getPsd();
+        $data['psd'] = [];
+
+        $data['tahun'] = '2015';
+        $data['semester'] = 'Ganjil';
+        $data['dosen'] = '196106301986032003';
+
+        if ($this->request->getPost('pilih')) {
+            $data['dosen'] = $this->request->getPost('dosen');
+        }
+
+        $data['data_epbm_dosen_select'] = $this->reportModel->getEpbmMataKuliahHasDosenSelect($data['dosen']);
+        $data['data_tahun'] = $this->reportModel->getTahun();
+        $data['data_semester'] = ['Ganjil', 'Genap'];
+
+        $data['data_nilai_epbm_mk'] = [];
+        $data['data_nilai_epbm_dosen'] = [];
+        $data['data_diagram_epbm_mk'] = [];
+        $data['data_diagram_epbm_dosen'] = [];
+        $data['kode_epbm_dosen'] = [];
+        $data['nama_mata_kuliah'] = [];
+        $data['nama_tahun'] = [];
+        $data['nama_semester'] = [];
+
+        foreach ($data['data_tahun'] as $key1) {
+            foreach ($data['data_semester'] as $key2) {
+                foreach ($data['data_epbm_dosen_select'] as $key) {
+                    $data_nilai_epbm_mk = $this->reportModel->getNilaiEpbmMk($key1->tahun, $key2, $key->kode_epbm_mk);
+                    $data_nilai_epbm_dosen = $this->reportModel->getNilaiEpbmDosen($key1->tahun, $key2, $key->kode_epbm_mk . "_" . $data['dosen']);
+
+                    $data_diagram_epbm_mk = [];
+                    $data_diagram_epbm_dosen = [];
+                    $psd = [];
+
+                    if (!empty($data_nilai_epbm_dosen)) {
+                        for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
+                            array_push($psd, $data['data_psd'][$i]->nama);
+                            array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
+                            array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
+                        }
+
+                        array_push($data['data_nilai_epbm_mk'], $data_nilai_epbm_mk);
+                        array_push($data['data_nilai_epbm_dosen'], $data_nilai_epbm_dosen);
+                        array_push($data['psd'], $psd);
+                        array_push($data['data_diagram_epbm_mk'], $data_diagram_epbm_mk);
+                        array_push($data['data_diagram_epbm_dosen'], $data_diagram_epbm_dosen);
+                        array_push($data['kode_epbm_dosen'], $key->kode_epbm_mk);
+                        array_push($data['nama_mata_kuliah'], $key->nama_mata_kuliah);
+                        array_push($data['nama_tahun'], $key1->tahun);
+                        array_push($data['nama_semester'], $key2);
+                    }
+                }
+            }
+        }
+
+        return view('vw_template_dosen', $data);
+    }
 
 } 

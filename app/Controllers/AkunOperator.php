@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\DosenModel;
 use App\Models\UserModel;
 
-class AkunMahasiswa extends BaseController
+class AkunOperator extends BaseController
 {
     protected $dosenModel;
     protected $userModel;
@@ -17,7 +17,7 @@ class AkunMahasiswa extends BaseController
 
         helper('session');
 
-        if (!session()->get('loggedin')) {
+        if (!session()->get('loggedin') || session()->get('level') != 3) {
             header('Location: ' . base_url('Auth/login'));
             exit(); 
         }
@@ -27,22 +27,22 @@ class AkunMahasiswa extends BaseController
     {
         $data = [
             'breadcrumbs' => 'akun',
-            'content' => 'vw_akun_mahasiswa',
+            'content' => 'vw_akun_operator',
             'datas' => session()->get()
         ];
 
-        return view('vw_template_mahasiswa', $data);
+        return view('vw_template_operator', $data);
     }
 
     public function ganti_password()
     {
         $data = [
             'breadcrumbs' => 'akun',
-            'content' => 'vw_akun_ganti_password_mahasiswa',
+            'content' => 'vw_akun_ganti_password_operator',
             'konfirmasi' => 'masuk'
         ];
 
-        return view('vw_template_mahasiswa', $data);
+        return view('vw_template_operator', $data);
     }
 
     public function submit_ganti_password()
@@ -65,9 +65,9 @@ class AkunMahasiswa extends BaseController
             }
 
             $data['breadcrumbs'] = 'akun';
-            $data['content'] = 'vw_akun_ganti_password_mahasiswa';
+            $data['content'] = 'vw_akun_ganti_password_operator';
 
-            return view('vw_template_mahasiswa', $data);
+            return view('vw_template_operator', $data);
         }
     }
 }

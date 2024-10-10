@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-
-class DashboardOperator extends BaseController
+use CodeIgniter\Controller;
+ 
+class DashboardOperator extends Controller
 {
     public function __construct()
     {
-        // Memuat session service
-        $this->session = \Config\Services::session();
-
-        if (!$this->session->get('loggedin') || $this->session->get('level') != 3) {
+        //parent::__construct();
+        
+        // Memeriksa apakah pengguna sudah login dan memiliki level admin (level = 0)
+        if (!session()->get('loggedin') || session()->get('level') != 3) {
             header('Location: ' . base_url('Auth/login'));
             exit(); 
         }
@@ -19,9 +19,13 @@ class DashboardOperator extends BaseController
 
     public function index()
     {
-        $data['breadcrumbs'] = 'Dashboard';
-        $data['content'] = 'vw_Beranda';
+        $data = [
+            'breadcrumbs' => 'Dashboard',
+            'content' => 'vw_Beranda' // Sesuaikan dengan nama view yang benar
+        ];
 
-        return view('vw_template_operator', $data);
+        return view('vw_template_operator', $data); // Memuat view 'vw_template' dengan data yang telah disiapkan
     }
 }
+
+?>

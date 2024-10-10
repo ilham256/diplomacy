@@ -1,26 +1,29 @@
 <div class="row small-spacing">
 	<div class="col-lg-12 col-xs-12">
-		<div class="box-content"> 
-			<h4 class="box-title">Laporan</h4> 
+		<div class="box-content">
+			<h4 class="box-title">Laporan</h4>  
 			<ul class="nav nav-tabs" id="myTabs" role="tablist">
 
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report_dosen')?>" ><button class="nav-link">Kinerja CPL Mahasiswa</button></a>
+					<a href="<?php echo site_url('reportdosen')?>" ><button class="nav-link">Kinerja CPL Mahasiswa</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report_dosen')?>" ><button class="nav-link">Kinerja CPMK Mahasiswa</button></a>
+					<a href="<?php echo site_url('reportdosen/kinerja_cpmk_mahasiswa')?>" ><button class="nav-link">Kinerja CPMK Mahasiswa</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report_dosen')?>" ><button class="nav-link">Rapor Mahasiswa</button></a>
+					<a href="<?php echo site_url('reportdosen/mahasiswa')?>" ><button class="nav-link">Rapor Mahasiswa</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report_dosen')?>" ><button class="nav-link">Rapor Mata Kuliah</button></a>
+					<a href="<?php echo site_url('reportdosen/mata_kuliah')?>" ><button class="nav-link">Rapor Mata Kuliah</button></a>
+				</li>				
+				<li class="nav-item" role="presentation">
+					<a href="<?php echo site_url('reportdosen/relevansi_ppm')?>" ><button class="nav-link">Relevansi PPM</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report_dosen/relevansi_ppm')?>" ><button class="nav-link">Relevansi PPM</button></a>
+					<a href="<?php echo site_url('reportdosen/efektivitas_cpl')?>" ><button class="nav-link active" id="cpl-tab" data-bs-toggle="tab" data-bs-target="#cpl" type="button" role="tab" aria-controls="cpl" aria-selected="true">Efektivitas CPL</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report_dosen/efektivitas_cpl')?>" ><button class="nav-link active" id="cpl-tab" data-bs-toggle="tab" data-bs-target="#cpl" type="button" role="tab" aria-controls="cpl" aria-selected="true">Efektivitas CPL</button></a>
+					<a href="<?php echo site_url('reportdosen/report_epbm')?>" ><button class="nav-link">Rekap EPBM</button></a>
 				</li>
 			</ul> 
 			<div class="tab-content" id="myTabContent">
@@ -70,11 +73,11 @@
 </div>
 
 <!-- chart.js Chart -->
-<script src="<?php echo base_url() ?>assets/plugin/chart/node_modules/chartjs-plugin-error-bars/node_modules/chart.js/dist/Chart.bundle.min.js"></script>
-<script src="<?php echo base_url() ?>assets/plugin/chart/node_modules/chartjs-plugin-error-bars/build/Plugin.Errorbars.js"></script>
+<script src="<?php echo base_url() ?>plugin/chart/node_modules/chartjs-plugin-error-bars/node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+<script src="<?php echo base_url() ?>plugin/chart/node_modules/chartjs-plugin-error-bars/build/Plugin.Errorbars.js"></script>
 
 
-<script src="<?php echo base_url() ?>assets/plugin/chart/chartjs/Chart.bundle.min.js"></script>
+<script src="<?php echo base_url() ?>plugin/chart/chartjs/Chart.bundle.min.js"></script>
 <script> 
 	var arr = <?php echo json_encode($nilai_cpl); ?>;
 	var arr_diagram = <?php echo json_encode($nilai_diagram); ?>;

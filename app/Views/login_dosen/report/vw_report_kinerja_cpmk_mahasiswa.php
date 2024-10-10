@@ -4,31 +4,31 @@
 			<h4 class="box-title">Laporan</h4>  
 			<ul class="nav nav-tabs" id="myTabs" role="tablist">
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report')?>" ><button class="nav-link">Kinerja CPL Mahasiswa</button></a>
+					<a href="<?php echo site_url('reportdosen')?>" ><button class="nav-link">Kinerja CPL Mahasiswa</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report/kinerja_cpmk_mahasiswa')?>" ><button class="nav-link active" id="cpl-tab" data-bs-toggle="tab" data-bs-target="#cpl" type="button" role="tab" aria-controls="cpl" aria-selected="true">Kinerja CPMK Mahasiswa</button></a>
+					<a href="<?php echo site_url('reportdosen/kinerja_cpmk_mahasiswa')?>" ><button class="nav-link active" id="cpl-tab" data-bs-toggle="tab" data-bs-target="#cpl" type="button" role="tab" aria-controls="cpl" aria-selected="true">Kinerja CPMK Mahasiswa</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report/mahasiswa')?>" ><button class="nav-link">Rapor Mahasiswa</button></a>
+					<a href="<?php echo site_url('reportdosen/mahasiswa')?>" ><button class="nav-link">Rapor Mahasiswa</button></a>
 				</li> 
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report/mata_kuliah')?>" ><button class="nav-link">Rapor Mata Kuliah</button></a>
+					<a href="<?php echo site_url('reportdosen/mata_kuliah')?>" ><button class="nav-link">Rapor Mata Kuliah</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report/relevansi_ppm')?>" ><button class="nav-link">Relevansi PPM</button></a>
+					<a href="<?php echo site_url('reportdosen/relevansi_ppm')?>" ><button class="nav-link">Relevansi PPM</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report/efektivitas_cpl')?>" ><button class="nav-link">Efektivitas CPL</button></a>
+					<a href="<?php echo site_url('reportdosen/efektivitas_cpl')?>" ><button class="nav-link">Efektivitas CPL</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('report/report_epbm')?>" ><button class="nav-link">Rekap EPBM</button></a>
+					<a href="<?php echo site_url('reportdosen/report_epbm')?>" ><button class="nav-link">Rekap EPBM</button></a>
 				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
 
 				<div class="row mb-3">
-							<form role="form" id="contactform" action="<?php echo site_url('report/kinerja_cpmk_mahasiswa')?>" method="post">
+							<form role="form" id="contactform" action="<?php echo site_url('reportdosen/kinerja_cpmk_mahasiswa')?>" method="post">
 							<div class="input-group">
 								<label for="mata_kuliah" class="col-sm-3 col-form-label">Silahkan Masukkan NIM</label>
 								<div class="col-sm-6">

@@ -13,7 +13,7 @@
 							<?php $i++; } ?>
 						</select>
 					</div> 
-				</div>  
+				</div>
 				<div class="row mb-3">
 					<label for="mata_kuliah" class="col-sm-3 col-form-label">Silahkan pilih Tahun Akademik</label>
 					<div class="col-sm-3 ">
@@ -113,7 +113,7 @@
 		</div>
 		<!-- /.box-content -->
 	</div>
-	<?php echo "PHP version :".phpversion()	; ?>
+	<?php //echo "PHP version :".phpversion()	; ?>
 	<!-- /.col-lg-9 col-xs-12 -->
 
 <!-- jQuery -->

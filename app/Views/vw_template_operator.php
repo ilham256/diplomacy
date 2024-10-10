@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -82,6 +82,10 @@
 	<script src="<?= base_url('plugin/dropify/js/dropify.min.js') ?>"></script>
 	<script src="<?= base_url('scripts/fileUpload.demo.min.js') ?>"></script>
 
+    <!-- Select2 -->
+  <link rel="stylesheet" href="<?= base_url('Adminlte/plugins/select2/css/select2.min.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('Adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') ?>">
+
 
 
 </head>
@@ -90,7 +94,7 @@
 	
 <div class="main-menu">
 	<header class="header">
-		<a href="<?php echo site_url('dashboard_operator') ?>" class="logo"><img src="<?php echo base_url() ?>assets/images/Logo_web.png" width="170" /></a>
+		<a href="<?php echo site_url() ?>" class="logo"><img src="<?php echo base_url() ?>images/Logo_web.png" width="170" /></a>
 		<button type="button" class="button-close fa fa-times js__menu_close"></button>
 	</header>
 	<!-- /.header -->
@@ -104,16 +108,16 @@
 					<a class="waves-effect" href="<?php echo site_url('dashboard_operator') ?>"><i class="menu-icon ti-dashboard"></i>Dashboard</a>
 				</li>
 				<li <?php echo ($breadcrumbs == 'mahasiswa' ? ' class = "current active"' : '') ?>>
-					<a class="waves-effect" href="<?php echo site_url('User/admin') ?>"><i class="menu-icon ti-user"></i>Admin</a>
+					<a class="waves-effect" href="<?php echo site_url('user/admin') ?>"><i class="menu-icon ti-user"></i>Admin</a>
 				</li>
 				<li <?php echo ($breadcrumbs == 'mahasiswa' ? ' class = "current active"' : '') ?>>
-					<a class="waves-effect" href="<?php echo site_url('User/dosen') ?>"><i class="menu-icon ti-user"></i>Dosen</a>
+					<a class="waves-effect" href="<?php echo site_url('user/dosen') ?>"><i class="menu-icon ti-user"></i>Dosen</a>
 				</li>
 				<li <?php echo ($breadcrumbs == 'mahasiswa' ? ' class = "current active"' : '') ?>>
-					<a class="waves-effect" href="<?php echo site_url('User/mahasiswa') ?>"><i class="menu-icon ti-user"></i>Mahasiswa</a>
+					<a class="waves-effect" href="<?php echo site_url('user/mahasiswa') ?>"><i class="menu-icon ti-user"></i>Mahasiswa</a>
 				</li>
 				<li <?php echo ($breadcrumbs == 'akun' ? ' class = "current active"' : '') ?>>
-					<a class="waves-effect" href="<?php echo site_url('akun_operator') ?>"><i class="menu-icon ti-user"></i>Akun</a>
+					<a class="waves-effect" href="<?php echo site_url('akunoperator') ?>"><i class="menu-icon ti-user"></i>Akun</a>
 				</li>
 
 				<li <?php echo ($breadcrumbs == 'logout' ? ' class = "current active"' : '') ?>>
@@ -251,16 +255,23 @@
     </div>
 </div>
 
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="<?= base_url('scripts/template.min.js') ?>"></script>
-<script src="<?= base_url('Adminlte/plugins/select2/js/select2.full.min.js') ?>"></script>
-<script src="<?= base_url('Adminlte/dist/js/adminlte.js') ?>"></script>
 
-
-<script src="<?= base_url('Adminlte/dist/js/adminlte.js') ?>"></script>
+<!-- Modal -->
 
 <!-- jQuery -->
 <script src="<?= base_url('Adminlte/plugins/jquery/jquery.min.js') ?>"></script>
+<!-- Select2 -->
+<script src="<?= base_url('Adminlte/plugins/select2/js/select2.full.min.js') ?>"></script>
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="<?= base_url('scripts/template.min.js') ?>"></script>
+
+<script src="<?= base_url('Adminlte/dist/js/adminlte.js') ?>"></script>
+
+
+<script src="<?= base_url('Adminlte/dist/js/adminlte.js') ?>"></script>
+
+
 <!-- Bootstrap 4 -->
 <script src="<?= base_url('Adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 <!-- overlayScrollbars -->
@@ -274,6 +285,22 @@
 <!-- DataTables -->
 <script src="<?= base_url('Adminlte/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
 <script src="<?= base_url('Adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'); ?>"></script>
+
+<!-- Page specific script -->
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+  })
+
+  // DropzoneJS Demo Code End
+</script>
 
 
 
@@ -306,13 +333,6 @@
 
 
   $(function () {
-    //Initialize Select2 Elements
-	$('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-      theme: 'bootstrap4'
-    }) 
 
     //Datemask dd/mm/yyyy
     $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })

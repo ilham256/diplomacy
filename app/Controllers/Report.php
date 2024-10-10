@@ -14,7 +14,7 @@ use App\Models\EpbmModel;
 class Report extends BaseController
 {
     protected $matakuliahModel;
-    protected $mahasiswaModel;
+    protected $mahasiswaModel; 
     protected $kincpmkModel;
     protected $reportModel;
     protected $katkinModel;
@@ -62,6 +62,34 @@ class Report extends BaseController
 
         $target = $this->katkinModel->getKatkin();
         $target_cpl = ($target["0"]->nilai_target_pencapaian_cpl);
+
+        // Mengambil data mahasiswa dari API
+        $currentYear = date('Y');
+        $startYear = 2017;
+        $tahun_report = range($startYear, $currentYear - 1);
+
+        function curl($url)
+        {
+            $curl = \Config\Services::curlrequest();
+            $headers = [
+                'accept' => 'text/plain',
+                'X-IPBAPI-TOKEN' => 'Bearer 86f2760d-7293-36f4-833f-1d29aaace42e'
+            ];
+            $response = $curl->request('GET', $url, [
+                'headers' => $headers,
+                'http_errors' => false,
+            ]);
+            return $response->getBody();
+        }
+
+        $arr['dt_mahasiswa_2'] = [];
+        foreach ($tahun_report as $year) {
+            $response = curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=$year");
+            $dt_mahasisw = json_decode($response, true);
+            $arr['dt_mahasiswa_2'] = array_merge($arr['dt_mahasiswa_2'], $dt_mahasisw);
+        }
+
+        $dt_mahasiswa = $arr['dt_mahasiswa_2'];
 
         if ($this->request->getPost('pilih_3')) {
             $nim_3 = $this->request->getPost('nim_3');
@@ -347,15 +375,28 @@ class Report extends BaseController
             array_push($tahun_report, $i);
         }
 
-        $dt_mahasiswa_2 = [];
-        foreach ($tahun_report as $key) {
-            $send = $this->curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=".$key);
-            $dt_mahasisw = json_decode($send, true);
-
-            array_push($dt_mahasiswa_2, $dt_mahasisw);
+        function curl($url)
+        {
+            $curl = \Config\Services::curlrequest();
+            $headers = [
+                'accept' => 'text/plain',
+                'X-IPBAPI-TOKEN' => 'Bearer 86f2760d-7293-36f4-833f-1d29aaace42e'
+            ];
+            $response = $curl->request('GET', $url, [
+                'headers' => $headers,
+                'http_errors' => false,
+            ]);
+            return $response->getBody();
         }
 
-        $dt_mahasiswa = array_reduce($dt_mahasiswa_2, 'array_merge', []);
+        $arr['dt_mahasiswa_2'] = [];
+        foreach ($tahun_report as $year) {
+            $response = curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=$year");
+            $dt_mahasisw = json_decode($response, true);
+            $arr['dt_mahasiswa_2'] = array_merge($arr['dt_mahasiswa_2'], $dt_mahasisw);
+        }
+
+        $dt_mahasiswa = $arr['dt_mahasiswa_2'];
 
         if ($this->request->getPost('pilih')) {
             $nim = $this->request->getPost('nim');
