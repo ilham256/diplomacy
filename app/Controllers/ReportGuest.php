@@ -771,11 +771,11 @@ class ReportGuest extends BaseController
 		$target = $this->katkinModel->getKatkin();
 		$data['target_cpl'] = $target;
 
-		if (!empty($this->request->getPost('download', true))) {
-			$th = $this->request->getPost('tahun', true);
+		if (!empty($this->request->getPost('download'))) {
+			$th = $this->request->getPost('tahun');
 			$data['tahun_mk'] = $th;
 
-			$mk_1 = $this->request->getPost('mk', true);
+			$mk_1 = $this->request->getPost('mk');
 			$data['simpanan_mk'] = $mk_1;
 
 			$data['status_aktif'] = '';
