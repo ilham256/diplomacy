@@ -30,12 +30,22 @@ class DosenModel extends Model
 
     public function editDosen($id)
     {
-        return $this->where('nim', $id)->findAll();
+        return $this->where('NIP', $id)->findAll();
+    }
+    public function editDosen2($id)  
+    {
+        return $this->db->table($this->table)
+            ->select('*')
+            ->where('NIP', $id)
+            ->get()
+            ->getResult();
     }
 
     public function submitEdit($saveData, $idEdit)
     {
-        return $this->update($idEdit, $saveData);
+        return $this->db->table($this->table)
+            ->where('NIP', $idEdit)
+            ->update($saveData);
     }
 
     public function updateDosen($saveData)
@@ -45,7 +55,7 @@ class DosenModel extends Model
 
     public function hapus($id)
     {
-        return $this->where('nim', $id)->delete();
+        return $this->where('NIP', $id)->delete();
     }
 }
 ?>

@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use App\Models\EpbmModel;
 use App\Models\MatakuliahModel;
-use App\Models\MahasiswaModel;
+use App\Models\MahasiswaModel; 
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
@@ -35,6 +35,10 @@ class Epbm extends BaseController
             'breadcrumbs' => 'epbm',
             'content' => 'vw_epbm'
         ];
+        $data['datas_psd'] = $this->epbmModel->getPsd();
+        $data['Epbm'] = $this->epbmModel->getDataEpbm();
+
+        //dd($data['datas_psd'],$data['Epbm']);
 
         return view('vw_template', $data);
     }
@@ -67,6 +71,8 @@ public function import(){
             //konfersi dari funsion uploads
             $arr['datas'] = [];
             $arr['datas_epbm'] = [];
+            $arr['datas_epbm_mk'] = [];
+            $arr['datas_epbm_dosen'] = [];
             $arr['datas_psd'] = $this->epbmModel->getPsd();
 
 
@@ -101,6 +107,8 @@ public function import(){
             }else {
                 $data_semester = 'Genap'; // akan masuk kesini
             }
+
+
 
             // Menyimpan Data EPMB Matakuliah
             for ($row = 5; $row <= $highestRow; $row++)
@@ -137,7 +145,10 @@ public function import(){
                                         "no"=> substr($rowMk[0][0],-1),
                                         "kode_mk"=> $kode_mk
                                     );
-                                    $insert = $this->epbmModel->updateExcelEpbmMataKuliah($save_data);
+                                    $insert1 = $this->epbmModel->updateExcelEpbmMataKuliah($save_data);
+                                    if ($insert1) {
+                                        # code...
+                                    }
                                     //echo '<pre>';  var_dump($save_data); echo '</pre>'; 
                                 
                                 }
@@ -150,7 +161,7 @@ public function import(){
                                         "no"=> substr($rowMk[0][0],-1),
                                         "kode_mk"=> $kode_mk
                                     );
-                            $insert = $this->epbmModel->updateExcelEpbmMataKuliah($save_data);
+                            $insert2 = $this->epbmModel->updateExcelEpbmMataKuliah($save_data);
                             }
                         } else {
 
@@ -161,7 +172,7 @@ public function import(){
                             "no"=> substr($rowMk[0][0],-1),
                             "kode_mk"=> $kode_mk
                         );
-                        $insert = $this->epbmModel->updateExcelEpbmMataKuliah($save_data);
+                        $insert3 = $this->epbmModel->updateExcelEpbmMataKuliah($save_data);
 
                         }
                     }
@@ -300,6 +311,7 @@ public function import(){
                                             "nilai"=>  $rowNilai[0][0+$i]
                                             );                         
                                         }
+                                        array_push($arr['datas_epbm_dosen'],$save_data);
                                         $insert = $this->epbmModel->updateExcelNilaiEpbmDosen($save_data);
                                 } 
                             else {                            
@@ -312,6 +324,8 @@ public function import(){
                                     "nilai"=>  $rowNilai[0][0+$i]
                                     );
                                  $d = $rowData[0][0];
+
+                                 array_push($arr['datas_epbm_mk'],$save_data);
                                  $insert = $this->epbmModel->updateExcelNilaiEpbmMataKuliah($save_data);
                                 }
                             $masukan = $save_data;
@@ -335,8 +349,11 @@ public function import(){
             echo '<pre>';  var_dump($_FILES['file']['type']); echo '</pre>';
 
         }
-        session()->setFlashdata('success', 'Data berhasil disimpan!');
-        return redirect()->to('epbm');
+        //session()->setFlashdata('success', 'Data berhasil disimpan!');
+        //dd($arr['datas_epbm_mk'],$arr['datas_epbm_dosen']);
+        $arr['breadcrumbs'] = 'epbm';
+        $arr['content'] = 'vw_data_nilai_berhasil_disimpan_epbm'; 
+        return view('vw_template', $arr);
 
     }
 }

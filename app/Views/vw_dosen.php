@@ -14,6 +14,7 @@
 						<th>No.</th>
 						<th>NIP</th> 
 						<th>Nama</th>
+						<th>Hapus</th>
 					</tr>
 				</thead>
 				<tfoot>
@@ -21,6 +22,7 @@
 						<th>No.</th>
 						<th>NIP</th> 
 						<th>Nama</th>
+						<th>Hapus</th>
 					</tr>
 				</tfoot>
 
@@ -29,7 +31,10 @@
                     <tr>
                         <td scope="row"><?php echo $i; ?></td>
                         <td><span class="label label-success"><?php echo $r["NIP"]; ?></span></td>
-                        <td><?php echo ucwords(strtolower($r["nama_dosen"])); ?></td>
+                        <td><a href="<?= base_url('dosen/edit/' . $r["NIP"]); ?>"><i class="fa " title="Edit Mata Kuliah"> <?= $r["nama_dosen"]; ?> </i></a></td>
+                        <td>
+                            <a onclick="return confirm('apakah anda ingin menghapus data')" href="<?= base_url('dosen/hapus/' . $r["NIP"]); ?>"><i class="fa fa-trash" title="Hapus Data produk"></i></a>
+                        </td>
                     </tr>
                     <?php $i++; } ?>
 

@@ -29,7 +29,9 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Kode</th> 
+                        <th>Kode TM-2018</th>
+                        <th>Kode TM-2019</th> 
+                        <th>Kode K-2020</th> 
                         <th>Mata Kuliah</th> 
                         <th>SKS</th> 
                         <th>Semester</th> 
@@ -40,10 +42,12 @@
                 <tfoot> 
                     <tr>
                         <th>#</th>
-                        <th>Kode</th> 
+                        <th>Kode TM-2018</th>
+                        <th>Kode TM-2019</th> 
+                        <th>Kode K-2020</th> 
                         <th>Mata Kuliah</th> 
                         <th>SKS</th> 
-                        <th>Semester</th> 
+                        <th>Semester</th>
                         <th>RPS</th> 
                         <th></th> 
                     </tr>  
@@ -53,6 +57,8 @@
                         <tr>
                             <td scope="row"><?= $i; ?></td>
                             <td><span class="label label-success"><?= $r->nama_kode; ?></span></td>
+                            <td><span class="label label-success"><?= $r->nama_kode_2; ?></span></td>
+                            <td><span class="label label-success"><?= $r->nama_kode_3; ?></span></td>
                             <td><a href="<?= base_url('matakuliah/edit/' . $r->kode_mk); ?>"><i class="fa " title="Edit Mata Kuliah"> <?= $r->nama_mata_kuliah; ?> </i></a></td>
                             <td><?= $r->sks; ?></td>
                             <td><?= $r->id_semester; ?></td>

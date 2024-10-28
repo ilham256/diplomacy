@@ -7,7 +7,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
 class Dosen extends Controller {
-
+ 
 	public function __construct()
   	{
   		$this->dosen_model = new \App\Models\DosenModel();
@@ -39,8 +39,8 @@ class Dosen extends Controller {
 	public function submit_tambah()
 	{ 
 		if ($this->request->getPost('simpan')) {
-			$nip = $this->request->getPost('nip');
-			$nama_dosen = $this->request->getPost('nama_dosen');
+			$nip = $this->request->getPost('nip', FILTER_SANITIZE_STRING);
+			$nama_dosen = $this->request->getPost('nama_dosen', FILTER_SANITIZE_STRING);
 			
 			if (!empty($nip) && !empty($nama_dosen)) {
 				$KL = [
@@ -62,6 +62,44 @@ class Dosen extends Controller {
 			}
 		} 
 	}
+
+	public function edit($id)
+	{
+		$data['breadcrumbs'] = 'dosen'; 
+		$data['content'] = 'dosen/edit';
+		
+		$data['data'] = $this->dosen_model->editDosen($id);
+
+		//dd($data['data']);
+
+		return view('vw_template', $data);
+	}
+
+	public function submit_edit()
+    {
+        if ($this->request->getPost('simpan')) {
+            $save_data = [
+                'NIP' => $this->request->getPost('nip', FILTER_SANITIZE_STRING),
+                'nama_dosen' => $this->request->getPost('nama', FILTER_SANITIZE_STRING),
+				'password' => "123456",
+            ];
+            $id_edit = $this->request->getPost('nip', FILTER_SANITIZE_STRING);
+
+            $query = $this->dosen_model->submitEdit($save_data, $id_edit);
+            if ($query) {
+                return redirect()->to('/dosen');
+            }
+        }
+    }
+
+    public function hapus($id)
+    {
+        $delete = $this->dosen_model->hapus($id);
+        if ($delete) {
+            return redirect()->to('/dosen');
+        }
+    }
+
 
 	public function export_excel()
 	{

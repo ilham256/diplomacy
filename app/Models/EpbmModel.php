@@ -98,5 +98,15 @@ class EpbmModel extends Model
                         ->get()
                         ->getResult();
     }
+
+    public function getDataEpbm()
+    {
+        return $this->db->table('nilai_epbm_dosen')
+                        ->select('*')
+                        ->join('epbm_mata_kuliah_has_dosen', 'epbm_mata_kuliah_has_dosen.kode_epbm_mk_has_dosen = nilai_epbm_dosen.kode_epbm_mk_has_dosen')
+                        ->join('dosen', 'dosen.NIP = epbm_mata_kuliah_has_dosen.NIP')
+                        ->get()
+                        ->getResult();
+    }
 }
 ?>

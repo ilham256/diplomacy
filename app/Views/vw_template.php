@@ -23,7 +23,7 @@
 	<link rel="stylesheet" href="<?= base_url('plugin/jquery-ui/jquery-ui.structure.min.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('plugin/jquery-ui/jquery-ui.theme.min.css') ?>">
 
-	<!-- Data Tables -->
+	<!-- Data Tables --> 
 	<link rel="stylesheet" href="<?= base_url('plugin/datatables/media/css/jquery.dataTables.min.css') ?>">
 
 	<!-- Dropify -->
@@ -531,6 +531,21 @@
     }
 
     $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true,
+    });
+  });
+
+  $(document).ready(function() {
+    if ($.fn.DataTable.isDataTable('#example3')) {
+      $('#example3').DataTable().clear().destroy();
+    }
+
+    $('#example3').DataTable({
       "paging": true,
       "lengthChange": true,
       "searching": true,

@@ -5,51 +5,21 @@
  
 			            <div class="card card-primary">
               <div class="card-header" >
-                <h3 class="card-title" >Edit Mahasiswa</h3>
+                <h3 class="card-title" >Edit Dosen</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="post" action="<?php echo site_url('mahasiswa/submit_edit') ?>" enctype="multipart/form-data">
-	                <div class="card-body">
-	                			<input type="hidden" name="nim" value="<?= $data->nim; ?>">
-  			                  <div class="form-group">
-			                    <label for="exampleInputEmail1">NIM</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" disabled value="<?= $data->nim; ?>" >
+              <form role="form" method="post" action="<?php echo site_url('dosen/submit_edit') ?>" enctype="multipart/form-data">
+	            <div class="card-body">
+	                		<input type="hidden" name="nip" value="<?= $data[0]['NIP']; ?>">
+	                		  <div class="form-group">
+			                    <label for="exampleInputEmail1">NIP</label>
+			                    <input type="text" class="form-control" id="exampleInputEmail1" disabled value="<?= $data[0]['NIP']; ?>">
 			                  </div>
-			                  <br>
-			                  <div class="form-group">
-			                    <label for="exampleInputEmail1">Nama Mahasiswa</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" name="nama" value="<?= $data->nama; ?>" maxlength="50" minlength="2" required>
-			                  </div>
-			                  <br>
-			                  <div class="form-group">
-			                    <label for="exampleInputEmail1">Asal SMA</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" name="asal_sma" value="<?= $data->asal_sma; ?>" maxlength="50" minlength="2" required>
-			                  </div>
-			                  <br>
-			                  <div class="form-group">
-			                    <label for="exampleInputEmail1">Jalur Masus</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" name="jalur_masuk" value="<?= $data->jalur_masuk; ?>" maxlength="50" minlength="2" required>
-			                  </div>
-			                  <br>
-			                  <div class="form-group">
-			                    <label for="exampleInputEmail1">Tahun Masuk</label>
-			                    <input type="number" class="form-control" id="exampleInputEmail1" name="tahun_masuk" value="<?= $data->tahun_masuk; ?>">
-			                  </div>
-			                  <br>
-			                  <div class="form-group">
-			                    <label for="exampleInputEmail1">Tempat Lahir</label>
-			                    <input type="text" class="form-control" id="exampleInputEmail1" name="tempat_lahir" value="<?= $data->tempat_lahir; ?>" maxlength="50" minlength="2" required>
-			                  </div>
-			                  <br>
-
-			                  <div class="form-group">
-		                      <label for="exampleInputEmail1">Tanggal Lahir</label>
-		                      <div class="input-group">
-		                        <input type="date" class="form-control" data-inputmask-alias="datetime" data-mask name="tanggal_lahir" value="<?= $data->tanggal_lahir; ?>">
-		                      </div>
+		                    <div class="form-group">
+		                      <label for="exampleInputEmail1">Nama Dosen</label>
+		                      <input type="text" class="form-control" id="exampleInputEmail1" name="nama" value="<?= $data[0]['nama_dosen']; ?>" maxlength="64" minlength="2" required>
 		                    </div>
-
                   </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="simpan" value="simpan">Simpan</button>

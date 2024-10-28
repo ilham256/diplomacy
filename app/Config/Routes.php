@@ -109,6 +109,9 @@ $routes->post('data/data_cpmk', 'Data::data_cpmk');
 $routes->get('dosen', 'Dosen::index');
 $routes->get('dosen/tambah', 'Dosen::tambah');
 $routes->post('dosen/submit_tambah', 'Dosen::submit_tambah');
+$routes->get('dosen/edit/(:segment)', 'Dosen::edit/$1');
+$routes->post('dosen/submit_edit', 'Dosen::submit_edit');
+$routes->get('dosen/hapus/(:segment)', 'Dosen::hapus/$1');
 $routes->get('dosen/export_excel', 'Dosen::export_excel');
 $routes->get('dosen/suksesSimpan', 'Dosen::suksesSimpan');
 
