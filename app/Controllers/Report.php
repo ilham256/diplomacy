@@ -772,11 +772,13 @@ class Report extends BaseController
 				//echo '<pre>';  var_dump($data_nilai_epbm_mk); echo '</pre>';
 
 				if (!empty($data_nilai_epbm_dosen)) {
-					for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
-						array_push($psd, $data['data_psd'][$i]->nama);
-						array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
-						array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
-					}
+                    for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
+                        if (isset($data['data_psd'][$i]) && isset($data_nilai_epbm_mk[$i]->nilai) && isset($data_nilai_epbm_dosen[$i]->nilai)) {
+                            array_push($psd, $data['data_psd'][$i]->nama);
+                            array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
+                            array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
+                        }
+                    }
 
 					array_push($data['data_nilai_epbm_mk'], $data_nilai_epbm_mk);
 					array_push($data['data_nilai_epbm_dosen'], $data_nilai_epbm_dosen);
@@ -984,11 +986,13 @@ class Report extends BaseController
 				$psd = [];
 
 				if (!empty($data_nilai_epbm_dosen)) {
-					for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
-						array_push($psd, $data['data_psd'][$i]->nama);
-						array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
-						array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
-					}
+                    for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
+                        if (isset($data['data_psd'][$i]) && isset($data_nilai_epbm_mk[$i]->nilai) && isset($data_nilai_epbm_dosen[$i]->nilai)) {
+                            array_push($psd, $data['data_psd'][$i]->nama);
+                            array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
+                            array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
+                        }
+                    }
 
 					array_push($data['data_nilai_epbm_mk'], $data_nilai_epbm_mk);
 					array_push($data['data_nilai_epbm_dosen'], $data_nilai_epbm_dosen);

@@ -774,9 +774,11 @@ class ReportDosen extends BaseController
 
                 if (!empty($data_nilai_epbm_dosen)) {
                     for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
-                        array_push($psd, $data['data_psd'][$i]->nama);
-                        array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
-                        array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
+                        if (isset($data['data_psd'][$i]) && isset($data_nilai_epbm_mk[$i]->nilai) && isset($data_nilai_epbm_dosen[$i]->nilai)) {
+                            array_push($psd, $data['data_psd'][$i]->nama);
+                            array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
+                            array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
+                        }
                     }
 
                     array_push($data['data_nilai_epbm_mk'], $data_nilai_epbm_mk);
@@ -986,9 +988,11 @@ class ReportDosen extends BaseController
 
                 if (!empty($data_nilai_epbm_dosen)) {
                     for ($i = 1; $i < count($data_nilai_epbm_mk); $i++) {
-                        array_push($psd, $data['data_psd'][$i]->nama);
-                        array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
-                        array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
+                        if (isset($data['data_psd'][$i]) && isset($data_nilai_epbm_mk[$i]->nilai) && isset($data_nilai_epbm_dosen[$i]->nilai)) {
+                            array_push($psd, $data['data_psd'][$i]->nama);
+                            array_push($data_diagram_epbm_mk, $data_nilai_epbm_mk[$i]->nilai);
+                            array_push($data_diagram_epbm_dosen, $data_nilai_epbm_dosen[$i]->nilai);
+                        }
                     }
 
                     array_push($data['data_nilai_epbm_mk'], $data_nilai_epbm_mk);
