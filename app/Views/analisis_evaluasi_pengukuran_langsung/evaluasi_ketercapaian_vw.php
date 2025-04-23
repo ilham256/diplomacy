@@ -48,7 +48,7 @@
 									} 
 									else { echo "Kurang dari target"; }  ?></td>
 									<td>
-										<a class="btn waves-effect waves-light" style="color: white; background-color: darkorange;" href="<?php echo site_url('evaluasi_l/identifikasi/'.$key) ?>" > Perlihatkan Nilai CPMK Pendukung </a>
+										<a class="btn waves-effect waves-light" style="color: white; background-color: darkorange;" href="<?php echo site_url('evaluasil/identifikasi/'.$key) ?>" > Perlihatkan Nilai CPMK Pendukung </a>
 									</td> 
 
 								</tr>

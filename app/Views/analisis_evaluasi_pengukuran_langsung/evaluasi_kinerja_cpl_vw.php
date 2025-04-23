@@ -6,7 +6,7 @@
 			<ul class="nav nav-tabs" id="myTabs" role="tablist">
 				
 				<li class="nav-item" role="presentation">
-					<a href="<?php echo site_url('evaluasi_l')?>" ><button class="nav-link">Analisis Kinerja CPL</button></a>
+					<a href="<?php echo site_url('evaluasil')?>" ><button class="nav-link">Analisis Kinerja CPL</button></a>
 				</li>
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active" id="cpl-tab" data-bs-toggle="tab" data-bs-target="#cpl" type="button" role="tab" aria-controls="cpl" aria-selected="true">Analisis Status Pencapaian CPL</button>

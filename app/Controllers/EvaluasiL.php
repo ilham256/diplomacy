@@ -50,6 +50,7 @@ class EvaluasiL extends BaseController
 
         $arr['data_semester'] = $this->Matakuliah_model->getSemester();
         $arr['tahun_masuk'] = $this->mahasiswa_model->getTahunMasuk();
+        rsort($arr['tahun_masuk']);
         $arr['tahun_masuk_max'] = $this->mahasiswa_model->getTahunMasukMax();
         $arr['katkin'] = $this->katkin_model->getKatkin();
 
@@ -346,11 +347,11 @@ class EvaluasiL extends BaseController
         $arr['breadcrumbs'] = 'evaluasi_l';
         $arr['content'] = 'analisis_evaluasi_pengukuran_langsung/evaluasi_ketercapaian_vw';
 
-        if (!empty($this->input->post('pilih', TRUE))) {
+        if (!empty($this->request->getPost('pilih'))) {
 
-           $arr['tahun'] = $this->input->post('tahun', TRUE);
-           $arr['data_cpl'] = $this->kinumum_model->getcpl();
-           $arr['nilai_cpl2'] = $this->input->post('nilai_cpl', TRUE);
+           $arr['tahun'] = $this->request->getPost('tahun'); // diasumsikan array
+            $arr['data_cpl'] = $this->kinumum_model->getcpl();
+            $arr['nilai_cpl2'] = $this->request->getPost('nilai_cpl'); // diasumsikan array
 
            $arr['nilai_cpl'] = [];
 
@@ -376,11 +377,10 @@ class EvaluasiL extends BaseController
         $arr['breadcrumbs'] = 'evaluasi_l';
         $arr['content'] = 'analisis_evaluasi_pengukuran_langsung/evaluasi_trend_vw';
 
-        if (!empty($this->input->post('pilih', TRUE))) {
-
-           $arr['tahun'] = $this->input->post('tahun', TRUE);
-           $arr['data_cpl'] = $this->kinumum_model->getcpl();
-           $arr['nilai_cpl2'] = $this->input->post('nilai_cpl', TRUE);
+        if (!empty($this->request->getPost('pilih'))) {
+            $arr['tahun'] = $this->request->getPost('tahun');
+            $arr['data_cpl'] = $this->kinumum_model->getcpl();
+            $arr['nilai_cpl2'] = $this->request->getPost('nilai_cpl');
 
            $arr['nilai_cpl'] = [];
 
