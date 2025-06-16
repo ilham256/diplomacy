@@ -9,7 +9,7 @@
               </div> 
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="post" action="<?php echo site_url('mahasiswa/submit_tambah') ?>" enctype="multipart/form-data">
+              <form role="form" method="post" action="<?php echo site_url('mahasiswa/submitTambah') ?>" enctype="multipart/form-data">
 	                <div class="card-body">
 	                  <div class="form-group">
 	                    <label for="exampleInputEmail1">Tahun Angkatan</label>

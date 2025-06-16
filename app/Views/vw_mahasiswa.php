@@ -5,7 +5,7 @@
 			<div class="form-group">
 				<div class="text-right">
 					<a class="btn btn-info waves-effect waves-light" href="<?php echo site_url('mahasiswa/tambah') ?>" > + Update Data Mahasiswa</a> &nbsp; &nbsp;
-					<a class="btn btn-default waves-effect waves-light" href="<?php echo site_url('mahasiswa/resetpassword') ?>" > Reset Password Mahasiswa </a>
+					<a class="btn btn-default waves-effect waves-light" href="<?php echo site_url('mahasiswa/resetPassword') ?>" > Reset Password Mahasiswa </a>
 				</div>
 				<br>
 			</div> 

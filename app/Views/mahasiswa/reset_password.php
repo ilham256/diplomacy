@@ -9,7 +9,7 @@
               </div> 
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="post" action="<?php echo site_url('mahasiswa/submitresetpassword') ?>" enctype="multipart/form-data">
+              <form role="form" method="post" action="<?php echo site_url('mahasiswa/submitResetPassword') ?>" enctype="multipart/form-data">
 	                <div class="card-body">
 	                  <div class="form-group">
 	                    <label for="exampleInputEmail1">Nim Mahasiswa</label>
