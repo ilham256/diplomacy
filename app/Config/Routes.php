@@ -339,6 +339,7 @@ $routes->group('reportmahasiswa', ['namespace' => 'App\Controllers'], function($
 
     // Route untuk method download_report_mahasiswa
     $routes->get('download', 'ReportMahasiswa::download_report_mahasiswa');
+    $routes->post('download_report_mahasiswa', 'ReportMahasiswa::download_report_mahasiswa');
 });
 
 $routes->get('/user/admin', 'User::admin');
