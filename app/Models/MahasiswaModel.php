@@ -23,6 +23,7 @@ class MahasiswaModel extends Model
     {
         return $this->db->table($this->tableMahasiswa)
             ->select('tahun_masuk')
+            ->orderBy('tahun_masuk', 'ASC')
             ->distinct()
             ->get()
             ->getResult();

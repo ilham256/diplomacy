@@ -50,8 +50,7 @@ class CpltlangModel extends Model
     public function getCpltlangAll()
     {
         return $this->db->table('nilai_cpl_tak_langsung')
-                        ->select('nilai_cpl_tak_langsung.*, mahasiswa.*')
-                        ->join('mahasiswa', 'mahasiswa.nim = nilai_cpl_tak_langsung.nim')
+                        ->select('nilai_cpl_tak_langsung.*')
                         ->get()
                         ->getResult();
     }

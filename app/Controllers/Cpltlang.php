@@ -38,10 +38,10 @@ class Cpltlang extends BaseController {
             'content' => 'vw_cpltlang',
             'tahun_masuk' => $this->mahasiswaModel->getTahunMasuk(),
             'cpl' => $this->cpltlangModel->getCpl(),
-            'simpanan_tahun' => " - Pilih Tahun - ",
-            't_simpanan_tahun' => " ",
-            'datas' => $this->cpltlangModel->getCpltlangAll(),
-            'data_mahasiswa' => $this->cpltlangModel->getMahasiswaAll(),
+            'simpanan_tahun' => "2019/2020",
+            't_simpanan_tahun' => " ", 
+            'datas' => $this->cpltlangModel->getCpltlang(2019),
+            'data_mahasiswa' => $this->cpltlangModel->getMahasiswa(2019),
         ];
 
         if ($this->request->getPost('pilih')) {
