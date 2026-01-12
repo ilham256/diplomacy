@@ -19,6 +19,16 @@ class MahasiswaModel extends Model
             ->getResult();
     }
 
+    public function getMahasiswaPerTahun($tahun)  
+    {
+        return $this->db->table($this->tableMahasiswa)
+            ->select('*')
+            ->where('tahun_masuk', $tahun)
+            ->get()
+            ->getResult();
+    }
+
+
     public function getTahunMasuk()  
     {
         return $this->db->table($this->tableMahasiswa)

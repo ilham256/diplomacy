@@ -34,7 +34,7 @@
 									<select id="nim_2" class="form-control select2" name="nim_2" required>
 										<option value="" style="background: lightblue;" selected disabled>- Mahasiswa -</option>
 										<?php $i = 1; foreach($dt_mahasiswa_2 as $d) { ?>
-										<option value="<?php echo $d['Nim']; ?>"><?php echo $d['Nim'].' - '.$d['Nama'].' - smt('.$d['SemesterMahasiswa'].') - stat('.$d['StatusAkademik'].')'; ?></option>
+										<option value="<?php echo $d->nim; ?>"><?php echo $d->nim.' - '.$d->nama.' - '.$d->tahun_masuk.' - '.$d->StatusAkademik.''; ?></option>
 										<?php $i++; } ?>
 									</select>			
 								</div>
@@ -113,7 +113,7 @@
 										<tr> 
 											<th scope="row"><?php  echo substr($data_cpl[$i]->nama,-1); ?></th> 
 											<td style="text-align: justify; "><p><?php  echo ($data_cpl[$i]->deskripsi); ?></p></td> 
-											<td style="text-align: center; "><?php echo ($nilai_cpl_mahasiswa[$i]); ?></td> 
+											<td style="text-align: center; "><?php echo (round($nilai_cpl_mahasiswa[$i],1)); ?></td> 
 											<td><?php echo $status_nilai_cpl_mahasiswa[$i]; ?></td> 
 										</tr> 
 										<?php } ?>

@@ -67,7 +67,7 @@ class Cpmktlang extends BaseController {
             $data['th'] = $data_tahun_masuk;
             $data['mk'] = $data_mata_kuliah;
         }
-
+        /*
         function curl($url) {
             $ch = curl_init();
             $headers = array(
@@ -81,10 +81,12 @@ class Cpmktlang extends BaseController {
             curl_close($ch);
             return $output;
         }
+        /*
+        $send = $this->curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=" . $data['tahun']);
+        $mahasiswa = json_decode($send, true); */
+        $data['data_mahasiswa'] = $this->mahasiswaModel->getMahasiswaPerTahun($data['tahun']);
 
-        $send = curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=" . $data['tahun']);
-        $mahasiswa = json_decode($send, TRUE);
-        $data['data_mahasiswa'] = $mahasiswa;
+        //dd($data);
 
         return view('vw_template', $data);
     }

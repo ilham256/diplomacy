@@ -222,7 +222,7 @@ class Report extends BaseController
         $currentYear = date('Y');
         $startYear = 2017;
         $tahun_report = range($startYear, $currentYear - 1);
-
+        /*
         function curl($url)
         {
             $curl = \Config\Services::curlrequest();
@@ -243,7 +243,8 @@ class Report extends BaseController
             $dt_mahasisw = json_decode($response, true);
             $data['dt_mahasiswa_2'] = array_merge($data['dt_mahasiswa_2'], $dt_mahasisw);
         }
-
+        */
+        $data['dt_mahasiswa_2'] = $this->mahasiswaModel->getMahasiswa();
         $dt_mahasiswa = $data['dt_mahasiswa_2'];
         //dd($data['dt_mahasiswa_2']);
 
@@ -268,15 +269,15 @@ class Report extends BaseController
 
             $n_m = null;
             foreach ($dt_mahasiswa as $mahasiswa) {
-                if ($mahasiswa["Nim"] == $nim_2) {
+                if ($mahasiswa->nim == $nim_2) {
                     $n_m = $mahasiswa;
                     break;
                 }
             }
 
             if (!empty($n_m)) {
-                $data['nama_rapor_mahasiswa'] = $n_m["Nama"];
-                $data['nim_rapor_mahasiswa'] = $n_m["Nim"];
+                $data['nama_rapor_mahasiswa'] = $n_m->nama;
+                $data['nim_rapor_mahasiswa'] = $n_m->nim;
             } else {
                 $data['nama_rapor_mahasiswa'] = 'Nama Mahasiswa Tidak Terdaftar';
                 $data['nim_rapor_mahasiswa'] = 'NIM Mahasiswa Tidak Terdaftar';
@@ -492,40 +493,21 @@ class Report extends BaseController
         $th = 2017;
         $tahun_report = range($th, $tgl - 1);
 
-        function curl($url)
-        {
-            $ch = curl_init();
-            $headers = [
-                'accept: text/plain',
-                'X-IPBAPI-TOKEN: Bearer 86f2760d-7293-36f4-833f-1d29aaace42e'
-            ];
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            $output = curl_exec($ch);
-            curl_close($ch);
-            return $output;
-        }
-
-        $dt_mahasiswa_2 = array_map(function ($tahun) {
-            $send = curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=$tahun");
-            return json_decode($send, TRUE);
-        }, $tahun_report);
-
-        $dt_mahasiswa = array_merge(...$dt_mahasiswa_2);
+        $data['dt_mahasiswa_2'] = $this->mahasiswaModel->getMahasiswa();
+        $dt_mahasiswa = $data['dt_mahasiswa_2'];
 
         if ($this->request->getPost('download')) {
             $nim_2 = $this->request->getPost('nim_2');
             $data['nim_2'] = $nim_2;
 
             foreach ($dt_mahasiswa as $key) {
-                if ($key["Nim"] == $nim_2) {
+                if ($key->nim == $nim_2) {
                     $n_m = $key;
                 }
             }
 
-            $data['nama_rapor_mahasiswa'] = $n_m["Nama"];
-            $data['nim_rapor_mahasiswa'] = $n_m["Nim"];
+            $data['nama_rapor_mahasiswa'] = $n_m->nama;
+            $data['nim_rapor_mahasiswa'] = $n_m->nim;
 
             $batas_cukup = $data['katkin'][0]->batas_bawah_kategori_cukup_cpl;
             $batas_baik = $data['katkin'][0]->batas_bawah_kategori_baik_cpl;

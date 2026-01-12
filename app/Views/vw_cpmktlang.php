@@ -61,13 +61,13 @@
 							<tbody>
 			                    <?php $i = 1; foreach($data_mahasiswa as $r) { ?>
 			                    <tr>
-			                        <td><?php echo $r["Nim"]	; ?></td>
-			                        <td><?php echo $r["Nama"] ; ?></td>
+			                        <td><?php echo $r->nim	; ?></td>
+			                        <td><?php echo $r->nama ; ?></td>
 
 			                        <?php foreach ($data_matakuliah_has_cpmk as $row) { ?>
 									<td>
 										<?php foreach($datas as $w) { ?>
-												<?php if ($w->nim == $r["Nim"]) {
+												<?php if ($w->nim == $r->nim) {
 													if ($row->id_matakuliah_has_cpmk == $w->id_matakuliah_has_cpmk) {
 														echo $w->nilai_tak_langsung;
 													} } } ?>

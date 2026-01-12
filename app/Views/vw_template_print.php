@@ -87,7 +87,37 @@
 
 	<!-- Data table -->
 
+	<style>
+		@media print {
+		    /* Sembunyikan semua elemen */
+		    body * {
+		        visibility: hidden !important;
+		    }
 
+		    /* Tampilkan hanya area print */
+		    #print-area, #print-area * {
+		        visibility: visible !important;
+		    }
+
+		    /* Atur posisi agar rapi */
+		    #print-area {
+		        position: absolute;
+		        left: 0;
+		        top: 0;
+		        width: 100%;
+		    }
+
+		    /* Sembunyikan tombol cetak */
+		    button {
+		        display: none !important;
+		    }
+
+		    /* Sembunyikan modal */
+		    .modal {
+		        display: none !important;
+		    }
+		}
+		</style>
 
 </head>
 
@@ -99,7 +129,7 @@
 	<!-- /.main-content -->
 </div>
 
-<div >
+<div id="print-area" >
 		<?= view($content); ?>
 	<!-- /.main-content -->
 </div><!--/#wrapper -->

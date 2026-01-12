@@ -68,10 +68,10 @@ class Cpmklang extends BaseController
             $data['data_matakuliah_has_cpmk'] = $this->cpmklang_model->getmatakuliahhascpmk($data_mata_kuliah);
             $data['data_mahasiswa'] = $this->cpmklang_model->getmahasiswa($data_tahun_masuk);
         }
-
+        /*
         $send = $this->curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=" . $data['tahun']);
-        $mahasiswa = json_decode($send, true);
-        $data['data_mahasiswa'] = $mahasiswa;
+        $mahasiswa = json_decode($send, true); */
+        $data['data_mahasiswa'] = $this->Mahasiswa_model->getMahasiswaPerTahun($data['tahun']);
 
         //dd($data);
 
