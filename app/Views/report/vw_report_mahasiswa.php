@@ -113,7 +113,15 @@
 										<tr> 
 											<th scope="row"><?php  echo substr($data_cpl[$i]->nama,-1); ?></th> 
 											<td style="text-align: justify; "><p><?php  echo ($data_cpl[$i]->deskripsi); ?></p></td> 
-											<td style="text-align: center; "><?php echo (round($nilai_cpl_mahasiswa[$i],1)); ?></td> 
+											<td style="text-align: center; ">
+												<?php 
+													if (is_numeric($nilai_cpl_mahasiswa[$i])) {
+													    echo round((float)$nilai_cpl_mahasiswa[$i], 1);
+													} else {
+													    echo $nilai_cpl_mahasiswa[$i];
+													}; 
+												?>		
+											</td> 
 											<td><?php echo $status_nilai_cpl_mahasiswa[$i]; ?></td> 
 										</tr> 
 										<?php } ?>

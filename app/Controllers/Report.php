@@ -506,6 +506,20 @@ class Report extends BaseController
                 }
             }
 
+            if (!isset($n_m) || !is_object($n_m)) {
+                $n_m = new \stdClass();
+
+                $n_m->asal_sma         = null;
+                $n_m->jalur_masuk      = null;
+                $n_m->nama             = "-";
+                $n_m->nim              = "-";
+                $n_m->SemesterMahasiswa= "-";
+                $n_m->StatusAkademik   = "-";
+                $n_m->tahun_masuk      = "-";
+                $n_m->tanggal_lahir    = null;
+                $n_m->tempat_lahir     = null;
+            }
+            //dd ($n_m) ;
             $data['nama_rapor_mahasiswa'] = $n_m->nama;
             $data['nim_rapor_mahasiswa'] = $n_m->nim;
 
