@@ -195,7 +195,7 @@ class ReportMahasiswa extends BaseController
     for ($i = $th; $i < $tgl; $i++) {
         $tahun_report[] = $i;
     }
-
+    //dd($data);
     function curl($url)
     {
         $ch = curl_init();
@@ -212,6 +212,7 @@ class ReportMahasiswa extends BaseController
         return $output;
     }
 
+    /*
     $dt_mahasiswa_2 = [];
     foreach ($tahun_report as $key) {
         $send = curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=" . $key);
@@ -220,16 +221,21 @@ class ReportMahasiswa extends BaseController
     }
 
     $dt_mahasiswa = array_reduce($dt_mahasiswa_2, 'array_merge', []);
+    */
+    $dt_mahasiswa_object = $this->reportModel->getMahasiswa();
+    $dt_mahasiswa = json_decode(json_encode($dt_mahasiswa_object), true);
+    //dd($dt_mahasiswa);
 
-    $n_m = $this->reportModel->getNamaMahasiswa($data['nim']);
-    
+
+    $n_m_object = $this->reportModel->getMahasiswaSelect($data['nim']);
+    $n_m = (array) $n_m_object[0];
     foreach ($dt_mahasiswa as $mhs) {
-        if ($mhs["Nim"] == $data['nim']) {
+        if ($mhs["nim"] == $data['nim']) {
             $n_m = $mhs;
         }
     }
-    //dd($data['nim'],$dt_mahasiswa,$n_m);
-    $data['nama'] = ($n_m['Nama']); 
+    //dd($n_m);
+    $data['nama'] = $n_m['nama']; 
     $data['ns'] = 'Nilai CPMK ' . $data['nama'] . ' (' . $data['nim'] . ')';
 
 	//mendefinisikan matakuliah dan nilai cpmk
@@ -276,14 +282,14 @@ class ReportMahasiswa extends BaseController
 		$data['nim_2'] = $nim_2;
         //dd($dt_mahasiswa,$nim_2);
 		foreach ($dt_mahasiswa as $key) {
-			if ($key["Nim"] == $nim_2) {
+			if ($key["nim"] == $nim_2) {
 				$n_m = $key;
 			}
 		}
 
         //dd($nim_2,$dt_mahasiswa,$n_m);
-		$data['nama_rapor_mahasiswa'] = $n_m["Nama"];
-		$data['nim_rapor_mahasiswa'] = $n_m["Nim"];
+		$data['nama_rapor_mahasiswa'] = $n_m['nama'];
+		$data['nim_rapor_mahasiswa'] =$n_m['nim'];
 
 		$batas_cukup = $data['katkin'][0]->batas_bawah_kategori_cukup_cpl;
 		$batas_baik = $data['katkin'][0]->batas_bawah_kategori_baik_cpl;
