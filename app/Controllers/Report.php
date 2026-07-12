@@ -538,16 +538,16 @@ class Report extends BaseController
                                     if ($key_4->id_deskriptor == $key_3->id_deskriptor) {
                                         if ($key_2->id_matakuliah_has_cpmk == $key_3->id_matakuliah_has_cpmk) {
                                             $n_1 += $key_4->persentasi * $key_2->nilai_langsung * $key_3->persentasi;
+                                            }
                                         }
                                     }
                                 }
                             }
+                            $n += $n_1;
                         }
-                        $n += $n_1;
                     }
+                    $data['nilai_cpl_mahasiswa'][] = $n;
                 }
-                $data['nilai_cpl_mahasiswa'][] = $n;
-            }
 
             foreach ($data['nilai_cpl_mahasiswa'] as $key) {
                 if ($key > $batas_sangat_baik) {

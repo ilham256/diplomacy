@@ -64,7 +64,7 @@ class Mahasiswa extends Controller {
                     "SemesterMahasiswa" => $key["SemesterMahasiswa"],
                     "StatusAkademik" => $key["StatusAkademik"],
                     "tahun_masuk" => $tahun
-                ];
+                ]; 
 
                 array_push($masukan, $save_data);
                 $this->mahasiswaModel->updateMahasiswa($save_data);
@@ -89,6 +89,213 @@ class Mahasiswa extends Controller {
             echo view('vw_template', $data);
         }
     }
+
+    public function submitTambahExcel()
+        {
+            $file = $this->request->getFile('file');
+
+            if (!$file->isValid()) {
+                return redirect()->back()->with('error', 'File gagal diupload.');
+            }
+
+            // Validasi ekstensi
+            $extension = strtolower($file->getExtension());
+
+            switch ($extension) {
+                case 'csv':
+                    $reader = new Csv();
+                    break;
+
+                case 'xlsx':
+                    $reader = new Xlsx();
+                    break;
+
+                case 'xls':
+                    $reader = new Xls();
+                    break;
+
+                default:
+                    return redirect()->back()->with('error', 'Format file harus xls, xlsx, atau csv.');
+            }
+
+            try {
+
+                $spreadsheet = $reader->load($file->getTempName());
+
+            } catch (\Exception $e) {
+
+                return redirect()->back()->with('error', 'File Excel tidak dapat dibaca.');
+            }
+
+            // Misal diambil dari form
+            $tahun_ini = date('Y');
+
+            $datas = [];
+
+            $sheetCount = $spreadsheet->getSheetCount();
+
+            $masukan = [];
+
+            for ($p = 0; $p < $sheetCount; $p++) {
+
+                $sheet = $spreadsheet->getSheet($p);
+
+                $highestRow = $sheet->getHighestRow();
+
+                // Maksimal 1000 baris
+                $highestRow = min($highestRow, 1000);
+
+                for ($row = 4; $row <= $highestRow; $row++) {
+
+                    $rowData = $sheet->rangeToArray(
+                        'B'.$row.':E'.$row,
+                        null,
+                        true,
+                        false
+                    );
+
+                    $key = $rowData[0];
+
+                    // Lewati jika satu baris kosong
+                    if (empty(array_filter($key))) {
+                        continue;
+                    }
+
+                    // 1. Ekstrak data mentah
+                    $nimRaw           = trim($key[0]);
+                    $namaRaw          = trim($key[1]);
+                    $tahunMasukRaw    = trim($key[2]);
+                    $statusAkademikRaw= trim($key[3]);
+
+                    // 2. Pembersihan & Validasi Tahun Masuk
+                    // Menghapus SEMUA karakter kecuali angka (0-9). 
+                    // Contoh: "' 20 23" -> menjadi "2023". "Tahun 2023" -> menjadi "2023".
+                    $tahunBersih = preg_replace('/[^0-9]/', '', $tahunMasukRaw);
+
+                    // Jika hasil pembersihan kosong (berarti inputnya teks murni atau cell kosong)
+                    if (empty($tahunBersih)) {
+                        $tahunMasukInt = (int)$tahun_ini; // Gunakan tahun sekarang
+                    } else {
+                        // Jika masih ada angkanya, ambil 4 digit pertama untuk berjaga-jaga
+                        // (misal user input 20232024, kita ambil 2023 saja)
+                        $tahunMasukInt = (int)substr($tahunBersih, 0, 4);
+                    }
+
+                    // 3. Sanitasi Kode Berbahaya pada Teks (XSS & Tag HTML)
+                    $save_data = [
+                        'nim'               => esc(strip_tags($nimRaw)),
+                        'nama'              => esc(strip_tags($nimRaw)),
+                        'SemesterMahasiswa' => ($tahun_ini - $tahunMasukInt) * 2 + 1,
+                        'tahun_masuk'       => $tahunMasukInt,
+                        'StatusAkademik'    => esc(strip_tags($statusAkademikRaw))
+                    ];
+
+
+                    array_push($masukan, $save_data);
+                    $this->mahasiswaModel->updateMahasiswa($save_data);
+
+                    $cek_id = $this->mahasiswaModel->cekUserMahasiswa(trim($key[0]));
+                    if (empty($cek_id)) {
+                        $save_data_user = [
+                            'id' => esc(strip_tags($nimRaw)),
+                            'username' => esc(strip_tags($namaRaw)),
+                            'email' => '',
+                            'password' => password_hash('admin', PASSWORD_DEFAULT),
+                            'level' => 2,
+                        ];
+                        $this->mahasiswaModel->updateUserMahasiswa($save_data_user);
+                    }
+
+
+                }
+            }
+
+            // Debug
+            // dd($masukan);
+
+            $data['datas'] = $masukan;
+            $data['breadcrumbs'] = 'mahasiswa';
+            $data['content'] = 'mahasiswa/vw_data_mahasiswa_berhasil_disimpan';
+            echo view('vw_template', $data);
+        }
+
+    public function submitTambahExcel2(){
+    //echo "dkf";
+    $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+   // echo '<pre>';  var_dump($_FILES); echo '</pre>'; 
+        if(isset($_FILES['file']['name']) && in_array($_FILES['file']['type'], $file_mimes)) {
+ 
+            $arr_file = explode('.', $_FILES['file']['name']);
+            //echo '<pre>';  var_dump($arr_file); echo '</pre>'; 
+            $extension = end($arr_file);
+            if('csv' == $extension){
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+                } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+                }
+            $spreadsheet = $reader->load($_FILES['file']['tmp_name']);
+            //$sheetData = $spreadsheet->getActiveSheet()->toArray();
+            //$sheetData2 = $spreadsheet->getSheet(2)->toArray();
+            $highestSheet = $spreadsheet->getSheetCount();
+            //echo "<pre>";
+            //print_r($sheetData2);
+            //echo '<pre>';  var_dump($highestSheet); echo '</pre>';
+
+            //konfersi dari funsion uploads
+            $arr['datas'] = []; 
+
+                for ($p=0; $p < $highestSheet; $p++) { 
+                    
+                    $sheet = $spreadsheet->getSheet($p);
+
+                    $highestRow = $sheet->getHighestRow();
+                    $highestColumn = $sheet->getHighestColumn();
+                    if ($highestRow == 1000) {
+                        $highestRow = 100 ;
+                    }
+
+
+                    for ($row = 4; $row <= $highestRow; $row++){                  //  Read a row of data into an array                 
+                            $rowData = $sheet->rangeToArray('B' . $row . ':' . $highestColumn . $row,
+                                                            NULL,
+                                                            TRUE,
+                                                            FALSE);
+
+                            //Sesuaikan sama nama kolom tabel di database 
+                         
+                            $save_data = array(
+                                "nim" => $key["Nim"],
+                                "nama" => $key["Nama"],
+                                "SemesterMahasiswa" => $key["SemesterMahasiswa"],
+                                "StatusAkademik" => $key["StatusAkademik"],
+                                "tahun_masuk" => $tahun
+                             );
+                            $masukan = $save_data;
+                            
+                            //sesuaikan nama dengan nama tabel
+                             
+                            array_push($arr['datas'],$masukan);
+                            //delete_files($media['file_path']);
+                                 
+                        }
+                        $i++;
+                }
+            dd($arr['datas']);
+
+        } else {
+            //echo $_FILES['upload_file']['type'];
+            echo '<pre>';  var_dump($_FILES['file']['type']); echo '</pre>';
+
+        }
+        //echo '<pre>';  var_dump($highestRow); echo '</pre>';
+        $arr['breadcrumbs'] = 'cpmklang';
+        $arr['content'] = 'vw_data_nilai_berhasil_disimpan'; 
+        return view('vw_template', $arr);
+
+
+    }
+
+
 
     public function exportExcel() {
         $data_mahasiswa = $this->mahasiswaModel->getMahasiswa();
@@ -274,6 +481,13 @@ class Mahasiswa extends Controller {
         $data['breadcrumbs'] = 'mahasiswa';
         $data['content'] = 'mahasiswa/reset_password';
         echo view('vw_template', $data);
+    }
+
+    public function downloadTemplateTambah()
+    {
+        $file = FCPATH . 'xls_file/Format upload mahasiswa.xlsx';
+
+        return $this->response->download($file, null);
     }
 }
 

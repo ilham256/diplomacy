@@ -243,6 +243,8 @@ $routes->group('kurikulum', function($routes) {
 $routes->group('mahasiswa', function($routes) {
     $routes->get('/', 'Mahasiswa::index');
     $routes->get('tambah', 'Mahasiswa::tambah');
+    $routes->get('downloadTemplateTambah', 'Mahasiswa::downloadTemplateTambah');
+    $routes->post('submitTambahExcel', 'Mahasiswa::submitTambahExcel');
     $routes->post('submitTambah', 'Mahasiswa::submitTambah');
     $routes->get('exportExcel', 'Mahasiswa::exportExcel');
     $routes->post('upload', 'Mahasiswa::upload');

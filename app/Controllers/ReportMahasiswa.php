@@ -342,6 +342,11 @@ class ReportMahasiswa extends BaseController
         $data = [];
         $data['breadcrumbs'] = 'report';
         $data['content'] = 'report/vw_report_mahasiswa_print';
+
+        $matakuliahModel = new MatakuliahModel();
+        $katkinModel = new KatkinModel();
+        $reportModel = new ReportModel();
+        $kinumumModel = new KinumumModel();
         
         $rumus_cpl = $this->kinumumModel->getCplRumusDeskriptor();
         $rumus_deskriptor = $this->kinumumModel->getDeskriptorRumusCpmk();
@@ -357,29 +362,9 @@ class ReportMahasiswa extends BaseController
         $startYear = 2017;
         $tahun_report = range($startYear, $currentYear - 1);
 
-        function curl($url)
-        {  
-            $ch = curl_init(); 
-            $headers = [
-                'accept: text/plain',
-                'X-IPBAPI-TOKEN: Bearer 86f2760d-7293-36f4-833f-1d29aaace42e'
-            ];
-            curl_setopt($ch, CURLOPT_URL, $url); 
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            $output = curl_exec($ch);
-            curl_close($ch);   
-            return $output;
-        }
+        $data['dt_mahasiswa_2'] = $this->mahasiswaModel->getMahasiswa();
+        $dt_mahasiswa = $data['dt_mahasiswa_2'];
 
-        $dt_mahasiswa_2 = [];
-        foreach ($tahun_report as $key) {
-            $send = curl("https://api.ipb.ac.id/v1/Mahasiswa/DaftarMahasiswa/PerDepartemen?departemenId=160&strata=S1&tahunMasuk=" . $key);
-            $dt_mahasisw = json_decode($send, true);
-            $dt_mahasiswa_2[] = $dt_mahasisw;
-        }
-
-        $dt_mahasiswa = array_reduce($dt_mahasiswa_2, 'array_merge', []);
        // dd($dt_mahasiswa);
         if ($this->request->getPost('download')) {
             $nim_2 = session()->get('nama_user');
@@ -387,20 +372,31 @@ class ReportMahasiswa extends BaseController
 
             //dd($dt_mahasiswa,$nim_2,$tahun_report);
             foreach ($dt_mahasiswa as $key) {
-                if ($key["Nim"] == $nim_2) {
+                if ($key->nim == $nim_2) {
                     $n_m = $key;
                 }
             }
 
-            $data['nama_rapor_mahasiswa'] = $n_m["Nama"];
-            $data['nim_rapor_mahasiswa'] = $n_m["Nim"];
+            if (!isset($n_m) || !is_object($n_m)) {
+                $n_m = new \stdClass();
+
+                $n_m->asal_sma         = null;
+                $n_m->jalur_masuk      = null;
+                $n_m->nama             = "-";
+                $n_m->nim              = "-";
+                $n_m->SemesterMahasiswa= "-";
+                $n_m->StatusAkademik   = "-";
+                $n_m->tahun_masuk      = "-";
+                $n_m->tanggal_lahir    = null;
+                $n_m->tempat_lahir     = null;
+            }
+
+            $data['nama_rapor_mahasiswa'] = $n_m->nama;
+            $data['nim_rapor_mahasiswa'] = $n_m->nim;
 
             $batas_cukup = $data['katkin'][0]->batas_bawah_kategori_cukup_cpl;
             $batas_baik = $data['katkin'][0]->batas_bawah_kategori_baik_cpl;
             $batas_sangat_baik = $data['katkin'][0]->batas_bawah_kategori_sangat_baik_cpl;
-
-            $data['nilai_cpl_mahasiswa'] = [];
-            $data['status_nilai_cpl_mahasiswa'] = [];
 
             foreach ($data['data_cpl'] as $key_0) {
                 $n = 0;
@@ -413,16 +409,16 @@ class ReportMahasiswa extends BaseController
                                     if ($key_4->id_deskriptor == $key_3->id_deskriptor) {
                                         if ($key_2->id_matakuliah_has_cpmk == $key_3->id_matakuliah_has_cpmk) {
                                             $n_1 += $key_4->persentasi * $key_2->nilai_langsung * $key_3->persentasi;
+                                            }
                                         }
                                     }
                                 }
                             }
+                            $n += $n_1;
                         }
-                        $n += $n_1;
                     }
+                    $data['nilai_cpl_mahasiswa'][] = $n;
                 }
-                array_push($data['nilai_cpl_mahasiswa'], $n);
-            }
 
             foreach ($data['nilai_cpl_mahasiswa'] as $key) {
                 if ($key > $batas_sangat_baik) {

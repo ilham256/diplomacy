@@ -9,7 +9,7 @@
         <br>
       <div class="alert alert-success alert-dismissible">
         <div class="box-title">
-          Data Mahasiswa Angkatan <?php echo $datas_tahun; ?> Berhasil Diupdate :
+          Data Mahasiswa Berhasil Diupdate :
         </div>
           
           <table class="table table-striped table-bordered display" style="width:100%" >
