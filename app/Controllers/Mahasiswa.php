@@ -184,7 +184,7 @@ class Mahasiswa extends Controller {
                     // 3. Sanitasi Kode Berbahaya pada Teks (XSS & Tag HTML)
                     $save_data = [
                         'nim'               => esc(strip_tags($nimRaw)),
-                        'nama'              => esc(strip_tags($nimRaw)),
+                        'nama'              => esc(strip_tags($namaRaw)),
                         'SemesterMahasiswa' => ($tahun_ini - $tahunMasukInt) * 2 + 1,
                         'tahun_masuk'       => $tahunMasukInt,
                         'StatusAkademik'    => esc(strip_tags($statusAkademikRaw))
@@ -198,7 +198,7 @@ class Mahasiswa extends Controller {
                     if (empty($cek_id)) {
                         $save_data_user = [
                             'id' => esc(strip_tags($nimRaw)),
-                            'username' => esc(strip_tags($namaRaw)),
+                            'username' => esc(strip_tags($nimRaw)),
                             'email' => '',
                             'password' => password_hash('admin', PASSWORD_DEFAULT),
                             'level' => 2,
