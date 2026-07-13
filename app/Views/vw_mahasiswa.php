@@ -49,7 +49,7 @@
 			<br>
 			<div class="form-group">
 				<div class="text-right" >
-					<a class="btn btn-success waves-effect waves-light" href="<?php echo site_url('mahasiswa/exportexcel/') ?>">Download Excel</a>
+					<a class="btn btn-success waves-effect waves-light" href="<?php echo site_url('mahasiswa/exportExcel/') ?>">Download Excel</a>
 				</div>
 			</div>
 		</div>
